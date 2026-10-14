@@ -1,0 +1,85 @@
+{
+  "recipe_id": "truncated_hopping_eta2-fc41d52d",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0167,
+    "occupied_bandwidth_ev": 56.8692,
+    "bands_available": 72,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.001,
+      "reason": "Lowering this from 0.01 to 0.005 cut the truncated eta2 by a factor of 2.6, the strongest lever in the record. A further step widens the projectability pool so the diffuse hybrids can localise."
+    }
+  ],
+  "diagnosis": "This is a PDWF construction for hcp Ti with 18 functions per channel (3d, 4s and 4p on each of the two atoms; 3s and 3p are cut out as an isolated block). The untruncated model is good: eta2 = 4.9 meV. The only failure is the sparse criterion. With every hopping beyond r_c = 8.2 \u00c5 removed, eta2 rises to 50 meV. That error comes from the five diffuse functions on each atom. These are s/p/d hybrids with spreads of about 2.0 \u00c5\u00b2, and their centres sit 0.7\u20130.9 \u00c5 off the Ti sites. They carry nearly all the hopping weight beyond r_c. The four tight d-like functions per atom (0.75\u20131.0 \u00c5\u00b2) carry almost none.\n\nThe truncation error falls on the parent bands near E_F and on the bottom s-like band 9 (worst near \u0393\u2013A, k_z of about 0.34). So it is a smoothness problem in the subspace, not a fidelity problem inside the frozen window. Both minimisations converged.\n\nThe frontier's ladder shows which knob moved the number. With dis_proj_max fixed at 0.99, lowering dis_proj_min from 0.01 to 0.005 cut the truncated eta2 from 131 to 50 meV. Lowering dis_proj_max from 0.99 to 0.95 only took it from 131 to 98 meV. Raising dis_proj_min to 0.02 emptied the projectability window (runs 1\u20134 were refused). A larger pool of weakly projectable states gives the disentanglement more room to choose a smoother, more localised subspace for the diffuse 4s/4p hybrids. I take the strongest lever, dis_proj_min, one step further. The frontier's own next ladder point (dis_proj_max 0.95) is the weaker lever, so I'm not using it.",
+  "provenance": {
+    "material": "Ti",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:07:23+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/claude_cli_claude_opus_5_5/qe/Ti/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 8.541989092161275,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 8.54 meV with hoppings longer than r_c = L_BvK/4 = 8.20 Ang (|R + tau_j - tau_i|) removed (133 of 1773 lattice vectors keep a hopping; untruncated 1.63 meV)",
+      "l_bvk_ang": 32.7883751741,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 8.197093793525,
+      "n_vectors_kept": 133,
+      "n_vectors_total": 1773,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 21542,
+      "n_elements_total": 574452,
+      "eta2_untruncated_mev": 1.6334347010598798,
+      "fermi_energy_scf_ev": 13.155,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Ti/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 10.929458391366666,
+      "eta_trunc_L3_mev": 4.968326087182687,
+      "n_vectors_kept_L3": 275,
+      "r_L2_ang": 16.39418758705,
+      "eta_trunc_L2_mev": 1.7165007614648145,
+      "n_vectors_kept_L2": 781,
+      "tau_ang": 1.9086153785197437,
+      "tau_free_intercept_ang": 3.8887650271451264,
+      "n_vectors_fitted": 1772
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

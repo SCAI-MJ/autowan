@@ -1,0 +1,50 @@
+{
+  "recipe_id": "centres_sit_on_atomic_sites-d636f52c",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1232,
+    "occupied_bandwidth_ev": 28.8201,
+    "bands_available": 20,
+    "spin_channels": 1,
+    "atoms_in_cell": 1,
+    "species": {
+      "Ba": 1
+    }
+  },
+  "resolved": [
+    "centres_sit_on_atomic_sites"
+  ],
+  "still_unresolved": [
+    "spread_minimisation_converged"
+  ],
+  "changes": [
+    {
+      "parameter": "trial_step",
+      "old": 0.05,
+      "new": 0.01,
+      "reason": "The spread minimisation is diverging with steps growing 71328x over the convergence window. Previous attempts show trial_step=0.5 and 0.2 kept centres on sites but didn't converge, while 0.05 made it diverge badly. The sweet spot appears to be between 0.2 and 0.05, but closer to 0.2 given the divergence at 0.05. However, since even 0.2 didn't converge after 12000 iterations, we need to go smaller still - trying 0.01 to strongly damp the oscillation."
+    }
+  ],
+  "diagnosis": "The spread minimisation is catastrophically diverging, with the final steps showing explosive growth (71328x amplification). The trajectory shows a sudden jump from small steps (~1e-06) to huge oscillations (0.518, -0.258, -0.137), indicating the optimiser has hit an unstable region of the landscape. The attempt history reveals that trial_step=0.5 and 0.2 produced stable but non-converging descents with good centre positions, while trial_step=0.05 caused divergence and centres to drift off sites by 2.66 Ang. This pattern indicates the landscape has competing minima and the line search is overshooting when the step is too small (0.05) but unable to navigate the landscape efficiently when larger.",
+  "provenance": {
+    "material": "Ba_pdwf",
+    "attempt": 7,
+    "recorded_at": "2026-08-29T11:01:59+00:00",
+    "certified": false
+  },
+  "measurements": {
+    "centres_sit_on_atomic_sites": {
+      "value": 0.107731889187928,
+      "units": "Ang",
+      "threshold": 2.1773842488818143,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+    }
+  },
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

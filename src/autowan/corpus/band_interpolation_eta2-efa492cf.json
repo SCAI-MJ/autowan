@@ -1,0 +1,104 @@
+{
+  "recipe_id": "band_interpolation_eta2-efa492cf",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0167,
+    "occupied_bandwidth_ev": 56.8692,
+    "bands_available": 72,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run",
+    "band_interpolation_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ti",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Name the Ti s, p and d shells explicitly as analytic projectors (18 functions in total). This restores the count attempt 1 lost and replaces the diffuse pseudopotential s2/p2 orbitals behind the unbalanced spreads in attempt 0."
+    }
+  ],
+  "diagnosis": "Attempt 1 dropped the Ti p2 pseudo-atomic orbital, which cut num_wann from 18 to 12. With dis_proj_max = 0.95, states above E_F + 2 eV that the s+d orbitals describe well were also frozen. At some k-point the frozen states then outnumbered the 12 functions, so Wannier90 refused the deck (dis_windows_proj). Any fix has to bring the count back to 18. The original 18-function PDWF deck (attempt 0) ran but missed eta2 by a wide margin (76 meV at E_F, worst error 0.61 eV). The worst errors are in band 9 near \u22121.3 eV, which sits inside the frozen window. Bands inside the frozen window are reproduced exactly on the construction mesh, so an error there on the separate path is an interpolation error from poorly localized functions, not a problem with the subspace selection. The spreads show the cause: the d-like functions are tight (about 0.73 \u00c5\u00b2), while the functions from the pseudopotential's s2 and p2 orbitals are diffuse (4\u201310 \u00c5\u00b2) and sit 0.6\u20130.8 \u00c5 off the atoms. Ti 4p is almost empty in the atom, and validate_deck warns that the projector list and the UPF file disagree on the l = 1 orbitals. So the shells are right but their radial parts are not. PDWF can only change which pseudopotential orbitals it keeps or its thresholds: dropping p is what failed in attempt 1, and the threshold ladder does not change the radial shape. I am therefore switching to SMV with analytic Ti s, p and d projectors. This gives the same 18-function count from projectors that do not depend on the pseudopotential, with the frozen window at E_F + 2 eV.",
+  "provenance": {
+    "material": "Ti",
+    "attempt": 2,
+    "recorded_at": "2026-10-12T13:22:19+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C1",
+    "profile": "band_interpolation",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/Ti/band_interpolation/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "band_interpolation_eta2": {
+      "value": 5.827713640880244,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 5.83 meV at mu = E_F(scf) + 2 = 15.155 eV over 338 path k-points and 18 bands",
+      "eta2_max_mev": 46.30255858877209,
+      "mu_ev": 15.155,
+      "fermi_energy_scf_ev": 13.155,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 13.155065484539502,
+      "eta2_mev_at_nscf_fermi": 5.8288949896792674,
+      "n_kpoints": 338,
+      "n_bands_compared": 18,
+      "excluded_dft_bands": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Ti/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 4,
+      "crossing_bands_path": 4,
+      "vbm_ev": 13.154311070085127,
+      "cbm_ev": 13.158872684059112,
+      "gap_ev": 0.004561613973985246,
+      "gap_mesh_ev": 0.016699632140586118,
+      "gap_path_ev": 0.0047969494272255275,
+      "ef_minus_vbm_ev": 0.0006889299148724604,
+      "cbm_minus_ef_ev": 0.0038726840591127853,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 10,
+      "filled_band_electrons": 20,
+      "parent_electrons": 24.0,
+      "occupation_consistent": null
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

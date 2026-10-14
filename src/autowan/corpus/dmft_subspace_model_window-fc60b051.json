@@ -1,0 +1,222 @@
+{
+  "recipe_id": "dmft_subspace_model_window-fc60b051",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 0.7659,
+    "occupied_bandwidth_ev": 103.8835,
+    "bands_available": 104,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 4,
+    "species": {
+      "Ni1": 1,
+      "Ni2": 1,
+      "O": 2
+    }
+  },
+  "resolved": [
+    "dmft_subspace_model_window"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "pao_subset",
+      "old": null,
+      "new": [
+        {
+          "species": "Ni1",
+          "orbitals": [
+            "d1"
+          ]
+        },
+        {
+          "species": "Ni2",
+          "orbitals": [
+            "d1"
+          ]
+        },
+        {
+          "species": "O",
+          "orbitals": [
+            "2p"
+          ]
+        }
+      ],
+      "reason": "Seed exactly the DMFT target orbitals (Ni 3d, O 2p): 16 functions per spin instead of 26"
+    },
+    {
+      "parameter": "semicore_exclusion",
+      "old": null,
+      "new": [
+        {
+          "species": "O",
+          "shells": [
+            "2s"
+          ]
+        }
+      ],
+      "reason": "With no O 2s function, exclude the isolated O 2s bands (9-10, 10.6 eV gap) so they are neither frozen nor counted"
+    },
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 1.53,
+      "reason": "End the frozen window between the top of band 26 (1.524 eV) and the bottom of band 27 (1.535 eV) so it holds at most 16 states; all target states stay frozen"
+    }
+  ],
+  "diagnosis": "The only failing check is dmft_subspace_model_window, and it fails on the model's make-up, not its accuracy. The RMS on the target states is 0.51 meV against a 20 meV limit. The deck builds 26 functions per spin from Ni 3d+4s+4p and O 2s+2p, but the DMFT target is Ni 3d plus O 2p, which is 16. The repair keeps only Ni d1 (3d) and O 2p. It also moves the O 2s bands (9-10), isolated 10.6 eV below the valence, into the bottom exclusion; otherwise they would be frozen with no function to hold them. Finally it lowers dis_froz_max from 2.26 to 1.53 eV so the frozen window ends just above the top of band 26 (1.524 eV) and below band 27 (from 1.535 eV at \u0393). At 2.26 eV the window holds 17 states for 16 functions. validate_deck accepts the deck: num_wann 16, num_bands 94, exclude_bands 1-10 honoured by the gate, at most 16 frozen states.",
+  "provenance": {
+    "material": "NiO",
+    "attempt": 1,
+    "recorded_at": "2026-10-12T14:04:06+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "down",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/NiO/dmft_subspace_window/rep1_down",
+    "campaign_version": "092d896f79873ec23115bae23c71e807605721da"
+  },
+  "measurements": {
+    "dmft_subspace_model_window": {
+      "value": 0.0604239493441905,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "target Ni 3d; O 2p: num_wann 16 against 16; RMS 0.06 meV over 4624 target states (bands 11-26, 6.05 to 15.71 eV); entangled target manifold, compared at or below 16.43 eV (conduction-band minimum + 2 eV), 0 target states above it not compared",
+      "target": "NiO",
+      "target_shells": [
+        "Ni 3d",
+        "O 2p"
+      ],
+      "num_wann_expected": 16,
+      "num_wann_actual": 16,
+      "num_wann_requested": 16,
+      "projector_route": "pao",
+      "count_ok": true,
+      "seeded": {
+        "Ni": [
+          "dx2-y2",
+          "dxy",
+          "dxz",
+          "dyz",
+          "dz2"
+        ],
+        "O": [
+          "px",
+          "py",
+          "pz"
+        ]
+      },
+      "seed_problems": [],
+      "seeds_ok": true,
+      "correlated_sites": [
+        {
+          "site": "Ni1#1",
+          "functions_on_site": 5,
+          "needed": 5
+        },
+        {
+          "site": "Ni2#2",
+          "functions_on_site": 5,
+          "needed": 5
+        }
+      ],
+      "centre_site_limit_ang": 1.0465844681575,
+      "nearest_neighbour_ang": 2.093168936315,
+      "centres_ok": true,
+      "target_rms_mev": 0.0604239493441905,
+      "target_max_mev": 0.6871494414344426,
+      "n_target_states": 4624,
+      "n_target_states_unpaired": 0,
+      "n_target_states_beyond_function_count": 0,
+      "target_states_per_k": [
+        16,
+        16
+      ],
+      "target_bands": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "target_energy_range_ev": [
+        6.051902158928648,
+        15.710565366076112
+      ],
+      "target_weight_min": 0.5,
+      "weights_source": "dmft_subspace_weights/NiO_weights.npz",
+      "n_kpoints": 289,
+      "n_dft_bands": 104,
+      "n_wannier_bands": 16,
+      "reference": "QE pw.x bands test_set_extension_parents/qe/NiO_afm2/work/74/57/NiO_afm2_bands_path.npz",
+      "manifold_isolated": false,
+      "manifold_isolation": {
+        "isolated": false,
+        "channels": [
+          {
+            "spin": 0,
+            "target_bands_1based": [
+              11,
+              26
+            ],
+            "n_target_bands": 16,
+            "n_functions": 16,
+            "gap_below_ev": 10.602605685564242,
+            "gap_above_ev": -0.01239555737547704,
+            "isolated": false,
+            "reasons": [
+              "no gap to the band above (band 27 dips 12 meV below the top of band 26)"
+            ]
+          },
+          {
+            "spin": 1,
+            "target_bands_1based": [
+              11,
+              26
+            ],
+            "n_target_bands": 16,
+            "n_functions": 16,
+            "gap_below_ev": 10.602607501370356,
+            "gap_above_ev": -0.01238062476763524,
+            "isolated": false,
+            "reasons": [
+              "no gap to the band above (band 27 dips 12 meV below the top of band 26)"
+            ]
+          }
+        ],
+        "gap_min_ev": 0.001,
+        "target_weight_min": 0.5
+      },
+      "n_target_states_above_window": 0,
+      "comparison_window_top_ev": 16.427715359561077,
+      "comparison_window_anchor": "conduction-band minimum",
+      "comparison_window_anchor_ev": 14.427715359561079,
+      "comparison_window_margin_ev": 2.0,
+      "comparison_window_fermi_ev": 14.1628,
+      "comparison_window_bands": "construction mesh",
+      "material_class": "gapped",
+      "fermi_source": "given"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

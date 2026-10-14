@@ -1,0 +1,100 @@
+{
+  "recipe_id": "truncated_hopping_eta2-6e9b47ae",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.016,
+    "occupied_bandwidth_ev": 63.7365,
+    "bands_available": 36,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "V": 1
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "V",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Replace pseudopotential-derived radial projectors without dropping shells: 1+3+5 gives nine functions."
+    },
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 2.0113,
+      "reason": "Preserve the current frozen edge at E_F + 2.0113 eV rather than adopting the switch default."
+    }
+  ],
+  "diagnosis": "The failure is long-range hopping, not unconverged optimisation or missing occupied states. The diffuse projector sector dominates the removed hopping weight. Threshold retries either fail feasibility or leave eta2 essentially unchanged; change projector source while retaining all nine functions.",
+  "provenance": {
+    "material": "V",
+    "attempt": 2,
+    "recorded_at": "2026-10-13T03:01:27+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/V/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 16.460644457798534,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 16.46 meV with hoppings longer than r_c = L_BvK/4 = 9.82 Ang (|R + tau_j - tau_i|) removed (283 of 3447 lattice vectors keep a hopping; untruncated 7.59 meV)",
+      "l_bvk_ang": 39.275819494859,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 9.81895487371475,
+      "n_vectors_kept": 283,
+      "n_vectors_total": 3447,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 22923,
+      "n_elements_total": 279207,
+      "eta2_untruncated_mev": 7.591008091014166,
+      "fermi_energy_scf_ev": 16.1042,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/V/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.091939831619666,
+      "eta_trunc_L3_mev": 10.485259561720373,
+      "n_vectors_kept_L3": 701,
+      "r_L2_ang": 19.6379097474295,
+      "eta_trunc_L2_mev": 7.725695929384418,
+      "n_vectors_kept_L2": 2277,
+      "tau_ang": 1.6542778743142799,
+      "tau_free_intercept_ang": 4.508745673179937,
+      "n_vectors_fitted": 3446
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

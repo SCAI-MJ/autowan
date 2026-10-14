@@ -1,0 +1,13 @@
+SYSTEM = Si diamond, autowan VASP backend fixture (debugging scale, 2x2x2 Gamma mesh)
+PREC   = Normal
+ENCUT  = 250
+EDIFF  = 1E-7
+NELM   = 100
+ISMEAR = 0
+SIGMA  = 0.05
+NBANDS = 16
+ISYM   = -1      ! full mesh: VASP2WANNIER90 needs every k-point of the grid
+LORBIT = 11      ! PROCAR: the projector supply the backend reads
+NCORE  = 1
+LWAVE  = .FALSE.
+LCHARG = .TRUE.  ! the overlap step continues from this density (ICHARG = 11)

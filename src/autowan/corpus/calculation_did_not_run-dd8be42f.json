@@ -1,0 +1,57 @@
+{
+  "recipe_id": "calculation_did_not_run-dd8be42f",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0427,
+    "occupied_bandwidth_ev": 56.8396,
+    "bands_available": 80,
+    "spin_channels": 1,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "centres_sit_on_atomic_sites"
+  ],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": [
+        {
+          "species": "Ti",
+          "orbitals": [
+            "sp",
+            "d"
+          ]
+        }
+      ],
+      "new": [
+        {
+          "species": "Ti",
+          "orbitals": [
+            "sp",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "The current 14 functions from 'sp;d' are insufficient for the frozen window. Adding explicit p orbitals gives 20 functions total, enough to represent all frozen states while using atomic rather than hybrid orbitals."
+    }
+  ],
+  "diagnosis": "The calculation cannot start because the frozen window contains more states than there are Wannier functions to represent them. The current projector set 'Ti:sp;d' on 2 Ti atoms gives (2+5)\u00d72 = 14 functions total. With dis_froz_max at 2.0 eV above the Fermi level and 4 bands crossing it, the frozen window is capturing more than 14 states. The previous attempt with 'Ti:sp3;d' giving 18 functions passed all checks, while this attempt with only 14 functions fails before running. The solution is to expand the projector set to include more functions while keeping num_bands sufficient to accommodate them.",
+  "provenance": {
+    "material": "Ti_pdwf",
+    "attempt": 5,
+    "recorded_at": "2026-08-29T13:44:27+00:00",
+    "certified": false
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

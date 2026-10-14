@@ -1,0 +1,84 @@
+{
+  "recipe_id": "centres_sit_on_atomic_sites-cd4d87ab",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 1.8879,
+    "occupied_bandwidth_ev": 56.413,
+    "bands_available": 140,
+    "spin_channels": 1,
+    "atoms_in_cell": 5,
+    "species": {
+      "Sr": 1,
+      "Ti": 1,
+      "O": 3
+    }
+  },
+  "resolved": [
+    "subspace_selection_converged",
+    "centres_sit_on_atomic_sites"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Sr",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        },
+        {
+          "species": "Ti",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        },
+        {
+          "species": "O",
+          "orbitals": [
+            "s",
+            "p"
+          ]
+        }
+      ],
+      "reason": "Explicitly specify atomic orbitals to replace the automatic projection scheme. This gives Sr:9, Ti:9, O:4\u00d73=12 functions, totaling 30, which is close to the 35 requested. Using standard atomic shells should produce more balanced projectors than whatever automatic scheme is currently mixing tight and diffuse functions."
+    }
+  ],
+  "diagnosis": "The subspace selection has exhausted its iteration budget (8000 iterations) while still changing by 2.084e-06 per step, which is above its convergence criterion. The trajectory shows it stopped at the iteration limit, not at the criterion. Previous attempts doubled the budget from 4000 to 8000, tried damping with dis_mix_ratio=0.5, and lowered dis_proj_min to 0.001, but all three changes left the final delta unchanged at ~2e-06. This indicates the iteration is not oscillating (damping didn't help) and is not simply running out of steps (doubling didn't get it closer to convergence). The subspace selection is descending toward something that doesn't satisfy the criterion.\n\nAdditionally, the Wannier centres have drifted 1.44 Ang from atomic sites (limit 0.98 Ang). This drift persists across all attempts and barely changes despite parameter adjustments. With 35 functions for 5 atoms (Sr:1, Ti:1, O:3), the projector set is likely mixing shells of very different spatial extent, causing some functions to delocalize to accommodate charge that tightly-bound projectors cannot represent.",
+  "provenance": {
+    "material": "SrTiO3_pdwf",
+    "attempt": 4,
+    "recorded_at": "2026-08-28T23:37:10+00:00",
+    "certified": true
+  },
+  "measurements": {
+    "subspace_selection_converged": {
+      "value": 398.0,
+      "units": "iterations",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+    },
+    "centres_sit_on_atomic_sites": {
+      "value": 0.5524281088739058,
+      "units": "Ang",
+      "threshold": 0.9762790363949446,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+    }
+  },
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

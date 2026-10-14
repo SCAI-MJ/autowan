@@ -1,0 +1,99 @@
+{
+  "recipe_id": "band_interpolation_eta2-1315a3b1",
+  "signature": {
+    "bands_crossing_fermi_level": 1,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1346,
+    "occupied_bandwidth_ev": 52.9842,
+    "bands_available": 16,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Na": 1
+    }
+  },
+  "resolved": [
+    "band_interpolation_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Na",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Add the next angular-momentum shell to expand subspace flexibility while retaining the existing s and p functions."
+    }
+  ],
+  "diagnosis": "The residual error occurs below the frozen edge on the independent path, despite accurate construction-mesh bands and converged minimisations. Replacing the projector source barely changed eta2, suggesting insufficient subspace flexibility rather than defective radial projectors or iteration budgets.",
+  "provenance": {
+    "material": "Na",
+    "attempt": 5,
+    "recorded_at": "2026-10-13T02:13:15+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C1",
+    "profile": "band_interpolation",
+    "channel": "nospin",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/Na/band_interpolation/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "band_interpolation_eta2": {
+      "value": 2.939138442888429,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 2.94 meV at mu = E_F(scf) + 2 = 3.555 eV over 270 path k-points and 9 bands",
+      "eta2_max_mev": 9.024445916819282,
+      "mu_ev": 3.5545999999999998,
+      "fermi_energy_scf_ev": 1.5546,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 1.554581271523683,
+      "eta2_mev_at_nscf_fermi": 2.939131212211593,
+      "n_kpoints": 270,
+      "n_bands_compared": 9,
+      "excluded_dft_bands": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Na/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 1,
+      "crossing_bands_path": 1,
+      "vbm_ev": 1.5398250429541918,
+      "cbm_ev": 1.5655009111870757,
+      "gap_ev": 0.025675868232883925,
+      "gap_mesh_ev": 0.13458197394784577,
+      "gap_path_ev": 0.025675868232883925,
+      "ef_minus_vbm_ev": 0.014774957045808224,
+      "cbm_minus_ef_ev": 0.010900911187075701,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 4,
+      "filled_band_electrons": 8,
+      "parent_electrons": 9.0,
+      "occupation_consistent": null
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

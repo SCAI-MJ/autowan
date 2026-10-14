@@ -1,0 +1,75 @@
+{
+  "recipe_id": "centres_stay_near_home_cell-af8b4d4b",
+  "signature": {
+    "bands_crossing_fermi_level": 1,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 1.0439,
+    "occupied_bandwidth_ev": 19.5171,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "C": 2
+    }
+  },
+  "resolved": [
+    "centres_stay_near_home_cell"
+  ],
+  "still_unresolved": [
+    "truncated_hopping_eta2"
+  ],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "C",
+          "orbitals": [
+            "s",
+            "p"
+          ]
+        }
+      ],
+      "reason": "Analytic s,p orbitals on each carbon (8 functions, the same count as now) seed atom-centred functions that do not depend on the pseudopotential, so no column ends up in the vacuum."
+    },
+    {
+      "parameter": "dis_num_iter",
+      "old": null,
+      "new": 2000,
+      "reason": "SMV needs iterations to minimise Omega_I during disentanglement; the value carried over from SCDM is 0."
+    }
+  ],
+  "diagnosis": "This is a 2D two-carbon layer with 16 \u00c5 of vacuum along c. The 8 functions are the four s,p functions on each carbon. That means 4 occupied valence bands and 4 functions taken from the entangled conduction states. Below E_F those are the pi* and sigma* bands, which are mixed with the vacuum states that start around +4 eV. The SCDM default from the protocol (mu = -30.7 eV, sigma = 11.8 eV) comes from a poor projectability fit (residual 0.245). Its weight favours the low-lying vacuum states over sigma*, so the column selection put function 7 in the vacuum at z = -7.9 \u00c5, 8.03 \u00c5 from any atom. It has spread 5.4 \u00c5\u00b2. Function 6 is also pulled 2.24 \u00c5 off the plane, with spread 5.7 \u00c5\u00b2. These two diffuse functions carry about 48 % of the hopping weight beyond r_c. That is why eta_2 is 6.2 meV untruncated but 30.2 meV after truncation. The decay length is 2.3 \u00c5, and the error after truncation sits in valence bands 3-5 near E_F. The localisation step converged monotonically, so the problem is not the gauge minimisation: SCDM chose the wrong subspace, and no setting of its knobs makes sigma* outweigh the vacuum states. PDWF, the other family that has been tried, keeps its centres on the atoms, but its projectability-threshold freezing gave eta_2 of 60-66 meV whatever its two thresholds were set to. SMV with analytic s,p trial orbitals and a smooth Omega_I-minimising subspace selection is the family that hasn't been tried.",
+  "provenance": {
+    "material": "graphene",
+    "attempt": 4,
+    "recorded_at": "2026-10-12T22:04:55+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v9",
+    "run_dir": "poster_campaign_v1/runs_v9/claude_cli_claude_opus_5_5/qe/graphene/sparse_tb/rep1",
+    "campaign_version": "3b397adfdb97db2d6ac853a24e67e63f3c302b4a"
+  },
+  "measurements": {
+    "centres_stay_near_home_cell": {
+      "value": 0.4800167827522801,
+      "units": "Ang",
+      "threshold": 1.4244912740000013,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "Wannier function 6 lies 0.480 Ang from the nearest atom (any lattice image)",
+      "measure": "distance to the nearest atom, every lattice image",
+      "furthest_outside_home_cell_ang": 0.439754
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

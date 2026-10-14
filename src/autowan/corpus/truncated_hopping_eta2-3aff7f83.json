@@ -1,0 +1,85 @@
+{
+  "recipe_id": "truncated_hopping_eta2-3aff7f83",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 4.1482,
+    "occupied_bandwidth_ev": 21.4775,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "C": 2
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 13.5,
+      "reason": "Move the frozen edge out of the entangled low conduction bands (where it causes subspace kinks and long-range tails) to just below the top of the nearly isolated 8-band sp3 manifold; validate_deck gives at most 8 energy-frozen states for 8 functions."
+    }
+  ],
+  "diagnosis": "The untruncated model is accurate (4.32 meV), with centres on atoms and balanced spreads (ratio 1.24). The truncated model fails (30.9 meV) because the Hamiltonian decays slowly (tau \u2248 2.0 \u00c5) for sp3 functions in a gapped crystal. The cause is a non-smooth disentangled subspace: the frozen edge at 3.92 eV cuts through the entangled conduction bands 5\u20137. States frozen on the mesh at 3.3\u20133.8 eV are interpolated 0.4\u20131.0 eV off along the path, a kink signature, and band 5 near (0, \u00bd, \u00bd) at 1.7\u20131.9 eV is 60 meV off untruncated and about 200 meV off truncated. The truncated error is 14 meV with valence only and jumps to 31 meV once those conduction states enter the E_F+2 window. Bands 1\u20138 form a nearly isolated manifold (top 14.573 eV, band 9 from 14.553 eV), so freezing almost all of it removes the kink from the measured range. The result should be a smooth subspace and faster-decaying hoppings. The frontier retry ladder only varies the projectability thresholds, which leaves the energy edge in place; the corpus held no matching repair.",
+  "provenance": {
+    "material": "C",
+    "attempt": 1,
+    "recorded_at": "2026-10-12T22:57:08+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v9",
+    "run_dir": "poster_campaign_v1/runs_v9/claude_cli_claude_opus_5_5/qe/C/sparse_tb/rep1",
+    "campaign_version": "3b397adfdb97db2d6ac853a24e67e63f3c302b4a"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 17.367321435264195,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 17.37 meV with hoppings longer than r_c = L_BvK/4 = 10.09 Ang (|R + tau_j - tau_i|) removed (447 of 4905 lattice vectors keep a hopping; untruncated 0.51 meV)",
+      "l_bvk_ang": 40.35508169235314,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 10.088770423088285,
+      "n_vectors_kept": 447,
+      "n_vectors_total": 4905,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 23712,
+      "n_elements_total": 313920,
+      "eta2_untruncated_mev": 0.51063478055398,
+      "fermi_energy_scf_ev": 16.1383,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/C/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.451693897451046,
+      "eta_trunc_L3_mev": 7.938152699556918,
+      "n_vectors_kept_L3": 1079,
+      "r_L2_ang": 20.17754084617657,
+      "eta_trunc_L2_mev": 2.426990665021701,
+      "n_vectors_kept_L2": 3337,
+      "tau_ang": 1.6984032760446912,
+      "tau_free_intercept_ang": 2.3871267119109865,
+      "n_vectors_fitted": 4904
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

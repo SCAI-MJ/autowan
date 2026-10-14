@@ -1,0 +1,95 @@
+{
+  "recipe_id": "truncated_hopping_eta2-f71de1df",
+  "signature": {
+    "bands_crossing_fermi_level": 3,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0295,
+    "occupied_bandwidth_ev": 65.89,
+    "bands_available": 120,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 5,
+    "species": {
+      "Sr": 1,
+      "V": 1,
+      "O": 3
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "pao_subset",
+      "old": null,
+      "new": [
+        {
+          "species": "V",
+          "orbitals": [
+            "4s",
+            "3d"
+          ]
+        }
+      ],
+      "reason": "Drop the diffuse V 4p shell (wf 16 to 18, about 30.5 \u00c5\u00b2, off-site), which shapes a landscape that will not localise. num_wann goes from 30 to 27, matching the published SrVO3 frontier runs."
+    }
+  ],
+  "diagnosis": "The subspace is fine. Disentanglement converged, and every check except the sparse one passes. Under PDWF the 30 functions are Sr 5s/5p/4d (9), V 4s/3d/4p (9) and O 2s/2p (12). The spread panel shows one clear step between them. The 18 functions on Sr d/p, V 3d and O 2p are tight (0.6 to 4 \u00c5\u00b2). Six are diffuse: wf 16 to 18, centred on V but 0.35 to 0.55 \u00c5 off it, at about 30.5 \u00c5\u00b2 each; and wf 19, 23 and 27, the O 2s set, at about 21 \u00c5\u00b2. The three ~30 \u00c5\u00b2 functions on V are the V 4p pseudo-atomic orbitals. That shell is empty in the atom and very diffuse, and it pins high, nearly free-electron states into the target. That explains three things: the spread minimisation wanders with non-shrinking steps at 4000 iterations; the hopping decays only slowly (tau about 3.5 \u00c5, 12 % of |H|\u00b2 beyond r_c = 8.78 \u00c5); and the model fails the path comparison even untruncated (eta2 = 1.73 eV). Most of the hopping weight beyond r_c sits on the O 2s functions and on the Sr p-like functions that hybridise with them. Truncating it throws the O 2s bands at R (DFT bands 9 to 11, -16.8 eV) off by about 10 eV. This is a projector problem, so raising the iteration budget will not help. Changing the windows will not either: disentanglement converged and the frozen window is satisfied. The published PDWF frontier runs on SrVO3 with the same 1-8 exclusion use 27 functions, not 30, and reach eta2 of about 0.2 meV. So the smallest repair is to drop the V 4p shell (3 functions \u2192 num_wann 27). validate_deck accepts this deck: 27 PAOs, the bottom 8-band cut is still honoured with a 1.46 eV gap, and at most 17 states are frozen against 27 functions.",
+  "provenance": {
+    "material": "SrVO3",
+    "attempt": 1,
+    "recorded_at": "2026-10-12T12:27:12+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/SrVO3/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 7.319354516368594,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 7.32 meV with hoppings longer than r_c = L_BvK/4 = 8.78 Ang (|R + tau_j - tau_i|) removed (171 of 1325 lattice vectors keep a hopping; untruncated 0.20 meV)",
+      "l_bvk_ang": 35.108019,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 8.77700475,
+      "n_vectors_kept": 171,
+      "n_vectors_total": 1325,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 35453,
+      "n_elements_total": 965925,
+      "eta2_untruncated_mev": 0.20333691948373045,
+      "fermi_energy_scf_ev": 11.8776,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands test_set_extension_parents/qe/SrVO3/work/8f/6f/SrVO3_bands_path.npz",
+      "r_L3_ang": 11.702672999999999,
+      "eta_trunc_L3_mev": 1.9335154561720451,
+      "n_vectors_kept_L3": 297,
+      "r_L2_ang": 17.5540095,
+      "eta_trunc_L2_mev": 0.4649149489660713,
+      "n_vectors_kept_L2": 787,
+      "tau_ang": 1.9819714324457058,
+      "tau_free_intercept_ang": 3.0141507744853007,
+      "n_vectors_fitted": 1324
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

@@ -1,0 +1,91 @@
+{
+  "recipe_id": "truncated_hopping_eta2-4c5d93fe",
+  "signature": {
+    "bands_crossing_fermi_level": 1,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 1.0439,
+    "occupied_bandwidth_ev": 19.5171,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "C": 2
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "num_iter",
+      "old": null,
+      "new": 20,
+      "reason": "Keep the gauge near the symmetric s/px/py/pz projection, so the minimiser cannot drift into the mirror-breaking sigma\u2013pi hybrid basin it reached after 4000 wandering iterations."
+    }
+  ],
+  "diagnosis": "This is graphene: a 2D hexagonal cell with two C atoms 1.4245 \u00c5 apart and a 16 \u00c5 vacuum. The model uses 8 functions from s,p trial orbitals. Disentanglement converged cleanly (Omega_I = 5.51 \u00c5\u00b2), so the chosen subspace is not the problem. The spread minimisation is. It ran its 4000 iterations with steps of about 3e-5 that were not shrinking, and it settled into a gauge that breaks the layer's mirror symmetry. On C#1 the function centres sit 0.35\u20130.45 \u00c5 off the atom, and two of them are displaced out of the plane, to z = +0.44 and z = \u22120.28 \u00c5. On C#2 there is a pair at z \u2248 \u00b10.46 \u00c5 and two wide in-plane functions (1.47 \u00c5\u00b2, against about 0.6\u20130.73 \u00c5\u00b2 for the other six). So the functions are tetrahedral-like hybrids that mix the in-plane bonding states (sigma) with the out-of-plane pz states (pi), and the two atoms are not treated alike. Symmetry keeps sigma and pi bands apart, and they cross. A gauge that mixes them has to change sharply near those crossings. That shows up as interpolation wiggles in a band the frozen window pins. At the mesh points every frozen state is reproduced to about 1e-5 eV. Between them, on the path, occupied band 3 (\u221210.6 to \u22123.1 eV) is wrong by up to 1.08 eV near k \u2248 (0.35, 0.29). The failure is in the model itself, not in the truncation: eta_2 is 124.9 meV untruncated and 114.1 meV truncated, and only 0.2 % of |H|\u00b2 lies beyond r_c. A larger iteration budget would only push further into this symmetry-broken basin. The trial projection gauge (s, px, py, pz on each atom) keeps sigma and pi separate, so I am capping the spread minimisation at a few iterations to keep the gauge close to that projected start. The orbital labels this tool allows include no sp2+pz combination (the textbook graphene seed). sp3 would build in exactly the sigma\u2013pi mixing. Limiting the gauge step is therefore the change open to me that targets this problem directly.",
+  "provenance": {
+    "material": "graphene",
+    "attempt": 5,
+    "recorded_at": "2026-10-12T22:06:58+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v9",
+    "run_dir": "poster_campaign_v1/runs_v9/claude_cli_claude_opus_5_5/qe/graphene/sparse_tb/rep1",
+    "campaign_version": "3b397adfdb97db2d6ac853a24e67e63f3c302b4a"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 15.831858915332928,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 15.83 meV with hoppings longer than r_c = L_BvK/4 = 9.25 Ang (|R + tau_j - tau_i|) removed (63 of 261 lattice vectors keep a hopping; untruncated 8.43 meV); 2D: L_BvK over the periodic directions [0, 1] only",
+      "l_bvk_ang": 37.009368924,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice over the periodic lattice directions [0, 1] only (vacuum along [2])",
+      "periodic_dims": 2,
+      "periodic_axes": [
+        0,
+        1
+      ],
+      "vacuum_gap_ang": {
+        "2": 15.999999999999996
+      },
+      "nearest_neighbour_ang": 1.4244912740000013,
+      "vacuum_axes": [
+        2
+      ],
+      "r_c_ang": 9.252342231,
+      "n_vectors_kept": 63,
+      "n_vectors_total": 261,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 3332,
+      "n_elements_total": 16704,
+      "eta2_untruncated_mev": 8.434004330747976,
+      "fermi_energy_scf_ev": -1.8623963855831813,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_audit/parents_z0/qe/graphene/work/b1/e4/graphene_bands_path.npz",
+      "r_L3_ang": 12.336456307999999,
+      "eta_trunc_L3_mev": 22.691570200301634,
+      "n_vectors_kept_L3": 109,
+      "r_L2_ang": 18.504684462,
+      "eta_trunc_L2_mev": 26.957537013029246,
+      "n_vectors_kept_L2": 227,
+      "tau_ang": 2.4658796344331377,
+      "tau_free_intercept_ang": 7.063308756702445,
+      "n_vectors_fitted": 260
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

@@ -1,0 +1,47 @@
+{
+  "recipe_id": "calculation_did_not_run-75cb9e0c",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.016,
+    "occupied_bandwidth_ev": 63.7365,
+    "bands_available": 36,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "V": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.0001,
+      "reason": "Lower the projectability threshold to prevent the subspace pool from becoming too small to support 9 functions."
+    }
+  ],
+  "diagnosis": "The construction failed repeatedly during the frontier phase with a `dis_windows_proj` error. This error occurs when the combination of the projectability threshold `dis_proj_min` and the energy windows excludes so many states that the resulting pool contains fewer than the requested 9 Wannier functions. The frontier attempted to lower `dis_proj_min` down to 0.005, but this was not sufficient. By further reducing `dis_proj_min` to 0.0001, we minimize the number of states dropped by projectability, thereby enlarging the pool of available states and allowing the subspace selection to proceed.",
+  "provenance": {
+    "material": "V",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T03:11:21+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "google/gemma-4-31b-it",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/gemma_4_31b_it/qe/V/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

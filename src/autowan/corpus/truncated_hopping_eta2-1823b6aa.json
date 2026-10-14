@@ -1,0 +1,101 @@
+{
+  "recipe_id": "truncated_hopping_eta2-1823b6aa",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 0.5368,
+    "occupied_bandwidth_ev": 14.8961,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ga": 1,
+      "As": 1
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ga",
+          "orbitals": [
+            "sp3",
+            "d"
+          ]
+        },
+        {
+          "species": "As",
+          "orbitals": [
+            "sp3",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Add an analytic d shell on each atom (count 2\u00d7(4+5)=18 \u2264 num_bands 27, checked with validate_deck). This gives the dispersive conduction band functions to live in, so the frozen window no longer forces long-range hoppings into an 8-function sp3 basis."
+    }
+  ],
+  "diagnosis": "The construction fails only on the truncated-hopping test. Without truncation the model reproduces the path bands to 13.8 meV, but cutting every hopping longer than r_c = 9.99 \u00c5 raises the error to 52.3 meV. Even at E_F (\u03bd=0) the truncated error is 26.6 meV, against 4.7 meV untruncated, and it peaks in the lowest conduction bands (DFT bands 10\u201311), which are 100\u2013200 meV off at E_F+1\u20132 eV. The hoppings beyond r_c hold only 1.4e-4 of |H|\u00b2 but still carry this error. The spreads are balanced (ratio 1.10), the centres sit on the bonds, and both minimisations converged. So this is not a gauge or optimiser problem. The cause is the 8-function sp3 basis: it has to carry the strongly dispersive GaAs conduction band, which is forced into the subspace by the frozen window at E_F+2.16 eV. A minimal sp3 basis can reproduce that band only with long-range hoppings. The frozen-window lever is already used up (PDWF at 1.2, 2.16 and 2.5 eV gave 102, 40 and 49 meV). Switching from atomic s/p to sp3 hybrids under SMV left the result essentially where it was (52 meV). The next lever is the projector set itself. Adding a d shell on each atom gives the conduction states, which have d character away from \u0393, functions of their own. That enlarges the basis so the frozen conduction states can be represented with short-range hoppings. The Ga 3d semicore exclusion stays: that block is isolated 1.97 eV below and the gate honours the cut.",
+  "provenance": {
+    "material": "GaAs",
+    "attempt": 4,
+    "recorded_at": "2026-10-12T12:07:00+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/GaAs/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 17.151883690980668,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 17.15 meV with hoppings longer than r_c = L_BvK/4 = 9.99 Ang (|R + tau_j - tau_i|) removed (211 of 1591 lattice vectors keep a hopping; untruncated 1.16 meV)",
+      "l_bvk_ang": 39.973787388333626,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 9.993446847083407,
+      "n_vectors_kept": 211,
+      "n_vectors_total": 1591,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 29942,
+      "n_elements_total": 515484,
+      "eta2_untruncated_mev": 1.155879847738882,
+      "fermi_energy_scf_ev": 7.0876,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/GaAs/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.324595796111208,
+      "eta_trunc_L3_mev": 6.468453972964079,
+      "n_vectors_kept_L3": 421,
+      "r_L2_ang": 19.986893694166813,
+      "eta_trunc_L2_mev": 2.008688132700865,
+      "n_vectors_kept_L2": 1159,
+      "tau_ang": 2.0209966569623954,
+      "tau_free_intercept_ang": 2.7879400390739866,
+      "n_vectors_fitted": 1590
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

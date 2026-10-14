@@ -1,0 +1,96 @@
+{
+  "recipe_id": "band_interpolation_eta2-b0698ac2",
+  "signature": {
+    "bands_crossing_fermi_level": 1,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1346,
+    "occupied_bandwidth_ev": 52.9842,
+    "bands_available": 16,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Na": 1
+    }
+  },
+  "resolved": [
+    "band_interpolation_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 5.6,
+      "reason": "Frozen capacity shows that up to 5.6786 eV, at most 4 states exist across all k-points, exactly matching num_wann = 4. The 5th band begins at 5.68 eV. Raising dis_froz_max from 2.0 eV to 5.6 eV freezes the entire 4-band manifold across the energy range weighted by the eta2 metric (evaluated at mu = E_F + 2 eV), continuing the substantial improvement seen in attempt 3."
+    },
+    {
+      "parameter": "dis_proj_max",
+      "old": null,
+      "new": 0.99,
+      "reason": "Sets the projectability threshold high so that states above 5.6 eV are not frozen by projectability, avoiding any k-point holding more frozen states than num_wann."
+    }
+  ],
+  "diagnosis": "The construction fails only on band_interpolation_eta2 (52.06 meV vs limit 20 meV), which measures interpolation fidelity on a high-symmetry path using Fermi-Dirac weighting at E_F + 2 eV (mu = 3.555 eV). In attempt 4, dis_froz_max was set to 2.0 eV with dis_proj_max = 0.85. However, band_character shows that the conduction states in the [-4, 6] eV window have negligible projection onto the Na pseudo-atomic p orbitals (Na p: 0.021), meaning projectability cannot freeze these free-electron-like bands. Consequently, bands 5-8 above 2.0 eV were unconstrained in attempt 4, leading to large interpolation errors (up to ~150 meV) in the 1.7-3.5 eV range. In attempt 3, raising dis_froz_max to 5.0 eV brought eta2 down from 51.17 to 34.11 meV. frozen_capacity confirms that up to 5.6786 eV, the number of states at any k-point does not exceed 4 (with band 9 only appearing at 5.68 eV). Raising dis_froz_max further to 5.6 eV, with dis_proj_max = 0.99 to prevent accidental freezing above the window, will enforce exact subspace agreement across the entire 4-band manifold.",
+  "provenance": {
+    "material": "Na",
+    "attempt": 5,
+    "recorded_at": "2026-10-12T11:39:19+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C1",
+    "profile": "band_interpolation",
+    "channel": "nospin",
+    "model": "google/gemini-3.8-flash",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/gemini_3.8_flash/qe/Na/band_interpolation/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "band_interpolation_eta2": {
+      "value": 12.834292743997041,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 12.83 meV at mu = E_F(scf) + 2 = 3.555 eV over 270 path k-points and 4 bands",
+      "eta2_max_mev": 43.11831685658707,
+      "mu_ev": 3.5545999999999998,
+      "fermi_energy_scf_ev": 1.5546,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 1.554581271523683,
+      "eta2_mev_at_nscf_fermi": 12.834279245484284,
+      "n_kpoints": 270,
+      "n_bands_compared": 4,
+      "excluded_dft_bands": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Na/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 1,
+      "crossing_bands_path": 1,
+      "vbm_ev": 1.5398250429541918,
+      "cbm_ev": 1.5655009111870757,
+      "gap_ev": 0.025675868232883925,
+      "gap_mesh_ev": 0.13458197394784577,
+      "gap_path_ev": 0.025675868232883925,
+      "ef_minus_vbm_ev": 0.014774957045808224,
+      "cbm_minus_ef_ev": 0.010900911187075701,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 4,
+      "filled_band_electrons": 8,
+      "parent_electrons": 9.0,
+      "occupation_consistent": null
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

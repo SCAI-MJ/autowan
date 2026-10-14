@@ -1,0 +1,60 @@
+{
+  "recipe_id": "calculation_did_not_run-9a937730",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1232,
+    "occupied_bandwidth_ev": 28.8201,
+    "bands_available": 20,
+    "spin_channels": 1,
+    "atoms_in_cell": 1,
+    "species": {
+      "Ba": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run",
+    "spread_minimisation_converged"
+  ],
+  "still_unresolved": [
+    "centres_sit_on_atomic_sites",
+    "subspace_selection_converged"
+  ],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ba",
+          "orbitals": [
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "8 functions (3 from p + 5 from d) should fit between the 6 that failed and 9 that passed the window check, providing enough functions for the frozen window states while avoiding the convergence issues seen with s,p,d"
+    }
+  ],
+  "diagnosis": "The calculation is failing with \"More states in the frozen window than target WFs\". Looking at the attempts: attempt 0-1 failed with this error initially. Attempt 2 added Ba s,p,d projectors (9 functions total) which cleared the window error but failed convergence. Attempts 3-7 tried various convergence fixes. Attempt 8 then reduced projectors to Ba s,d (6 functions) and the window error returned. This tells me the frozen window at 2.0 eV above Fermi contains between 7-9 states. With bands crossing the Fermi level (2 bands) and dis_froz_max at 2.0 eV, the frozen window is capturing too many states for 6 functions to represent. The projector reduction from 9 to 6 functions was too aggressive - we need an intermediate count. Ba s,p gives 1+3=4 functions which is too few. Ba p,d gives 3+5=8 functions, which should fit within the constraint while being more balanced than s,d.",
+  "provenance": {
+    "material": "Ba_pdwf",
+    "attempt": 9,
+    "recorded_at": "2026-08-29T11:09:24+00:00",
+    "certified": false
+  },
+  "measurements": {
+    "spread_minimisation_converged": {
+      "value": 1930.0,
+      "units": "iterations",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+    }
+  },
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

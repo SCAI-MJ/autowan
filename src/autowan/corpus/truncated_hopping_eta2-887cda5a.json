@@ -1,0 +1,117 @@
+{
+  "recipe_id": "truncated_hopping_eta2-887cda5a",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 0.5368,
+    "occupied_bandwidth_ev": 14.8961,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ga": 1,
+      "As": 1
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "semicore_exclusion",
+      "old": null,
+      "new": [
+        {
+          "species": "Ga",
+          "shells": []
+        },
+        {
+          "species": "As",
+          "shells": []
+        }
+      ],
+      "reason": "Bring Ga-d shells into the manifold to improve localization."
+    },
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ga",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        },
+        {
+          "species": "As",
+          "orbitals": [
+            "s",
+            "p"
+          ]
+        }
+      ],
+      "reason": "Add d-orbitals for Ga to match the new semicore_exclusion and provide a basis for localization."
+    }
+  ],
+  "diagnosis": "The construction is failing the sparse tight-binding criterion (truncated_hopping_eta2 = 52.89 meV). The truncation diagnostics show that the untruncated model is quite accurate (13.57 meV), but removing hoppings beyond r_c = 9.99 Ang causes a significant error. This indicates the Hamiltonian is not sufficiently short-ranged. The functions carrying the most weight beyond r_c (WFs 2, 3, 4 and 6, 7, 8) correspond to the p-shells of Ga and As. The spreads are relatively balanced (ratio 1.68), but the total spread for the p-orbitals is around 2.0-2.4 \u00c5\u00b2. In GaAs, the Ga 3d states often hybridize with the valence manifold; while the current deck excludes the lowest 5 bands (semicore), the remaining valence manifold's localization depends on the projectability of the trial orbitals. Since explicit s;p projectors have not improved the decay and the frozen window is already quite narrow (up to 2.16 eV), the most likely cause is that the target manifold requires the inclusion of the Ga-d states to be properly localized. The current semicore_exclusion removes the Ga d1 shell. Bringing these d-orbitals into the construction will increase the number of Wannier functions (adding 5 per Ga atom) and provide the necessary basis to localise the valence states more effectively, reducing long-range hoppings.",
+  "provenance": {
+    "material": "GaAs",
+    "attempt": 7,
+    "recorded_at": "2026-10-12T14:50:12+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "google/gemma-4-31b-it",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/gemma_4_31b_it/qe/GaAs/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 18.005237890853106,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 18.01 meV with hoppings longer than r_c = L_BvK/4 = 9.99 Ang (|R + tau_j - tau_i|) removed (187 of 1325 lattice vectors keep a hopping; untruncated 4.03 meV)",
+      "l_bvk_ang": 39.973787388333626,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 9.993446847083407,
+      "n_vectors_kept": 187,
+      "n_vectors_total": 1325,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 29632,
+      "n_elements_total": 429300,
+      "eta2_untruncated_mev": 4.0337240259055545,
+      "fermi_energy_scf_ev": 7.0876,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/GaAs/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.324595796111208,
+      "eta_trunc_L3_mev": 10.371316454266436,
+      "n_vectors_kept_L3": 383,
+      "r_L2_ang": 19.986893694166813,
+      "eta_trunc_L2_mev": 4.863167376776839,
+      "n_vectors_kept_L2": 1059,
+      "tau_ang": 2.041685549777303,
+      "tau_free_intercept_ang": 4.138180068269937,
+      "n_vectors_fitted": 1324
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

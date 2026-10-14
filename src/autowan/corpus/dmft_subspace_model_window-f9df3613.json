@@ -1,0 +1,192 @@
+{
+  "recipe_id": "dmft_subspace_model_window-f9df3613",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0328,
+    "occupied_bandwidth_ev": 81.6717,
+    "bands_available": 52,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Mn": 1,
+      "O": 1
+    }
+  },
+  "resolved": [
+    "model_bands_correspond_to_parent_bands",
+    "dmft_subspace_model_window"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_proj_max",
+      "old": null,
+      "new": 0.8,
+      "reason": "Extend the threshold-lowering trend that improved fidelity to nearly the acceptance limit."
+    }
+  ],
+  "diagnosis": "The target subspace is insufficiently constrained by projectability, not limited by optimisation. Lowering dis_proj_max repeatedly improved target-band fidelity; changing dis_proj_min had little effect. Continue the effective change while retaining the eight-function d-p manifold.",
+  "provenance": {
+    "material": "MnO",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T01:55:48+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "down",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/MnO/dmft_subspace_window/rep1_down",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 11326 inside -6.47..15.42 eV sit further than 505 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 25.71 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+        -6.469708713015888,
+        15.418656445297817
+      ],
+      "deck_frozen_window_ev": [
+        null,
+        null
+      ]
+    },
+    "dmft_subspace_model_window": {
+      "value": 17.701523054407325,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "target Mn 3d; O 2p: num_wann 8 against 8; RMS 17.70 meV over 1448 target states (bands 6-14, 5.99 to 15.42 eV); entangled target manifold, compared at or below 15.42 eV (Fermi level + 2 eV), 560 target states above it not compared",
+      "target": "MnO",
+      "target_shells": [
+        "Mn 3d",
+        "O 2p"
+      ],
+      "num_wann_expected": 8,
+      "num_wann_actual": 8,
+      "num_wann_requested": 8,
+      "projector_route": "pao",
+      "count_ok": true,
+      "seeded": {
+        "Mn": [
+          "dx2-y2",
+          "dxy",
+          "dxz",
+          "dyz",
+          "dz2"
+        ],
+        "O": [
+          "px",
+          "py",
+          "pz"
+        ]
+      },
+      "seed_problems": [],
+      "seeds_ok": true,
+      "correlated_sites": [
+        {
+          "site": "Mn#1",
+          "functions_on_site": 5,
+          "needed": 5
+        }
+      ],
+      "centre_site_limit_ang": 1.1099491998499997,
+      "nearest_neighbour_ang": 2.2198983996999995,
+      "centres_ok": true,
+      "target_rms_mev": 17.701523054407325,
+      "target_max_mev": 374.4642350583298,
+      "n_target_states": 1448,
+      "n_target_states_unpaired": 3,
+      "n_target_states_beyond_function_count": 2,
+      "target_states_per_k": [
+        4,
+        8
+      ],
+      "target_bands": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "target_energy_range_ev": [
+        5.987109598058505,
+        15.417984880191062
+      ],
+      "target_weight_min": 0.5,
+      "weights_source": "dmft_subspace_weights/MnO_weights.npz",
+      "n_kpoints": 249,
+      "n_dft_bands": 52,
+      "n_wannier_bands": 8,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/MnO/A_external_fixed/dft_bands_path.npz",
+      "manifold_isolated": false,
+      "manifold_isolation": {
+        "isolated": false,
+        "channels": [
+          {
+            "spin": 0,
+            "target_bands_1based": [
+              6,
+              13
+            ],
+            "n_target_bands": 8,
+            "n_functions": 8,
+            "gap_below_ev": 10.953750922702508,
+            "gap_above_ev": -0.7435748965489424,
+            "isolated": false,
+            "reasons": [
+              "no gap to the band above (band 14 dips 744 meV below the top of band 13)"
+            ]
+          },
+          {
+            "spin": 1,
+            "target_bands_1based": [
+              6,
+              14
+            ],
+            "n_target_bands": 9,
+            "n_functions": 8,
+            "gap_below_ev": 11.439856227968535,
+            "gap_above_ev": -0.12057089297561063,
+            "isolated": false,
+            "reasons": [
+              "bands 6-14 carry target states: 9 bands for 8 target functions",
+              "no gap to the band above (band 15 dips 121 meV below the top of band 14)"
+            ]
+          }
+        ],
+        "gap_min_ev": 0.001,
+        "target_weight_min": 0.5
+      },
+      "n_target_states_above_window": 560,
+      "comparison_window_top_ev": 15.4187,
+      "comparison_window_anchor": "Fermi level",
+      "comparison_window_anchor_ev": 13.4187,
+      "comparison_window_margin_ev": 2.0,
+      "comparison_window_fermi_ev": 13.4187,
+      "comparison_window_bands": "construction mesh",
+      "material_class": "metal",
+      "fermi_source": "given"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

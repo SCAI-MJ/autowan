@@ -1,0 +1,11 @@
+seed,certified,coverage,knobs,unresolved,total_spread_ang2
+fe_dn_manual,False,1.0,num_iter=400 conv_window=3 dis_froz_max=30.0d0 dis_win_max=70.0d0,spread_minimisation_converged,7.84961952
+fe_dn_pdwf,False,0.857,num_iter=1000 dis_win_max=62.78 dis_proj_min=0.01 dis_proj_max=0.95,spread_minimisation_converged,23.08074415
+fe_dn_pdwfed,False,0.857,num_iter=1000 dis_froz_max=29.64 dis_win_max=62.78 dis_proj_min=0.01 dis_proj_max=0.95,spread_minimisation_converged,15.057150519999999
+fe_dn_stage1,True,1.0,num_iter=1000 conv_window=3 dis_froz_max=30.0d0 dis_win_max=70.0d0,-,7.84961936
+fe_up_manual,False,1.0,num_iter=400 conv_window=3 dis_froz_max=30.0d0 dis_win_max=70.0d0,spread_minimisation_converged,7.83313551
+fe_up_manualfix,True,1.0,num_iter=4000 conv_window=3 dis_froz_max=30.0d0 dis_win_max=70.0d0,-,7.833135510000001
+fe_up_pdwf,False,0.857,num_iter=1000 dis_win_max=62.78 dis_proj_min=0.01 dis_proj_max=0.95,spread_minimisation_converged,20.86199628
+fe_up_pdwfed,False,0.857,num_iter=1000 dis_froz_max=29.64 dis_win_max=62.78 dis_proj_min=0.01 dis_proj_max=0.95,spread_minimisation_converged,18.764369170000002
+fe_up_sdfix,False,1.0,num_iter=400 conv_window=3 dis_froz_max=20.0d0 dis_win_max=70.0d0,"spread_minimisation_converged, centres_sit_on_atomic_sites",7.9802447899999995
+fe_up_stage1,True,1.0,num_iter=800 conv_window=3 dis_froz_max=30.0d0 dis_win_max=70.0d0,-,7.833135510000001

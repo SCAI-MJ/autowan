@@ -1,0 +1,85 @@
+{
+  "recipe_id": "truncated_hopping_eta2-4e97214d",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0167,
+    "occupied_bandwidth_ev": 56.8692,
+    "bands_available": 72,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.001,
+      "reason": "Following the trend of run 9, further lowering the projectability floor to allow a more flexible subspace for the diffuse functions to localize."
+    }
+  ],
+  "diagnosis": "The construction is failing the sparse tight-binding criterion (truncated_hopping_eta2), where removing hoppings beyond r_c = 8.20 Ang leads to an eta_2 of 50.12 meV, well above the 20 meV limit. The untruncated eta_2 is 4.87 meV, indicating the underlying model is accurate but insufficiently localized. Truncation diagnostics reveal that the weight beyond r_c is concentrated in functions 9, 18, 2, and 11, all of which have the widest spreads (around 2.06 A^2). The spread plot shows a clear bimodal distribution: a tight group (< 1.0 A^2) and a diffuse group (~ 2.0 A^2), which is the signature of a projector set mixing shells of very different spatial extents. In PDWF, the subspace is determined by the projectability thresholds. Lowering dis_proj_max or adjusting dis_proj_min can change the subspace composition. However, the frontier's previous attempts (runs 1-8) varied these thresholds and failed to solve the problem, although the most recent run (9) significantly improved the truncated error (from >90 meV down to 50 meV) by lowering dis_proj_min. This suggests that continuing to free the subspace by lowering dis_proj_min further may help the optimiser find a more localized gauge for the diffuse functions, reducing the long-range hopping weight.",
+  "provenance": {
+    "material": "Ti",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:39:28+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "google/gemma-4-31b-it",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/gemma_4_31b_it/qe/Ti/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 8.541989092161275,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 8.54 meV with hoppings longer than r_c = L_BvK/4 = 8.20 Ang (|R + tau_j - tau_i|) removed (133 of 1773 lattice vectors keep a hopping; untruncated 1.63 meV)",
+      "l_bvk_ang": 32.7883751741,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 8.197093793525,
+      "n_vectors_kept": 133,
+      "n_vectors_total": 1773,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 21542,
+      "n_elements_total": 574452,
+      "eta2_untruncated_mev": 1.6334347010598798,
+      "fermi_energy_scf_ev": 13.155,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Ti/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 10.929458391366666,
+      "eta_trunc_L3_mev": 4.968326087182687,
+      "n_vectors_kept_L3": 275,
+      "r_L2_ang": 16.39418758705,
+      "eta_trunc_L2_mev": 1.7165007614648145,
+      "n_vectors_kept_L2": 781,
+      "tau_ang": 1.9086153785197437,
+      "tau_free_intercept_ang": 3.8887650271451264,
+      "n_vectors_fitted": 1772
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

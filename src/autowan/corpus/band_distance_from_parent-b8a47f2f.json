@@ -1,0 +1,83 @@
+{
+  "recipe_id": "band_distance_from_parent-b8a47f2f",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 0.5368,
+    "occupied_bandwidth_ev": 14.8961,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ga": 1,
+      "As": 1
+    }
+  },
+  "resolved": [
+    "band_distance_from_parent"
+  ],
+  "still_unresolved": [
+    "truncated_hopping_eta2"
+  ],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ga",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        },
+        {
+          "species": "As",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Analytic sp3d5 on both sites (18 functions) supplies the d-like conduction character the 8-function sp3 set cannot represent."
+    },
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 7.0,
+      "reason": "Pin the conduction bands through the scored range and the correspondence window (up to 7.09 eV). Frozen states max out at 9, well within 18 functions."
+    }
+  ],
+  "diagnosis": "The truncated-hopping criterion fails because the 8-function sp3 model can't reproduce the lowest conduction bands that eta_2 scores (up to E_F+2 eV). The problem is fidelity, not hopping range: the untruncated eta_2 (112.8 meV) is about as bad as the truncated one (102.2 meV), only 6.4e-5 of |H|^2 lies beyond r_c, and the decay length is about 2 \u00c5. Below E_F the error is 1.8 meV. In the 0 to 2 eV window, DFT band 10 is off by 0.5 to 2.3 eV. PDWF here can only use Ga s1, p1, d1 and As s1, p1. d1 is the excluded 3d semicore shell, so 8 functions is the ceiling. Every PDWF lever has been tried: ten frontier threshold variants (best 37.9 meV) and dis_froz_max at 6 eV (76.8) and 0 eV (102.2, which also broke band_distance_from_parent). Reproducing the GaAs conduction bands needs d-like functions on both sites, which only SMV's analytic projectors can supply.",
+  "provenance": {
+    "material": "GaAs",
+    "attempt": 3,
+    "recorded_at": "2026-10-13T02:29:34+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/claude_cli_claude_opus_5_5/qe/GaAs/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "band_distance_from_parent": {
+      "value": 1.296173246347908e-05,
+      "units": "eV",
+      "threshold": 0.06817909367065952,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "4070 states compared over -6.01..8.36 eV; bands 1-5 excluded by the deck and not counted (isolated 1.97 eV below the represented manifold)"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

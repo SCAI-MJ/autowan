@@ -1,0 +1,165 @@
+{
+  "recipe_id": "dmft_subspace_model_window-bb81f235",
+  "signature": {
+    "bands_crossing_fermi_level": 6,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0129,
+    "occupied_bandwidth_ev": 88.0671,
+    "bands_available": 36,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Fe": 1
+    }
+  },
+  "resolved": [
+    "dmft_subspace_model_window"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 6.0,
+      "reason": "Freeze most of the 4s-like band 10 (top 9.9 eV; band 11 starts at 7.8 eV) so the s-d subspace is fixed by the parent states instead of a k-dependent mixture of higher states. 6.0 eV is below the 6.73 eV capacity limit."
+    }
+  ],
+  "diagnosis": "Fe is a metal, and its 3d+4s manifold (6 functions per spin) is entangled with the free-electron-like band above it. Attempt 1 built the right correlated subspace: the count, the centres and the orbital target all pass. It misses only the 20 meV RMS check, at 45.7 meV. On the 16^3 mesh the frozen states are reproduced to about 1e-4 eV. The error shows up on the separate reference path: up to 0.42 eV in band 6 near -1.5 eV, and 0.24 eV in band 5. The ranking of worst bands changes once nu reaches 4 eV, where band 10 (the 4s-like band, 1.6 to 9.9 eV) moves into the top three. So the error is not in the states the deck pins. It comes from the free part of the subspace: with dis_froz_max at only E_F+2 eV, most of band 10 is unfrozen. The 6th function, the diffuse s-like one at 3.03 \u00c5\u00b2 against about 1 \u00c5\u00b2 for the d functions, takes its weight from a mixture of higher states that varies from k-point to k-point. That variation comes back as interpolation error in the d bands between mesh points. The minimisation converged in both stages, so this is the subspace, not the gauge step. The fix is to pin more of the s-band by raising the top of the frozen window. frozen_capacity says the window fits num_wann up to 6.73 eV, and band 11 starts at 7.8 eV, so 6.0 eV freezes band 10 almost fully without overfilling.",
+  "provenance": {
+    "material": "Fe",
+    "attempt": 2,
+    "recorded_at": "2026-10-12T14:08:48+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "down",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/Fe/dmft_subspace_window/rep1_down",
+    "campaign_version": "092d896f79873ec23115bae23c71e807605721da"
+  },
+  "measurements": {
+    "dmft_subspace_model_window": {
+      "value": 15.190737232892578,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "target Fe 4s; Fe 3d: num_wann 6 against 6; RMS 15.19 meV over 1727 target states (bands 5-10, 9.39 to 19.54 eV); entangled target manifold, compared at or below 19.54 eV (Fermi level + 2 eV), 658 target states above it not compared",
+      "target": "Fe",
+      "target_shells": [
+        "Fe 4s",
+        "Fe 3d"
+      ],
+      "num_wann_expected": 6,
+      "num_wann_actual": 6,
+      "num_wann_requested": 6,
+      "projector_route": "pao",
+      "count_ok": true,
+      "seeded": {
+        "Fe": [
+          "dx2-y2",
+          "dxy",
+          "dxz",
+          "dyz",
+          "dz2",
+          "s"
+        ]
+      },
+      "seed_problems": [],
+      "seeds_ok": true,
+      "correlated_sites": [
+        {
+          "site": "Fe#1",
+          "functions_on_site": 5,
+          "needed": 5
+        }
+      ],
+      "centre_site_limit_ang": 1.239730737007768,
+      "nearest_neighbour_ang": 2.479461474015536,
+      "centres_ok": true,
+      "target_rms_mev": 15.190737232892578,
+      "target_max_mev": 221.54846295503106,
+      "n_target_states": 1727,
+      "n_target_states_unpaired": 0,
+      "n_target_states_beyond_function_count": 0,
+      "target_states_per_k": [
+        2,
+        6
+      ],
+      "target_bands": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "target_energy_range_ev": [
+        9.391490641890803,
+        19.54091189563879
+      ],
+      "target_weight_min": 0.5,
+      "weights_source": "dmft_subspace_weights/Fe_weights.npz",
+      "n_kpoints": 402,
+      "n_dft_bands": 36,
+      "n_wannier_bands": 6,
+      "reference": "QE pw.x bands test_set_extension_parents/qe/Fe_fm/work/c7/e5/Fe_fm_bands_path.npz",
+      "manifold_isolated": false,
+      "manifold_isolation": {
+        "isolated": false,
+        "channels": [
+          {
+            "spin": 0,
+            "target_bands_1based": [
+              5,
+              15
+            ],
+            "n_target_bands": 11,
+            "n_functions": 6,
+            "gap_below_ev": 45.56487082305202,
+            "gap_above_ev": -10.049792077197708,
+            "isolated": false,
+            "reasons": [
+              "bands 5-15 carry target states: 11 bands for 6 target functions",
+              "no gap to the band above (band 16 dips 10050 meV below the top of band 15)"
+            ]
+          },
+          {
+            "spin": 1,
+            "target_bands_1based": [
+              5,
+              15
+            ],
+            "n_target_bands": 11,
+            "n_functions": 6,
+            "gap_below_ev": 43.07349240914791,
+            "gap_above_ev": -9.430624061458161,
+            "isolated": false,
+            "reasons": [
+              "bands 5-15 carry target states: 11 bands for 6 target functions",
+              "no gap to the band above (band 16 dips 9431 meV below the top of band 15)"
+            ]
+          }
+        ],
+        "gap_min_ev": 0.001,
+        "target_weight_min": 0.5
+      },
+      "n_target_states_above_window": 658,
+      "comparison_window_top_ev": 19.5414,
+      "comparison_window_anchor": "Fermi level",
+      "comparison_window_anchor_ev": 17.5414,
+      "comparison_window_margin_ev": 2.0,
+      "comparison_window_fermi_ev": 17.5414,
+      "comparison_window_bands": "construction mesh",
+      "material_class": "metal",
+      "fermi_source": "given"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

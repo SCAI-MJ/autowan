@@ -1,0 +1,115 @@
+{
+  "recipe_id": "band_distance_from_parent-2e96b8f6",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 3.3568,
+    "occupied_bandwidth_ev": 32.3518,
+    "bands_available": 52,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Sr": 1,
+      "O": 1
+    }
+  },
+  "resolved": [
+    "occupied_manifold_is_represented",
+    "truncated_hopping_eta2",
+    "band_distance_from_parent"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "semicore_exclusion",
+      "old": null,
+      "new": [
+        {
+          "species": "Sr",
+          "shells": []
+        },
+        {
+          "species": "O",
+          "shells": []
+        }
+      ],
+      "reason": "Bring semicore states into the target manifold to resolve the non-honoured exclude_bands failure."
+    }
+  ],
+  "diagnosis": "The construction is failing critical fidelity checks ('occupied_manifold_is_represented' and 'band_distance_from_parent') because the target manifold is not correctly defined. The gate report explicitly states that 'exclude_bands 1-4' is not honoured because the excluded block is not isolated; it reaches 0.35 eV into the kept bands. This means the model is being judged against occupied states that the deck intended to ignore, leading to a massive perceived error (6.4 eV). The 'wan_bands.png' figure confirms this, showing a large gap and a set of deep states in the parent that the model does not reproduce. The solution is to bring these semicore states into the construction so they are explicitly represented by Wannier functions. By setting 'semicore_exclusion' to empty lists for all species, we include the Sr 4s and 4p shells and the O 2s shell. This increases the number of Wannier functions from 13 to 17, as verified by 'validate_deck', and removes the invalid exclusion cut, allowing the model to represent the full occupied manifold.",
+  "provenance": {
+    "material": "SrO",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:27:46+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "google/gemma-4-31b-it",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/gemma_4_31b_it/qe/SrO/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 10648 lie further than 165 meV from any band of the model"
+    },
+    "truncated_hopping_eta2": {
+      "value": 3.414305827870199,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 3.41 meV with hoppings longer than r_c = L_BvK/4 = 10.03 Ang (|R + tau_j - tau_i|) removed (201 of 1921 lattice vectors keep a hopping; untruncated 0.64 meV)",
+      "l_bvk_ang": 40.131319187156265,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 10.032829796789066,
+      "n_vectors_kept": 201,
+      "n_vectors_total": 1921,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 37039,
+      "n_elements_total": 555169,
+      "eta2_untruncated_mev": 0.635147357283276,
+      "fermi_energy_scf_ev": 8.9973,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/SrO/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.377106395718755,
+      "eta_trunc_L3_mev": 1.8465278583301434,
+      "n_vectors_kept_L3": 417,
+      "r_L2_ang": 20.065659593578133,
+      "eta_trunc_L2_mev": 1.5556933022411503,
+      "n_vectors_kept_L2": 1289,
+      "tau_ang": 1.9139111687472397,
+      "tau_free_intercept_ang": 3.4916645639602373,
+      "n_vectors_fitted": 1920
+    },
+    "band_distance_from_parent": {
+      "value": 0.019338424838471518,
+      "units": "eV",
+      "threshold": 0.16520058558099088,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "11807 states compared over -24.40..13.98 eV"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

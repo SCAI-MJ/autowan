@@ -1,0 +1,105 @@
+{
+  "recipe_id": "band_interpolation_eta2-ab847250",
+  "signature": {
+    "bands_crossing_fermi_level": 1,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1346,
+    "occupied_bandwidth_ev": 52.9842,
+    "bands_available": 16,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Na": 1
+    }
+  },
+  "resolved": [
+    "band_interpolation_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Na",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Adding the d shell to s+p raises num_wann from 4 to 9, fewer than the 12 kept bands. It gives the functions the d character of the Na states above E_F that s+p could not represent."
+    },
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 4.0,
+      "reason": "Keeps exact reproduction through E_F+2 eV and beyond (the eta_2 weight region) while staying below band 8's minimum (4.67 eV). It is well inside capacity for 9 functions."
+    }
+  ],
+  "diagnosis": "On the construction mesh the subspace reproduces the parent exactly (about 1e-5 eV below the frozen edge). On the separate path, eta_2 is 71 meV, with errors of about 170 meV even in the fully frozen band 5 near \u0393. So the failure comes from interpolation, not from subspace selection. The real-space Hamiltonian is long-ranged (decay length 2.9 \u00c5, 1.3 % of |H|\u00b2 beyond 10 \u00c5), the gauge is non-smooth, and the wannierisation diverged. Na's s+p set (3s + 3p, 4 functions) cannot represent the d-mixed states that a wider frozen window pins. Widening dis_froz_max helped only slightly (41 \u2192 37 meV), then broke the minimisation and doubled the error at 5.5 eV, which is close to the frozen-capacity limit of 5.68 eV. The pseudopotential has no d orbital, so PDWF cannot widen its projector set. Switching to SMV with analytic s, p and d (9 functions out of 12 kept bands) and a frozen window at E_F+4 eV gives the subspace the d character it needs and leaves the frozen window well inside capacity.",
+  "provenance": {
+    "material": "Na",
+    "attempt": 3,
+    "recorded_at": "2026-10-12T11:04:16+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C1",
+    "profile": "band_interpolation",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/Na/band_interpolation/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "band_interpolation_eta2": {
+      "value": 2.463925316997209,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 2.46 meV at mu = E_F(scf) + 2 = 3.555 eV over 270 path k-points and 9 bands",
+      "eta2_max_mev": 8.76392450622503,
+      "mu_ev": 3.5545999999999998,
+      "fermi_energy_scf_ev": 1.5546,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 1.554581271523683,
+      "eta2_mev_at_nscf_fermi": 2.4639101718676795,
+      "n_kpoints": 270,
+      "n_bands_compared": 9,
+      "excluded_dft_bands": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Na/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 1,
+      "crossing_bands_path": 1,
+      "vbm_ev": 1.5398250429541918,
+      "cbm_ev": 1.5655009111870757,
+      "gap_ev": 0.025675868232883925,
+      "gap_mesh_ev": 0.13458197394784577,
+      "gap_path_ev": 0.025675868232883925,
+      "ef_minus_vbm_ev": 0.014774957045808224,
+      "cbm_minus_ef_ev": 0.010900911187075701,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 4,
+      "filled_band_electrons": 8,
+      "parent_electrons": 9.0,
+      "occupation_consistent": null
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

@@ -1,0 +1,23 @@
+{
+  "source": "$AUTOWAN_WORK/parent_adequacy_vasp_controls/spin/degraded/construction/mno.vasp2wannier90",
+  "ispin": 1,
+  "fermi_energy_ev": 8.8528,
+  "magnetisation_bohr": null,
+  "products": {
+    "wannier90.amn": {
+      "source_sha256": "6460f6fe0ada35b3c266d8f625142a5e56a55ceefbf9eabd4ff37b5c1fdefdad",
+      "source_bytes": 4672614,
+      "kept_lines": 6
+    },
+    "wannier90.eig": {
+      "source_sha256": "3aa3c13e67a57250355e0b25fb927d2d10e3c7140f3f4b08641d7f761f81539e",
+      "source_bytes": 324864,
+      "kept_lines": 32
+    },
+    "wannier90.mmn": {
+      "source_sha256": "142f8d02336e577bf872aa7294169a43035ef09c4840de1fbbaac4d43dc26a14",
+      "source_bytes": 65515494,
+      "kept_lines": 6
+    }
+  }
+}

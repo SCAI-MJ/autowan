@@ -1,0 +1,94 @@
+{
+  "recipe_id": "truncated_hopping_eta2-e44fcdef",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.016,
+    "occupied_bandwidth_ev": 63.7365,
+    "bands_available": 36,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "V": 1
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "V",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Replaces the pseudopotential's p2/s2/d1 orbitals with analytic s, p, d on V. That is the same 9 functions and the same shells, but the radial parts no longer depend on the UPF, whose l=1 orbital is flagged as inconsistent and produces the diffuse p functions that carry the tail beyond r_c."
+    }
+  ],
+  "diagnosis": "The untruncated model is good: eta_2 is 3.88 meV, and every other check passes, including centres, hopping decay and the occupied manifold. The only failure is the sparse criterion, which removes every hopping longer than r_c = 9.82 \u00c5 (L_BvK/4 on a 15x15x15 mesh). With those removed, eta_2 rises to 49.3 meV.\n\nThe weight beyond r_c is small (1.5e-4 of |H|^2) but it sits in a few shells just past the cutoff. The largest element is 17 meV at 10.03 \u00c5, and with many bcc neighbours at that distance the removed elements add up to an error of about -330 meV at the N point on band 7, about 1.5 eV above E_F. The three p-like functions (spread 2.97 \u00c5^2) carry 88 % of that tail weight and the s function (2.12 \u00c5^2) carries 7 %. The five d functions (0.59\u20130.70 \u00c5^2) carry essentially none.\n\nSo the tail belongs to the 4p shell. That shell cannot be dropped: s+d alone gave 817 meV. What remains is where the p radial functions come from. Right now they are the pseudopotential's own p2 orbital for a nearly empty 4p shell, and validate_deck warns that the projector list and the UPF file disagree in their l=1 orbitals.\n\nThe other knobs are already used up:\n- The projectability thresholds barely move the result (0.95 gave 49.04 meV, 0.99 gave 49.29 meV).\n- Every attempt to raise dis_proj_min stopped Wannier90 before it ran.\n- num_bands is already at the parent's maximum of 32 kept bands (validate_deck refuses 36).\n\nThe minimisations also converged cleanly, so the optimiser is not the problem. The lever left is the projector source. SMV accepts analytic s, p, d orbitals, which do not depend on the pseudopotential. I keep the same 9 functions, the same exclusion of the 3s/3p semicore bands, the same 32 bands, and the same frozen window at E_F + 2 eV. At these thresholds PDWF's projectability classification was nearly inactive, so the projector source is effectively the only thing that changes.",
+  "provenance": {
+    "material": "V",
+    "attempt": 3,
+    "recorded_at": "2026-10-13T03:24:50+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/claude_cli_claude_opus_5_5/qe/V/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 16.99792488555955,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 17.00 meV with hoppings longer than r_c = L_BvK/4 = 9.82 Ang (|R + tau_j - tau_i|) removed (283 of 3447 lattice vectors keep a hopping; untruncated 7.88 meV)",
+      "l_bvk_ang": 39.275819494859,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 9.81895487371475,
+      "n_vectors_kept": 283,
+      "n_vectors_total": 3447,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 22923,
+      "n_elements_total": 279207,
+      "eta2_untruncated_mev": 7.884226141854989,
+      "fermi_energy_scf_ev": 16.1042,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/V/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.091939831619666,
+      "eta_trunc_L3_mev": 10.860485932176086,
+      "n_vectors_kept_L3": 701,
+      "r_L2_ang": 19.6379097474295,
+      "eta_trunc_L2_mev": 7.9647022881663005,
+      "n_vectors_kept_L2": 2277,
+      "tau_ang": 1.6530036944560424,
+      "tau_free_intercept_ang": 4.36332891374887,
+      "n_vectors_fitted": 3446
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

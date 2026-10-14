@@ -1,0 +1,85 @@
+{
+  "recipe_id": "truncated_hopping_eta2-6cc7636b",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 4.1482,
+    "occupied_bandwidth_ev": 21.4775,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "C": 2
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 5.0,
+      "reason": "Lowering the frozen edge to 2.5 eV worsened the truncated eta_2 (25.1 to 34.3 meV). Raising it past the original 3.92 eV pins more of the entangled conduction-band bottom, which is where the truncated error sits. Capacity allows up to 14.55 eV."
+    }
+  ],
+  "diagnosis": "Diamond, with the 8 C 2s+2p PAOs. The untruncated model is accurate (17.45 meV), all other checks pass, and the spreads are tight and even (ratio 1.11). The truncated eta_2 failure comes entirely from the bottom of the conduction band. Below E_F+1 eV the truncated model stays within about 9\u201312 meV. In the E_F+2 eV window, band 5 (CBM at +1.35 eV on the path, off the 16^3 mesh near 0.4\u20130.5 along the \u0393\u2013X/K direction) is off by up to 305 meV once hoppings beyond 10.09 \u00c5 are cut. Those weak long-range tails come from how the entangled conduction states between the frozen edge and the free region are disentangled; they do not come from the projectors. The run's own history shows which way to move: lowering dis_froz_max from the paper's 3.92 eV to 2.5 eV made the truncated eta_2 worse (25.06 to 34.26 meV). So pinning more of the low conduction manifold is what keeps the CB-bottom subspace smooth and short-ranged. I'm reversing that change and going further: dis_froz_max = 5.0 eV. frozen_capacity allows up to 14.55 eV (7 states at most against 8 functions), and validate_deck accepts the deck. I'm keeping dis_proj_max = 0.99, which gave the earlier improvement (30.90 to 25.06).",
+  "provenance": {
+    "material": "C",
+    "attempt": 3,
+    "recorded_at": "2026-10-12T12:02:55+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/C/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 15.17426945383846,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 15.17 meV with hoppings longer than r_c = L_BvK/4 = 10.09 Ang (|R + tau_j - tau_i|) removed (447 of 4905 lattice vectors keep a hopping; untruncated 1.83 meV)",
+      "l_bvk_ang": 40.35508169235314,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 10.088770423088285,
+      "n_vectors_kept": 447,
+      "n_vectors_total": 4905,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 23712,
+      "n_elements_total": 313920,
+      "eta2_untruncated_mev": 1.8254761383827134,
+      "fermi_energy_scf_ev": 16.1383,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/C/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.451693897451046,
+      "eta_trunc_L3_mev": 7.708346873584604,
+      "n_vectors_kept_L3": 1079,
+      "r_L2_ang": 20.17754084617657,
+      "eta_trunc_L2_mev": 2.7185140428711385,
+      "n_vectors_kept_L2": 3337,
+      "tau_ang": 1.8839984675583892,
+      "tau_free_intercept_ang": 4.292380103646273,
+      "n_vectors_fitted": 4904
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

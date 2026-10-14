@@ -1,0 +1,46 @@
+{
+  "recipe_id": "calculation_did_not_run-bc587799",
+  "signature": {
+    "bands_crossing_fermi_level": 1,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.4741,
+    "occupied_bandwidth_ev": 3.2971,
+    "bands_available": 9,
+    "spin_channels": 1,
+    "atoms_in_cell": 1,
+    "species": {
+      "Na": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Na",
+          "orbitals": [
+            "s",
+            "p"
+          ]
+        }
+      ],
+      "reason": "The automatic projection is failing to generate the correct number of projections. For metallic Na with states up to 2.0 eV above Fermi, we need both s and p character. This gives 4 functions total (1s + 3p), which should be sufficient for the frozen window while staying within the 9 available bands."
+    }
+  ],
+  "diagnosis": "The calculation failed to run because the projection file has the wrong number of projections. The first attempt failed because there were more states in the frozen window than Wannier functions. After raising num_bands to 9 in attempt 1, the error changed to a projection count mismatch. This is a sodium system with 1 atom, and the automatic projection scheme is not generating the correct number of projections for the requested number of Wannier functions. The frozen window extends to 2.0 eV above the Fermi level, and with bands crossing the Fermi level, we need explicit projectors to properly represent the metallic character.",
+  "provenance": {
+    "material": "Na_pdwf",
+    "attempt": 2,
+    "recorded_at": "2026-08-28T17:17:41+00:00",
+    "certified": true
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

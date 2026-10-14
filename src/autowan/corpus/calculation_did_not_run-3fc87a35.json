@@ -1,0 +1,64 @@
+{
+  "recipe_id": "calculation_did_not_run-3fc87a35",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0427,
+    "occupied_bandwidth_ev": 56.8396,
+    "bands_available": 80,
+    "spin_channels": 1,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "centres_sit_on_atomic_sites"
+  ],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": [
+        {
+          "species": "Ti",
+          "orbitals": [
+            "s",
+            "p",
+            "sp3"
+          ]
+        }
+      ],
+      "new": [
+        {
+          "species": "Ti",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "s+p+d gives 1+3+5=9 functions per Ti atom (18 total), which should exceed the state count in the frozen window since this combination ran successfully in attempt 2"
+    },
+    {
+      "parameter": "num_bands",
+      "old": 40,
+      "new": 50,
+      "reason": "Increasing the band pool gives disentanglement more states to work with, which may help with the centering issues seen in attempt 2 by providing better flexibility in subspace selection"
+    }
+  ],
+  "diagnosis": "The calculation failed to run because there are more states in the frozen window than Wannier functions to represent them. The last attempt used projectors s+p+sp3 on Ti, which gives 1+3+4=8 functions per Ti atom, so 16 functions total for 2 Ti atoms. The frozen window extends to 2.0 eV above the Fermi level and apparently contains more than 16 states. Previous attempts show the construction had convergence and centering issues with other projector sets, but this immediate failure is purely arithmetic: we need more functions to match the frozen window constraint.",
+  "provenance": {
+    "material": "Ti_pdwf",
+    "attempt": 4,
+    "recorded_at": "2026-08-29T07:51:27+00:00",
+    "certified": false
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

@@ -1,0 +1,35 @@
+autowan
+Copyright (c) 2026 SCAI-MJ. Licensed under the MIT License (see LICENSE).
+
+This distribution includes third-party data that is NOT covered by the MIT License.
+
+-------------------------------------------------------------------------------
+src/autowan/data/frontier_wannier_lookup.csv.gz
+-------------------------------------------------------------------------------
+A table extracted from the AiiDA archives of the following Materials Cloud Archive
+records, which are distributed under the Creative Commons Attribution 4.0
+International licence (CC BY 4.0, https://creativecommons.org/licenses/by/4.0/).
+The table was modified: one row per top-level Wannierisation workflow was selected
+and a subset of columns extracted (see src/autowan/data/FRONTIER_DATASET.md).
+
+  - Materials Cloud Archive, doi:10.24435/materialscloud:x0-yf (v2 of v4-e9).
+    J. Qiao, G. Pizzi, N. Marzari, "Projectability disentanglement for accurate and
+    automated electronic-structure Hamiltonians", npj Comput. Mater. 9, 208 (2023),
+    arXiv:2303.07877.
+
+  - Materials Cloud Archive, doi:10.24435/materialscloud:ck-br (v2; v1 is
+    doi:10.24435/materialscloud:9g-ds).
+    Y. Jiang et al., "Robust Wannierization including magnetization and spin-orbit
+    coupling via projectability disentanglement", npj Comput. Mater. 11, 353 (2025),
+    arXiv:2507.06840.
+
+If you use the frontier_dataset tool or this table, cite the papers and the archive
+DOIs above.
+
+-------------------------------------------------------------------------------
+tests/fixtures/wannier90/graphene_projectability_*.{win,wout}
+-------------------------------------------------------------------------------
+Copied unaltered from the Wannier90 test suite (test-suite/tests/testw90_graphene_pdwf/
+and testw90_graphene_dis_proj_auto/, https://github.com/wannier-developers/wannier90,
+commit cfa8441). Wannier90 is distributed under the GNU General Public License v2;
+these files are used as test data only and remain under that licence.

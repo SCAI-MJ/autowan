@@ -1,0 +1,69 @@
+{
+  "recipe_id": "model_bands_correspond_to_parent_bands-2b067619",
+  "signature": {
+    "bands_crossing_fermi_level": 6,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0129,
+    "occupied_bandwidth_ev": 88.0671,
+    "bands_available": 36,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Fe": 1
+    }
+  },
+  "resolved": [
+    "model_bands_correspond_to_parent_bands"
+  ],
+  "still_unresolved": [
+    "dmft_subspace_model_window"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 0.5,
+      "reason": "Force reproduction of states around the Fermi level to fix the large RMS error in the target manifold."
+    }
+  ],
+  "diagnosis": "The construction fails both the reproduction of parent bands and the dmft_subspace accuracy check, with a large RMS error of 455 meV. Band error analysis shows the failure exists across the entire target manifold, including significant errors below the Fermi level (eta ~ 416 meV at nu=0). The spread panel reveals a highly unbalanced set of functions, with one function significantly more diffuse than the other five. This signature, combined with the fact that the current PDWF projectability thresholds (dis_proj_min=0.005, dis_proj_max=0.99) are very wide, suggests the subspace selection is not isolating the target manifold effectively. Since the frontier has already exhausted the projectability threshold ladder with poor results, and the error persists below E_F, the issue is likely that the subspace is not being constrained. Adding a frozen window (dis_froz_max) will force the model to reproduce the states below that energy, which is the primary requirement for the DMFT subspace.",
+  "provenance": {
+    "material": "Fe",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T03:26:14+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "up",
+    "model": "google/gemma-4-31b-it",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/gemma_4_31b_it/qe/Fe/dmft_subspace_window/rep1_up",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 21762 inside 9.22..18.04 eV sit further than 83 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 45.56 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+        9.217395668758845,
+        18.041432209857035
+      ],
+      "deck_frozen_window_ev": [
+        null,
+        18.041432209857035
+      ]
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

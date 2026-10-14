@@ -1,0 +1,38 @@
+{
+  "source": "$AUTOWAN_WORK/parent_adequacy_vasp_controls/spin/clean/construction/mno.vasp2wannier90",
+  "ispin": 2,
+  "fermi_energy_ev": 9.3377,
+  "magnetisation_bohr": 4.7526096,
+  "products": {
+    "wannier90.1.amn": {
+      "source_sha256": "31623a17a03b3e811b5a360547e1836daa160fa3ccacaed3645ea9cb5b189168",
+      "source_bytes": 4672614,
+      "kept_lines": 6
+    },
+    "wannier90.1.eig": {
+      "source_sha256": "0061bcac78bba2ef1a1ccec05ba664b5b9ccc8d5bbc2314aeaf612cbf9c9ddd2",
+      "source_bytes": 324864,
+      "kept_lines": 32
+    },
+    "wannier90.1.mmn": {
+      "source_sha256": "fdaff314b6be2a27f5239bcfb5eae8daf5329cde8f914371255fe36a85296d74",
+      "source_bytes": 65515494,
+      "kept_lines": 6
+    },
+    "wannier90.2.amn": {
+      "source_sha256": "5da0ff4adf10c92041e3bea381b6a3d829c012cccaad0cbfdf94ee8e6172075d",
+      "source_bytes": 4672614,
+      "kept_lines": 6
+    },
+    "wannier90.2.eig": {
+      "source_sha256": "993a14bc58d3de89b7039ea3c4f85eb5ae7d91c0f406d060126f32bd9700d84c",
+      "source_bytes": 324864,
+      "kept_lines": 32
+    },
+    "wannier90.2.mmn": {
+      "source_sha256": "9b421c03ab21ac7dff62fcbf7acd7a2f4d8f9c2945551a0a5b3a21260c8c463c",
+      "source_bytes": 65515494,
+      "kept_lines": 6
+    }
+  }
+}

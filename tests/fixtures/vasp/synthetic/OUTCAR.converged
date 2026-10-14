@@ -1,0 +1,15 @@
+ vasp.6.4.1 05Apr23 (build Jul 23 2026 21:57:36) complex
+
+ executed on             LinuxIFC date 2026.09.12  19:55:03
+ running    4 mpi-ranks, with    1 threads/rank
+ ...
+   ISYM   =     -1    0-nonsym 1-usesym 2-fastsym
+   NELM   =    100;   NELMIN=  2; NELMDL= -5     # of ELM steps
+ Found      1 space group operations (whereof      1 operations were pure point group operations)
+ ...
+----------------------------------------- Iteration    1(  12)  ---------------------------------------
+ ...
+------------------------ aborting loop because EDIFF is reached ----------------------------------------
+
+
+ E-fermi :   5.2000     XC(G=0):  -9.5541     alpha+bet : -5.0326

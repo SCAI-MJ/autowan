@@ -1,0 +1,5 @@
+ vasp.6.4.1 05Apr23 (build Jul 23 2026 21:57:36) complex
+   NELM   =    100;   NELMIN=  2; NELMDL= -5     # of ELM steps
+ Found      1 space group operations (whereof      1 operations were pure point group operations)
+------------------------ aborting loop EDIFF was not reached (unconverged) ----------------------------------------
+ E-fermi :   5.2000     XC(G=0):  -9.5541     alpha+bet : -5.0326

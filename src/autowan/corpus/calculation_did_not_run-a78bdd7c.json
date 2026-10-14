@@ -1,0 +1,49 @@
+{
+  "recipe_id": "calculation_did_not_run-a78bdd7c",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.016,
+    "occupied_bandwidth_ev": 63.7365,
+    "bands_available": 36,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "V": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "truncated_hopping_eta2"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.00125,
+      "reason": "Return to the cutoff demonstrated to permit construction, leaving the other parameters unchanged."
+    }
+  ],
+  "diagnosis": "The projectability cutoff removes too many candidate states before disentanglement. Changing dis_proj_max repeatedly did not resolve this shortage; the frontier's default run built a construction with dis_proj_min = 0.00125.",
+  "provenance": {
+    "material": "V",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:08:00+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/V/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

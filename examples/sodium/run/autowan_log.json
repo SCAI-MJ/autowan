@@ -1,0 +1,1404 @@
+{
+ "material": "wan",
+ "backend": "qe",
+ "model": "claude-cli:claude-opus-5-5",
+ "model_settings": {
+  "model": "claude-cli:claude-opus-5-5",
+  "max_tokens": 16000,
+  "reasoning": null,
+  "temperature": null,
+  "usd_per_mtok_in": null,
+  "usd_per_mtok_out": null,
+  "note": "no entry in MODEL_SETTINGS: provider-default reasoning and temperature",
+  "provider_routing": null
+ },
+ "gate_profile": {
+  "name": "band_interpolation",
+  "hash": "03e038df686b1d80",
+  "checks": [
+   "wannier_count_matches_request",
+   "hopping_shells_inside_representable_supercell",
+   "frontier_manifold_straddles_fermi_level",
+   "centres_stay_near_home_cell",
+   "occupied_manifold_is_represented",
+   "model_bands_correspond_to_parent_bands",
+   "band_distance_from_parent",
+   "hopping_decays_with_distance",
+   "metal_frozen_window_contains_fermi_level",
+   "band_interpolation_eta2"
+  ],
+  "target_manifold": "whole_occupied_manifold"
+ },
+ "config": {
+  "total_attempts": 9,
+  "stop_on_repeated_parameters": true,
+  "tool_calls_per_attempt": 8
+ },
+ "stage": "terminal",
+ "passed": true,
+ "terminal_reason": "both gates passed",
+ "stopped_by_provider": false,
+ "provider_stops": [],
+ "stopped_by_infrastructure": false,
+ "infrastructure_stops": [],
+ "trailing_proposal": null,
+ "cost_usd": 0.864452,
+ "schema_enforcement": {
+  "requested": true,
+  "mechanism": "claude --json-schema",
+  "answers_enforced": 2,
+  "answers_unenforced": 0
+ },
+ "searches": [
+  {
+   "attempt": 1,
+   "query": "alkali metal bcc eta2 interpolation error near Fermi level sp manifold PDWF",
+   "retrieved": [],
+   "scores": []
+  }
+ ],
+ "frontier_handoff": {
+  "point": 9,
+  "history": [
+   {
+    "run": 0,
+    "ladder_point": null,
+    "deck": {
+     "num_wann": 4,
+     "num_bands": 12,
+     "dis_proj_min": 0.005,
+     "dis_proj_max": 0.95,
+     "dis_froz_max": 2.0752,
+     "method": "pdwf"
+    },
+    "certified": false,
+    "failing_checks": [
+     "band_interpolation_eta2"
+    ],
+    "measurements": {
+     "band_interpolation_eta2": {
+      "value": 41.4107,
+      "threshold": 20.0,
+      "units": "meV"
+     }
+    },
+    "calculation_error": null,
+    "deck_values": {
+     "dis_proj_min": 0.005,
+     "dis_proj_max": 0.95
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_frontier__qe__Na__nospin.4af1de27ac.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.95,
+     "dis_proj_min": 0.005,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 1,
+    "ladder_point": 1,
+    "deck": {
+     "dis_proj_max": 0.99,
+     "dis_proj_min": 0.02
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.02,
+     "dis_proj_max": 0.99
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p01__nospin.71dbfb61bb.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.99,
+     "dis_proj_min": 0.02,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 2,
+    "ladder_point": 2,
+    "deck": {
+     "dis_proj_min": 0.02
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.02,
+     "dis_proj_max": 0.95
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p02__nospin.a2bb32c571.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.95,
+     "dis_proj_min": 0.02,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 3,
+    "ladder_point": 3,
+    "deck": {
+     "dis_proj_max": 0.9,
+     "dis_proj_min": 0.02
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.02,
+     "dis_proj_max": 0.9
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p03__nospin.c596826a6f.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.9,
+     "dis_proj_min": 0.02,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 4,
+    "ladder_point": 4,
+    "deck": {
+     "dis_proj_max": 0.85,
+     "dis_proj_min": 0.02
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.02,
+     "dis_proj_max": 0.85
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p04__nospin.9b87c1345b.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.85,
+     "dis_proj_min": 0.02,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 5,
+    "ladder_point": 5,
+    "deck": {
+     "dis_proj_max": 0.99,
+     "dis_proj_min": 0.01
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.01,
+     "dis_proj_max": 0.99
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p05__nospin.6b0bfe9f96.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.99,
+     "dis_proj_min": 0.01,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 6,
+    "ladder_point": 6,
+    "deck": {
+     "dis_proj_min": 0.01
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.01,
+     "dis_proj_max": 0.95
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p06__nospin.7aa9ee88f1.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.95,
+     "dis_proj_min": 0.01,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 7,
+    "ladder_point": 7,
+    "deck": {
+     "dis_proj_max": 0.9,
+     "dis_proj_min": 0.01
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.01,
+     "dis_proj_max": 0.9
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p07__nospin.5b2ea3f76a.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.9,
+     "dis_proj_min": 0.01,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 8,
+    "ladder_point": 8,
+    "deck": {
+     "dis_proj_max": 0.85,
+     "dis_proj_min": 0.01
+    },
+    "certified": false,
+    "failing_checks": [],
+    "measurements": {},
+    "calculation_error": "Wannier90 stopped: dis_windows_proj: Energy window contains fewer states than number of target WFs, consider decreasing dis_proj_min/increasing dis",
+    "deck_values": {
+     "dis_proj_min": 0.01,
+     "dis_proj_max": 0.85
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p08__nospin.f858faf2d1.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.85,
+     "dis_proj_min": 0.01,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   },
+   {
+    "run": 9,
+    "ladder_point": 9,
+    "deck": {
+     "dis_proj_max": 0.99
+    },
+    "certified": false,
+    "failing_checks": [
+     "band_interpolation_eta2"
+    ],
+    "measurements": {
+     "band_interpolation_eta2": {
+      "value": 41.4107,
+      "threshold": 20.0,
+      "units": "meV"
+     }
+    },
+    "calculation_error": null,
+    "deck_values": {
+     "dis_proj_min": 0.005,
+     "dis_proj_max": 0.99
+    },
+    "source": "poster_campaign_final/frontier_scores_f3a461600/qe_ladder__qe__Na__p09__nospin.df7000ab58.json",
+    "parameters": {
+     "conv_tol": "1.0000000000d-07",
+     "conv_window": "3",
+     "dis_froz_max": "3.6297928855d+00",
+     "dis_num_iter": "4000",
+     "dis_proj_max": 0.99,
+     "dis_proj_min": 0.005,
+     "mp_grid": "11, 11, 11",
+     "num_bands": "12",
+     "num_iter": "4000",
+     "num_wann": "4",
+     "projection_source": "the pseudopotential's own atomic orbitals",
+     "method": "pdwf"
+    }
+   }
+  ],
+  "next_proposal": {
+   "ladder_point": 10,
+   "dis_proj_min": 0.005,
+   "dis_proj_max": 0.95
+  }
+ },
+ "accounting": {
+  "frontier_attempts": 10,
+  "handoff_point": 9,
+  "autowan_attempts": 2,
+  "autowan_attempt_budget": 8,
+  "autowan_wannier90_runs": 2,
+  "w90_runs_total": 12,
+  "certified_at_autowan_attempt": 2,
+  "certified_at_w90_run": 12
+ },
+ "attempts": [
+  {
+   "index": 0,
+   "stage": "automatic",
+   "parameters": {
+    "conv_tol": "1.0000000000d-07",
+    "conv_window": "3",
+    "dis_froz_max": "3.6297928855d+00",
+    "dis_num_iter": "4000",
+    "dis_proj_max": "0.99",
+    "dis_proj_min": "0.005",
+    "mp_grid": "11, 11, 11",
+    "num_bands": "12",
+    "num_iter": "4000",
+    "num_wann": "4",
+    "projection_source": "the pseudopotential's own atomic orbitals",
+    "method": "pdwf"
+   },
+   "outcome": {
+    "passed": false,
+    "evaluated_check_ids": [
+     "wannier_count_matches_request",
+     "hopping_shells_inside_representable_supercell",
+     "frontier_manifold_straddles_fermi_level",
+     "centres_stay_near_home_cell",
+     "occupied_manifold_is_represented",
+     "model_bands_correspond_to_parent_bands",
+     "hopping_decays_with_distance",
+     "metal_frozen_window_contains_fermi_level",
+     "band_interpolation_eta2"
+    ],
+    "failed_check_ids": [
+     "band_interpolation_eta2"
+    ],
+    "measurements": {
+     "wannier_count_matches_request": {
+      "value": 4.0,
+      "units": "functions",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "hopping_shells_inside_representable_supercell": {
+      "value": 0.0,
+      "units": "shells",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "frontier_manifold_straddles_fermi_level": {
+      "value": 1.0,
+      "units": "fraction of the parent's frontier k-points",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)"
+     },
+     "centres_stay_near_home_cell": {
+      "value": 0.0,
+      "units": "Ang",
+      "threshold": 3.6586397989644457,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "Wannier function 1 lies 0.000 Ang from the nearest atom (any lattice image)",
+      "measure": "distance to the nearest atom, every lattice image",
+      "furthest_outside_home_cell_ang": 0.0
+     },
+     "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 675 lie further than 249 meV from any band of the model; bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)"
+     },
+     "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 1408 inside -1.72..3.63 eV sit further than 249 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+       -1.7154069419073097,
+       3.6297928855
+      ],
+      "deck_frozen_window_ev": [
+       null,
+       3.6297928855
+      ]
+     },
+     "band_distance_from_parent": {
+      "value": null,
+      "units": "",
+      "threshold": null,
+      "passed": null,
+      "evaluable": false,
+      "applies": false,
+      "note": "not meaningful for a metal manifold"
+     },
+     "hopping_decays_with_distance": {
+      "value": 0.010208,
+      "units": "eV",
+      "threshold": 0.07653244000000001,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "largest element among the outermost 156 shells"
+     },
+     "metal_frozen_window_contains_fermi_level": {
+      "value": 0.0,
+      "units": "eV",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "band_interpolation_eta2": {
+      "value": 41.410669975171324,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": false,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 41.41 meV at mu = E_F(scf) + 2 = 3.555 eV over 270 path k-points and 4 bands",
+      "eta2_max_mev": 133.57216830781107,
+      "mu_ev": 3.5545999999999998,
+      "fermi_energy_scf_ev": 1.5546,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 1.554581271523683,
+      "eta2_mev_at_nscf_fermi": 41.40990602884678,
+      "n_kpoints": 270,
+      "n_bands_compared": 4,
+      "excluded_dft_bands": [
+       1,
+       2,
+       3,
+       4
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Na/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 1,
+      "crossing_bands_path": 1,
+      "vbm_ev": 1.5398250429541918,
+      "cbm_ev": 1.5655009111870757,
+      "gap_ev": 0.025675868232883925,
+      "gap_mesh_ev": 0.13458197394784577,
+      "gap_path_ev": 0.025675868232883925,
+      "ef_minus_vbm_ev": 0.014774957045808224,
+      "cbm_minus_ef_ev": 0.010900911187075701,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 4,
+      "filled_band_electrons": 8,
+      "parent_electrons": 9.0,
+      "occupation_consistent": null
+     }
+    },
+    "source": "physics_gate"
+   },
+   "action": null,
+   "calculation_error": null,
+   "requests": [],
+   "model_error": null,
+   "started_at": "2026-10-13T01:28:27+00:00",
+   "finished_at": "2026-10-13T01:28:28+00:00",
+   "invalid_reason": null,
+   "refused": false,
+   "seed": "wan",
+   "method": "pdwf",
+   "method_switched": false,
+   "switch": null,
+   "tools_called": [],
+   "model_requests": 0,
+   "model_usage": {},
+   "cost_usd": null,
+   "gate_profile": "band_interpolation",
+   "gate_profile_hash": "03e038df686b1d80",
+   "schema_enforcement": null,
+   "stalled": null,
+   "steps": [],
+   "overlaps_from": null,
+   "frontier_point": 9,
+   "status": "gate_refused"
+  },
+  {
+   "index": 1,
+   "stage": "repair",
+   "parameters": {
+    "dis_froz_max": "6.054581271523683",
+    "conv_tol": "1.0000000000d-07",
+    "conv_window": "3",
+    "dis_num_iter": "4000",
+    "dis_proj_max": "0.99",
+    "dis_proj_min": "0.005",
+    "mp_grid": "11, 11, 11",
+    "num_bands": "12",
+    "num_iter": "4000",
+    "num_wann": "4",
+    "projection_source": "the pseudopotential's own atomic orbitals",
+    "method": "pdwf"
+   },
+   "outcome": {
+    "passed": false,
+    "evaluated_check_ids": [
+     "wannier_count_matches_request",
+     "hopping_shells_inside_representable_supercell",
+     "frontier_manifold_straddles_fermi_level",
+     "centres_stay_near_home_cell",
+     "occupied_manifold_is_represented",
+     "model_bands_correspond_to_parent_bands",
+     "hopping_decays_with_distance",
+     "metal_frozen_window_contains_fermi_level",
+     "band_interpolation_eta2"
+    ],
+    "failed_check_ids": [
+     "band_interpolation_eta2"
+    ],
+    "measurements": {
+     "wannier_count_matches_request": {
+      "value": 4.0,
+      "units": "functions",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "hopping_shells_inside_representable_supercell": {
+      "value": 0.0,
+      "units": "shells",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "frontier_manifold_straddles_fermi_level": {
+      "value": 1.0,
+      "units": "fraction of the parent's frontier k-points",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)"
+     },
+     "centres_stay_near_home_cell": {
+      "value": 0.0,
+      "units": "Ang",
+      "threshold": 3.6586397989644457,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "Wannier function 1 lies 0.000 Ang from the nearest atom (any lattice image)",
+      "measure": "distance to the nearest atom, every lattice image",
+      "furthest_outside_home_cell_ang": 0.0
+     },
+     "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 675 lie further than 249 meV from any band of the model; bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)"
+     },
+     "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 2475 inside -1.72..6.05 eV sit further than 249 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+       -1.7154069419073097,
+       6.054581271523683
+      ],
+      "deck_frozen_window_ev": [
+       null,
+       6.054581271523683
+      ]
+     },
+     "band_distance_from_parent": {
+      "value": null,
+      "units": "",
+      "threshold": null,
+      "passed": null,
+      "evaluable": false,
+      "applies": false,
+      "note": "not meaningful for a metal manifold"
+     },
+     "hopping_decays_with_distance": {
+      "value": 0.012407,
+      "units": "eV",
+      "threshold": 0.07539732,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "largest element among the outermost 156 shells"
+     },
+     "metal_frozen_window_contains_fermi_level": {
+      "value": 0.0,
+      "units": "eV",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "band_interpolation_eta2": {
+      "value": 38.68813995160176,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": false,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 38.69 meV at mu = E_F(scf) + 2 = 3.555 eV over 270 path k-points and 4 bands",
+      "eta2_max_mev": 151.83394213025318,
+      "mu_ev": 3.5545999999999998,
+      "fermi_energy_scf_ev": 1.5546,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 1.554581271523683,
+      "eta2_mev_at_nscf_fermi": 38.68749712627842,
+      "n_kpoints": 270,
+      "n_bands_compared": 4,
+      "excluded_dft_bands": [
+       1,
+       2,
+       3,
+       4
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Na/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 1,
+      "crossing_bands_path": 1,
+      "vbm_ev": 1.5398250429541918,
+      "cbm_ev": 1.5655009111870757,
+      "gap_ev": 0.025675868232883925,
+      "gap_mesh_ev": 0.13458197394784577,
+      "gap_path_ev": 0.025675868232883925,
+      "ef_minus_vbm_ev": 0.014774957045808224,
+      "cbm_minus_ef_ev": 0.010900911187075701,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 4,
+      "filled_band_electrons": 8,
+      "parent_electrons": 9.0,
+      "occupation_consistent": null
+     }
+    },
+    "source": "physics_gate"
+   },
+   "action": {
+    "action": "modify_parameters",
+    "diagnosis": "The subspace selection and the spread minimisation both converged without trouble. All structural checks pass: the centre sits on the Na site, hoppings decay and the semicore exclusion is honoured. The only failure is eta_2 on the separate path: 41 meV, against a limit of 20 meV, with the Fermi-Dirac weight reaching to E_F + 2 eV. The error builds up with energy (19.8 meV at nu = 0, 26.6 at nu = 1, 41.4 at nu = 2), and the worst points sit between about 1.1 and 1.7 eV above E_F. The frozen window stops at E_F + 2.075 eV. That edge cuts through the dispersive band 6, which starts at 1.28 eV, and lies just below band 7, which starts at 3.06 eV. Below the edge the frozen set changes from one k-point to the next, so the subspace is fixed exactly at some mesh points and left free at their neighbours. That makes the gauge rough between mesh points, and the path interpolation picks up errors of about 50–130 meV in band 5, even below the frozen edge. The frontier's ladder only moved the projectability thresholds, and it either crashed or gave the identical 41.4 meV. That class of change is exhausted. The energy edge of the frozen window has not been touched, and it is the instrument for fidelity. frozen_capacity shows at most 3 frozen states per k-point up to 5.68 eV, against 4 functions. Raising dis_froz_max to E_F + 4.5 eV pins the s and p bands across the whole weighted region and well beyond the Fermi-Dirac tail, and validate_deck accepts the deck.",
+    "evidence": [
+     "band_interpolation_eta2",
+     "metal_frozen_window_contains_fermi_level",
+     "hopping_decays_with_distance",
+     "centres_stay_near_home_cell",
+     "occupied_manifold_is_represented"
+    ],
+    "observations": [
+     "The error grows with energy: eta = 19.8, 26.6 and 41.4 meV at nu = 0, 1 and 2 eV. The largest deviations are in band 5 between 1.1 and 1.7 eV above E_F, just under the current frozen edge at 2.075 eV.",
+     "On the construction mesh, frozen states agree to about 1e-5 eV. The error appears only on the separate path, so it comes from interpolation (a rough subspace between mesh points), not from missing states.",
+     "The frozen edge at 2.08 eV cuts through the dispersive band 6 (1.28–11.6 eV). Band 7 starts at 3.06 eV and band 8 at 4.67 eV, so a 4.5 eV edge freezes bands 5–7 over most of the zone and still holds at most 3 states at any k-point.",
+     "Every frontier ladder step changed only dis_proj_min/max. These runs either stopped on the window count or gave exactly the same 41.41 meV, so the projectability thresholds do not reach this error.",
+     "In the projections the states are 98% Na s and only 2% Na p. The p projectors from the pseudopotential capture little, so the PD part of PDWF freezes little, and the energy window has to do the work.",
+     "The two spread groups (3.6 vs 6.3 Å^2, ratio 1.72) are the expected s/p split, not a sign of a projector problem."
+    ],
+    "expected_effect": "The subspace is pinned to the parent bands up to E_F + 4.5 eV at every mesh k-point, which removes the k-dependent frozen/free boundary inside the weighted window. Interpolated bands up to E_F + 2–3 eV should then follow DFT much more closely, and eta_2 should drop below 20 meV. Spreads may grow somewhat, but they should stay localised on the Na site.",
+    "confidence": 0.6,
+    "targets": [
+     "band_interpolation_eta2"
+    ],
+    "method": null,
+    "method_from": null,
+    "reason": null,
+    "num_bands_needed": null,
+    "changes": [
+     {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 4.5,
+      "reason": "The current frozen edge (E_F + 2.08 eV) cuts through band 6 inside the weighted region and leaves the subspace rough between mesh points. frozen_capacity allows up to 5.68 eV, so 4.5 eV freezes the s and p manifold across the whole region eta_2 weights while staying within capacity."
+     }
+    ]
+   },
+   "calculation_error": null,
+   "requests": [],
+   "model_error": null,
+   "started_at": "2026-10-13T01:29:17+00:00",
+   "finished_at": "2026-10-13T01:31:17+00:00",
+   "invalid_reason": null,
+   "refused": false,
+   "seed": "wan_r1",
+   "method": "pdwf",
+   "method_switched": false,
+   "switch": null,
+   "tools_called": [
+    {
+     "name": "band_error_by_energy",
+     "arguments": {},
+     "result": "{\"construction_attempt\":0,\"model\":\"the construction's own H(R), Wannier90's interpolation, untruncated\",\"fermi_energy_ev\":1.5546,\"fermi_energy_source\":\"given\",\"reference\":\"DFT bands on the separate high-symmetry path the criteria use\",\"success_mev\":20.0,\"n_kpoints\":270,\"n_bands_compared\":4,\"excluded_dft_bands\":[1,2,3,4],\"windows\":[{\"nu_ev\":0.0,\"eta_mev\":19.776,\"eta_max_mev\":52.213,\"worst_kpoints\":[{\"k_index\":36,\"k_frac\":[0.3017,0.3017,-0.3017],\"eta_mev\":58.38,\"eta_max_mev\":52.21,\"worst_band_dft\":5,\"e_dft_minus_ef_ev\":-0.188,\"e_wan_minus_dft_mev\":-58.4},{\"k_index\":35,\"k_frac\":[0.2931,0.2931,-0. ...",
+     "counted": true
+    },
+    {
+     "name": "frozen_capacity",
+     "arguments": {
+      "e_max": 3.5,
+      "e_min": null
+     },
+     "result": "{\"window_ev_relative\":[null,3.5],\"num_wann\":4,\"frozen_states_max\":3,\"at_kpoint\":173,\"fits\":true,\"highest_e_max_that_fits\":5.6786}",
+     "counted": true
+    },
+    {
+     "name": "band_character",
+     "arguments": {
+      "e_min": -3.5,
+      "e_max": 6
+     },
+     "result": "{\"window_ev_relative\":[-3.5,6.0],\"states\":3313,\"source\":\"the projections of attempt 0 (wan.amn): the weight each state carries on the deck's own projectors, not an independent decomposition; states the projectors miss do not show\",\"composition\":{\"Na s\":0.979,\"Na p\":0.021},\"bands\":[{\"band\":5,\"min_ev\":-3.27,\"max_ev\":3.434,\"excluded_by_deck\":false,\"gap_to_next_ev\":-2.158},{\"band\":6,\"min_ev\":1.276,\"max_ev\":11.6,\"excluded_by_deck\":false,\"gap_to_next_ev\":-8.537},{\"band\":7,\"min_ev\":3.063,\"max_ev\":11.6,\"excluded_by_deck\":false,\"gap_to_next_ev\":-6.934},{\"band\":8,\"min_ev\":4.666,\"max_ev\":11.6,\"excluded_b ...",
+     "counted": true
+    },
+    {
+     "name": "validate_deck",
+     "arguments": {
+      "method": null,
+      "changes": [
+       {
+        "parameter": "dis_froz_max",
+        "new": 4.5
+       }
+      ]
+     },
+     "result": "{\"ok\":true,\"method\":\"pdwf\",\"problems\":[],\"facts\":{\"num_wann\":4,\"num_bands\":12,\"spinors\":false,\"paos_kept\":4,\"excluded_bands\":4,\"exclusion\":{\"bottom_bands\":4,\"top_bands\":0,\"gate_verdict\":\"honoured\",\"gap_ev\":21.679,\"tolerance_ev\":0.2492},\"semicore_excluded\":[{\"species\":\"Na\",\"shells\":[\"s1\",\"p1\"]}],\"frozen_states_max\":3},\"notes\":[\"states frozen by projectability are not counted (no overlaps on hand); the energy-window count is a lower bound\"],\"switch\":null,\"deck\":{\"dis_froz_max\":4.5,\"conv_tol\":\"1.0000000000d-07\",\"conv_window\":\"3\",\"dis_num_iter\":\"4000\",\"dis_proj_max\":\"0.99\",\"dis_proj_min\":\"0.005\",\" ...",
+     "counted": true
+    }
+   ],
+   "model_requests": 3,
+   "model_usage": {
+    "prompt_tokens": 71091,
+    "cache_write_tokens": 27221,
+    "cached_tokens": 43864,
+    "completion_tokens": 3072,
+    "reasoning_tokens": 1110,
+    "total_tokens": 74163,
+    "seconds": 35.507
+   },
+   "cost_usd": 0.345804,
+   "gate_profile": "band_interpolation",
+   "gate_profile_hash": "03e038df686b1d80",
+   "schema_enforcement": {
+    "requested": true,
+    "mechanism": "claude --json-schema",
+    "enforced": true
+   },
+   "stalled": null,
+   "steps": [
+    {
+     "step": "wan_r1:localise",
+     "returncode": 0,
+     "seconds": 109.99,
+     "progress": {
+      "iterations": 155,
+      "loops": 2,
+      "median_interval_s": 5.2009,
+      "max_interval_s": 5.222
+     }
+    }
+   ],
+   "overlaps_from": "wan",
+   "frontier_point": null,
+   "status": "gate_refused"
+  },
+  {
+   "index": 2,
+   "stage": "repair",
+   "parameters": {
+    "dis_froz_max": "6.054581271523683",
+    "num_wann": "9",
+    "conv_tol": "1.0000000000d-07",
+    "conv_window": "3",
+    "dis_num_iter": "4000",
+    "mp_grid": "11, 11, 11",
+    "num_bands": "12",
+    "num_iter": "4000",
+    "projectors": "Na:s;p;d",
+    "projection_source": "analytic orbitals named in the input",
+    "method": "smv"
+   },
+   "outcome": {
+    "passed": true,
+    "evaluated_check_ids": [
+     "wannier_count_matches_request",
+     "hopping_shells_inside_representable_supercell",
+     "frontier_manifold_straddles_fermi_level",
+     "centres_stay_near_home_cell",
+     "occupied_manifold_is_represented",
+     "model_bands_correspond_to_parent_bands",
+     "hopping_decays_with_distance",
+     "metal_frozen_window_contains_fermi_level",
+     "band_interpolation_eta2"
+    ],
+    "failed_check_ids": [],
+    "measurements": {
+     "wannier_count_matches_request": {
+      "value": 9.0,
+      "units": "functions",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "hopping_shells_inside_representable_supercell": {
+      "value": 0.0,
+      "units": "shells",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "frontier_manifold_straddles_fermi_level": {
+      "value": 1.0,
+      "units": "fraction of the parent's frontier k-points",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)"
+     },
+     "centres_stay_near_home_cell": {
+      "value": 1.2386578688859164,
+      "units": "Ang",
+      "threshold": 3.6586397989644457,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "Wannier function 2 lies 1.239 Ang from the nearest atom (any lattice image)",
+      "measure": "distance to the nearest atom, every lattice image",
+      "furthest_outside_home_cell_ang": 1.2386578688859162
+     },
+     "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 675 lie further than 249 meV from any band of the model; bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)"
+     },
+     "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 2474 inside -1.72..6.05 eV sit further than 249 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 21.68 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+       -1.7154069419073097,
+       6.054581271523683
+      ],
+      "deck_frozen_window_ev": [
+       null,
+       6.054581271523683
+      ]
+     },
+     "band_distance_from_parent": {
+      "value": null,
+      "units": "",
+      "threshold": null,
+      "passed": null,
+      "evaluable": false,
+      "applies": false,
+      "note": "not meaningful for a metal manifold"
+     },
+     "hopping_decays_with_distance": {
+      "value": 0.0012990138567390264,
+      "units": "eV",
+      "threshold": 0.15457053,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "largest element among the outermost 156 shells"
+     },
+     "metal_frozen_window_contains_fermi_level": {
+      "value": 0.0,
+      "units": "eV",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+     },
+     "band_interpolation_eta2": {
+      "value": 2.966805292070412,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 2.97 meV at mu = E_F(scf) + 2 = 3.555 eV over 270 path k-points and 9 bands",
+      "eta2_max_mev": 8.112887363867873,
+      "mu_ev": 3.5545999999999998,
+      "fermi_energy_scf_ev": 1.5546,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 1.554581271523683,
+      "eta2_mev_at_nscf_fermi": 2.9667932995789497,
+      "n_kpoints": 270,
+      "n_bands_compared": 9,
+      "excluded_dft_bands": [
+       1,
+       2,
+       3,
+       4
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Na/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 1,
+      "crossing_bands_path": 1,
+      "vbm_ev": 1.5398250429541918,
+      "cbm_ev": 1.5655009111870757,
+      "gap_ev": 0.025675868232883925,
+      "gap_mesh_ev": 0.13458197394784577,
+      "gap_path_ev": 0.025675868232883925,
+      "ef_minus_vbm_ev": 0.014774957045808224,
+      "cbm_minus_ef_ev": 0.010900911187075701,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 4,
+      "filled_band_electrons": 8,
+      "parent_electrons": 9.0,
+      "occupation_consistent": null
+     }
+    },
+    "source": "physics_gate"
+   },
+   "action": {
+    "action": "switch_method",
+    "diagnosis": "eta_2 is too high because the 4-function sp model does not interpolate well between mesh points. The subspace and the spread minimisation are not the cause. Both minimisations converged monotonically. On the 11×11×11 construction mesh, every state below the frozen edge is reproduced to about 1e-5 eV. The error appears only on the separate path: band 5, the band crossing E_F, is off by 40–60 meV within ±0.5 eV of E_F and by up to 190 meV near E_F+1.7 eV around H–N. This is the error you get when the hoppings decay too slowly for the mesh. The three p-like functions have spreads of 7.0 Å², and they carry all of the hopping weight beyond L_BvK/4. The fitted decay length is 2.7 Å, and cutting the hoppings at r_c raises eta_2 to 185 meV. Raising dis_froz_max from 2.08 to 4.5 eV improved eta_2 by only 2.7 meV, and the frontier's projectability ladder either refused to run or gave the same 41.4 meV. So the windows and thresholds are spent. What limits the result is the basis: the Na 3p functions are diffuse and are being forced to also describe the d-hybridised states above E_F. The pseudopotential has no d orbitals, so this cannot be fixed inside PDWF.",
+    "evidence": [
+     "band_interpolation_eta2",
+     "occupied_manifold_is_represented",
+     "model_bands_correspond_to_parent_bands",
+     "centres_stay_near_home_cell",
+     "hopping_shells_inside_representable_supercell"
+    ],
+    "observations": [
+     "The error is concentrated in band 5, which crosses E_F. On the path, eta is already 16 meV at nu=0 and reaches 38.7 meV at nu=2. The worst points are near (0.3,0.3,-0.3) at E_F and (0.68,0.23,-0.23) at E_F+1.7 eV, so this is in-window interpolation error, not an error at the top of the window.",
+     "On the construction mesh, the frozen states match the parent to about 1e-5 eV. The error only appears between mesh points, which means the real-space Hamiltonian is too long-ranged for the 11×11×11 mesh.",
+     "There are two groups of spreads: one s-like function at 3.97 Å² and three p-like functions at 7.03 Å². The p functions carry all of the hopping weight beyond r_c, and cutting at r_c sends eta_2 to 185 meV.",
+     "Moving dis_froz_max from 2.08 to 4.5 eV improved eta_2 by only 2.7 meV (41.4 to 38.7). Seven of the frontier's ten projectability-ladder points would not run, and the two that did gave 41.4 meV.",
+     "The only orbitals PDWF can use for Na are s1, s2, p1 and p2, so a d channel cannot be added within PDWF."
+    ],
+    "expected_effect": "I expect, but cannot guarantee, that the 9-function model will localise better than the current 4-function one. With analytic s, p and d projectors, the d-hybridised states between E_F and about 10 eV can be represented by their own functions instead of stretching the p functions. That should make the p-like functions more compact and the hoppings shorter-ranged, and bring eta_2 on the path near E_F below 20 meV. The functions should stay centred on the Na site, and the frozen window at E_F+4.5 eV keeps the Fermi level inside it.",
+    "confidence": 0.55,
+    "targets": [
+     "band_interpolation_eta2"
+    ],
+    "method": "smv",
+    "method_from": "pdwf",
+    "reason": "PDWF can only keep the pseudopotential's atomic orbitals, and for Na those are s1, s2, p1 and p2. The valence choice (3s and 3p, 4 functions) is already in use, and adding the semicore shells does nothing for the valence bands. No d orbital is available in PDWF, and validate_deck refused a 3d subset. The two PDWF knobs that were tried (widening the frozen window, and the frontier's 10-point projectability ladder) left eta_2 at 38.7–41.4 meV. SMV lets me name analytic s, p and d projectors, which gives a 9-function spd basis. That is the usual way to get localised Wannier functions that interpolate well for a simple metal. validate_deck accepts this deck: 9 functions, 12 bands, frozen window holds at most 3 states, and the semicore exclusion is honoured.",
+    "num_bands_needed": null,
+    "changes": [
+     {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+       {
+        "species": "Na",
+        "orbitals": [
+         "s",
+         "p",
+         "d"
+        ]
+       }
+      ],
+      "reason": "Use analytic s, p and d projectors on Na (9 functions) so the d-hybridised conduction states get their own functions instead of making the 3p functions more diffuse."
+     },
+     {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 4.5,
+      "reason": "Keep the frozen edge that gave the best eta_2 so far (E_F+4.5 eV). It contains the Fermi level, and validate_deck shows it holds at most 3 states against 9 functions."
+     }
+    ]
+   },
+   "calculation_error": null,
+   "requests": [],
+   "model_error": null,
+   "started_at": "2026-10-13T01:32:20+00:00",
+   "finished_at": "2026-10-13T01:48:54+00:00",
+   "invalid_reason": null,
+   "refused": false,
+   "seed": "wan_r2",
+   "method": "smv",
+   "method_switched": true,
+   "switch": {
+    "from": "pdwf",
+    "to": "smv",
+    "reason": "PDWF can only keep the pseudopotential's atomic orbitals, and for Na those are s1, s2, p1 and p2. The valence choice (3s and 3p, 4 functions) is already in use, and adding the semicore shells does nothing for the valence bands. No d orbital is available in PDWF, and validate_deck refused a 3d subset. The two PDWF knobs that were tried (widening the frozen window, and the frontier's 10-point projectability ladder) left eta_2 at 38.7–41.4 meV. SMV lets me name analytic s, p and d projectors, which gives a 9-function spd basis. That is the usual way to get localised Wannier functions that interpolate well for a simple metal. validate_deck accepts this deck: 9 functions, 12 bands, frozen window holds at most 3 states, and the semicore exclusion is honoured."
+   },
+   "tools_called": [
+    {
+     "name": "band_error_by_energy",
+     "arguments": {},
+     "result": "{\"construction_attempt\":1,\"model\":\"the construction's own H(R), Wannier90's interpolation, untruncated\",\"fermi_energy_ev\":1.5546,\"fermi_energy_source\":\"given\",\"reference\":\"DFT bands on the separate high-symmetry path the criteria use\",\"success_mev\":20.0,\"n_kpoints\":270,\"n_bands_compared\":4,\"excluded_dft_bands\":[1,2,3,4],\"windows\":[{\"nu_ev\":0.0,\"eta_mev\":16.241,\"eta_max_mev\":44.206,\"worst_kpoints\":[{\"k_index\":36,\"k_frac\":[0.3017,0.3017,-0.3017],\"eta_mev\":49.61,\"eta_max_mev\":44.21,\"worst_band_dft\":5,\"e_dft_minus_ef_ev\":-0.188,\"e_wan_minus_dft_mev\":-49.6},{\"k_index\":122,\"k_frac\":[0.2317,-0.0,-0.2 ...",
+     "counted": true
+    },
+    {
+     "name": "truncation_diagnostics",
+     "arguments": {
+      "profile": null
+     },
+     "result": "{\"construction_attempt\":1,\"profile\":\"band_interpolation\",\"judged_by_profile\":false,\"criterion\":\"truncated_hopping_eta2\",\"evaluable\":true,\"passed\":false,\"eta2_truncated_mev\":185.2793,\"eta2_untruncated_mev\":38.6881,\"success_mev\":20.0,\"note\":\"eta_2 = 185.28 meV with hoppings longer than r_c = L_BvK/4 = 10.06 Ang (|R + tau_j - tau_i|) removed (113 of 1367 lattice vectors keep a hopping; untruncated 38.69 meV)\",\"range\":{\"r_c_ang\":10.0613,\"l_bvk_ang\":40.245,\"l_bvk_definition\":\"shortest non-zero vector of the mp_grid superlattice\",\"periodic_dims\":3,\"periodic_axes\":[0,1,2]},\"mp_grid\":[11,11,11],\"decay ...",
+     "counted": true
+    },
+    {
+     "name": "search_references",
+     "arguments": {
+      "query": "alkali metal bcc eta2 interpolation error near Fermi level sp manifold PDWF"
+     },
+     "result": "REFERENCE SEARCH nothing in the corpus resolved any of the checks still open here.",
+     "counted": true
+    },
+    {
+     "name": "validate_deck",
+     "arguments": {
+      "method": null,
+      "changes": [
+       {
+        "parameter": "pao_subset",
+        "new": [
+         {
+          "species": "Na",
+          "orbitals": [
+           "3s",
+           "3p",
+           "3d"
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     "result": "{\"ok\":false,\"method\":\"pdwf\",\"problems\":[\"pao_subset names 3d, 3p, 3s for Na, which its projector list does not supply (it has: s1, s2, p1, p2)\"]}",
+     "counted": true
+    },
+    {
+     "name": "method_defaults",
+     "arguments": {
+      "method": "smv"
+     },
+     "result": "{\"method\":\"smv\",\"available_on_this_engine\":[\"pdwf\",\"scdm\",\"smv\"],\"what_it_is\":\"energy-window disentanglement seeded by trial projections: the frozen window fixes which states are reproduced exactly, the outer window bounds the pool, and the projector set decides what the functions can become\",\"knobs\":[\"num_bands\",\"semicore_exclusion\",\"num_iter\",\"dis_num_iter\",\"dis_mix_ratio\",\"conv_window\",\"trial_step\",\"dis_win_min\",\"dis_win_max\",\"dis_froz_min\",\"dis_froz_max\",\"projectors\"],\"current_method\":\"pdwf\",\"starting_deck\":{\"method\":\"smv\",\"code\":\"qe\",\"source\":\"SMV with the frontier's pseudo-atomic project ...",
+     "counted": true
+    },
+    {
+     "name": "validate_deck",
+     "arguments": {
+      "method": "smv",
+      "changes": [
+       {
+        "parameter": "projectors",
+        "new": [
+         {
+          "species": "Na",
+          "orbitals": [
+           "s",
+           "p",
+           "d"
+          ]
+         }
+        ],
+        "reason": ""
+       },
+       {
+        "parameter": "num_bands",
+        "new": 12
+       },
+       {
+        "parameter": "dis_froz_max",
+        "new": 4.5
+       }
+      ]
+     },
+     "result": "{\"ok\":true,\"method\":\"smv\",\"problems\":[],\"facts\":{\"num_wann\":9,\"num_bands\":12,\"spinors\":false,\"projectors_imply\":9,\"excluded_bands\":4,\"exclusion\":{\"bottom_bands\":4,\"top_bands\":0,\"gate_verdict\":\"honoured\",\"gap_ev\":21.679,\"tolerance_ev\":0.2492},\"semicore_excluded\":[{\"species\":\"Na\",\"shells\":[\"s1\",\"p1\"]}],\"frozen_states_max\":3},\"notes\":[],\"switch\":\"pdwf -> smv\",\"deck\":{\"num_bands\":\"12\",\"dis_froz_max\":4.5,\"num_wann\":\"9\",\"conv_tol\":\"1.0000000000d-07\",\"conv_window\":\"3\",\"dis_num_iter\":\"4000\",\"mp_grid\":\"11, 11, 11\",\"num_iter\":\"4000\",\"projectors\":\"Na:s;p;d\",\"exclude_bands\":\"1-4\"},\"gate_profile\":\"band_int ...",
+     "counted": true
+    },
+    {
+     "name": "frozen_capacity",
+     "arguments": {
+      "e_max": 8,
+      "e_min": null
+     },
+     "result": "{\"window_ev_relative\":[null,8],\"num_wann\":4,\"frozen_states_max\":6,\"at_kpoint\":666,\"fits\":false,\"highest_e_max_that_fits\":5.6786}",
+     "counted": true
+    }
+   ],
+   "model_requests": 4,
+   "model_usage": {
+    "prompt_tokens": 109757,
+    "cache_write_tokens": 18789,
+    "cached_tokens": 90960,
+    "completion_tokens": 3981,
+    "reasoning_tokens": 1455,
+    "total_tokens": 113738,
+    "seconds": 53.949
+   },
+   "cost_usd": 0.518648,
+   "gate_profile": "band_interpolation",
+   "gate_profile_hash": "03e038df686b1d80",
+   "schema_enforcement": {
+    "requested": true,
+    "mechanism": "claude --json-schema",
+    "enforced": true
+   },
+   "stalled": null,
+   "steps": [
+    {
+     "step": "wan_r2:nnkp",
+     "returncode": 0,
+     "seconds": 6.3,
+     "progress": {
+      "iterations": 0,
+      "loops": 0,
+      "median_interval_s": null,
+      "max_interval_s": null
+     }
+    },
+    {
+     "step": "wan_r2:overlaps",
+     "returncode": 0,
+     "seconds": 724.34,
+     "progress": {
+      "iterations": 2662,
+      "loops": 2,
+      "median_interval_s": 5.2765,
+      "max_interval_s": 15.748
+     }
+    },
+    {
+     "step": "wan_r2:localise",
+     "returncode": 0,
+     "seconds": 254.21,
+     "progress": {
+      "iterations": 722,
+      "loops": 2,
+      "median_interval_s": 5.1805,
+      "max_interval_s": 6.502
+     }
+    }
+   ],
+   "overlaps_from": null,
+   "frontier_point": null,
+   "status": "passed"
+  }
+ ],
+ "parent_adequacy": {
+  "engine": "qe",
+  "findings": [
+   {
+    "check_id": "band_count_covers_demand",
+    "status": "adequate",
+    "severity": "blocking",
+    "measured": {
+     "parent_bands": 16,
+     "num_wann": 4,
+     "num_bands": 12,
+     "excluded": 4,
+     "required_bands": 16,
+     "frozen_window_closed": true,
+     "prescribed_bands": 16
+    },
+    "reason": "The parent supplies the bands required by the deck.",
+    "prescription": null
+   },
+   {
+    "check_id": "kpoints_are_the_decks_full_grid",
+    "status": "adequate",
+    "severity": "blocking",
+    "measured": {
+     "parent_kpoints": 1331,
+     "deck_kpoints": 1331,
+     "mp_grid": [
+      11,
+      11,
+      11
+     ],
+     "missing": 0,
+     "extra": 0,
+     "order_matches": true,
+     "n_symmetries": 1,
+     "symmetry_reduced": false
+    },
+    "reason": "The parent contains the deck's full sampling grid.",
+    "prescription": null
+   },
+   {
+    "check_id": "spin_treatment_matches_magnetic_state",
+    "status": "not_evaluable",
+    "severity": "blocking",
+    "measured": {
+     "spin_polarised": false,
+     "noncollinear": false,
+     "moment_bohr": null,
+     "declared_total_bohr": null,
+     "declared": null,
+     "source": "none"
+    },
+    "reason": "No magnetic state has been declared.",
+    "prescription": null
+   },
+   {
+    "check_id": "projector_inventory_covers_fermi_level",
+    "status": "adequate",
+    "severity": "limiting",
+    "measured": {
+     "projector_functions": 5,
+     "num_wann": 4,
+     "channels": {},
+     "states_at_fermi_level": 1,
+     "states_in_frozen_window": 2
+    },
+    "reason": "The pseudo-atomic projection route supplies enough functions at the Fermi level.",
+    "prescription": null
+   },
+   {
+    "check_id": "mesh_resolves_hopping_decay",
+    "status": "not_evaluable",
+    "severity": "advisory",
+    "measured": {
+     "onsite_ev": null,
+     "threshold_fraction": 0.01,
+     "threshold_ev": null,
+     "outer_hopping_ev": null,
+     "decay_length_ang": null,
+     "reach_needed_ang": null,
+     "outer_distance_ang": null,
+     "mesh": [
+      11,
+      11,
+      11
+     ],
+     "prescribed_mesh": null
+    },
+    "reason": "A Hamiltonian and a declared mesh are needed to assess hopping decay.",
+    "prescription": null
+   },
+   {
+    "check_id": "band_partition_matches_deck",
+    "status": "adequate",
+    "severity": "blocking",
+    "measured": {
+     "parent_bands": 16,
+     "num_bands": 12,
+     "excluded": 4,
+     "deck_bands": 16,
+     "overlap_bands": 12,
+     "surplus_bands": 0,
+     "surplus_band_range": null,
+     "frozen_window_closed_by_deck_bands": true,
+     "prescribed_bands": null
+    },
+    "reason": "The parent bands partition exactly into the deck's declared bands and exclusions.",
+    "prescription": null
+   }
+  ]
+ },
+ "terminal_diagnosis": null,
+ "prescription": null,
+ "parent_limit_requests": [],
+ "status": "certified"
+}

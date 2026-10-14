@@ -1,0 +1,113 @@
+{
+  "recipe_id": "band_distance_from_parent-4a9d051d",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 3.3568,
+    "occupied_bandwidth_ev": 32.3518,
+    "bands_available": 52,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Sr": 1,
+      "O": 1
+    }
+  },
+  "resolved": [
+    "occupied_manifold_is_represented",
+    "truncated_hopping_eta2",
+    "band_distance_from_parent"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "semicore_exclusion",
+      "old": null,
+      "new": [
+        {
+          "species": "O",
+          "shells": [
+            "s1"
+          ]
+        }
+      ],
+      "reason": "Exclude O 2s together with the already excluded Sr semicore shells, completing the isolated block. Counts update automatically."
+    }
+  ],
+  "diagnosis": "The four-band exclusion cuts through an overlapping semicore block, so the gate counts excluded occupied states as missing. Exclude the complete isolated five-band block instead; projectability retries cannot repair an invalid exclusion.",
+  "provenance": {
+    "material": "SrO",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T01:54:56+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/SrO/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 3993 lie further than 165 meV from any band of the model; bands 1-5 excluded by the deck and not counted (isolated 10.76 eV below the represented manifold)"
+    },
+    "truncated_hopping_eta2": {
+      "value": 6.407958621059886,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 6.41 meV with hoppings longer than r_c = L_BvK/4 = 10.03 Ang (|R + tau_j - tau_i|) removed (201 of 1921 lattice vectors keep a hopping; untruncated 0.90 meV)",
+      "l_bvk_ang": 40.131319187156265,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 10.032829796789066,
+      "n_vectors_kept": 201,
+      "n_vectors_total": 1921,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 18414,
+      "n_elements_total": 276624,
+      "eta2_untruncated_mev": 0.9044520802143605,
+      "fermi_energy_scf_ev": 8.9973,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/SrO/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.377106395718755,
+      "eta_trunc_L3_mev": 2.572113888665588,
+      "n_vectors_kept_L3": 417,
+      "r_L2_ang": 20.065659593578133,
+      "eta_trunc_L2_mev": 1.73329262691066,
+      "n_vectors_kept_L2": 1289,
+      "tau_ang": 1.981991318401671,
+      "tau_free_intercept_ang": 3.1285150681135008,
+      "n_vectors_fitted": 1920
+    },
+    "band_distance_from_parent": {
+      "value": 1.4563297900578972e-05,
+      "units": "eV",
+      "threshold": 0.16520058558099088,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "3993 states compared over 5.86..10.95 eV; bands 1-5 excluded by the deck and not counted (isolated 10.76 eV below the represented manifold)"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

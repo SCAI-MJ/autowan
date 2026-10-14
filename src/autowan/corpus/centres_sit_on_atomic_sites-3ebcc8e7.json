@@ -1,0 +1,50 @@
+{
+  "recipe_id": "centres_sit_on_atomic_sites-3ebcc8e7",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1232,
+    "occupied_bandwidth_ev": 28.8201,
+    "bands_available": 20,
+    "spin_channels": 1,
+    "atoms_in_cell": 1,
+    "species": {
+      "Ba": 1
+    }
+  },
+  "resolved": [
+    "centres_sit_on_atomic_sites"
+  ],
+  "still_unresolved": [
+    "spread_minimisation_converged"
+  ],
+  "changes": [
+    {
+      "parameter": "trial_step",
+      "old": null,
+      "new": 0.5,
+      "reason": "The spread minimisation is oscillating with steps that change sign and are not shrinking toward the tolerance. The trajectory shows alternating negative deltas around -1e-04 to -2e-04 that are not decreasing in magnitude. Tripling the iteration budget from 4000 to 12000 did not help - the minimisation is wandering on a difficult landscape rather than running out of steps. A smaller line-search step will damp the oscillation and help the minimisation settle into a minimum."
+    }
+  ],
+  "diagnosis": "The spread minimisation is oscillating rather than converging. The final steps show alternating negative deltas of similar magnitude (-1.02e-04 to -2.40e-04) that are not shrinking toward the tolerance. The trajectory analysis confirms these steps are not shrinking (1.10x over the window). The iteration budget was already tripled from 4000 to 12000 iterations between attempts 2 and 3, but this did not resolve the convergence - it just oscillated for longer. This is a classic sign of a minimisation that needs damping rather than more iterations. Additionally, the centres drifted further off-site when given more iterations (from 0.80 Ang to 2.64 Ang), suggesting the minimisation is exploring an unhelpful region of the landscape.",
+  "provenance": {
+    "material": "Ba_pdwf",
+    "attempt": 4,
+    "recorded_at": "2026-08-29T10:38:55+00:00",
+    "certified": false
+  },
+  "measurements": {
+    "centres_sit_on_atomic_sites": {
+      "value": 0.3383412321045131,
+      "units": "Ang",
+      "threshold": 2.1773842488818143,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+    }
+  },
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

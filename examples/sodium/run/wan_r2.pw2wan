@@ -1,0 +1,5 @@
+&INPUTPP
+  outdir = './out/'
+  prefix = 'aiida'
+  seedname = 'wan_r2'
+/

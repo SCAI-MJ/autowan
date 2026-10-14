@@ -1,0 +1,86 @@
+{
+  "recipe_id": "calculation_did_not_run-dcbf703a",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1478,
+    "occupied_bandwidth_ev": 74.1368,
+    "bands_available": 36,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "W": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run",
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.005,
+      "reason": "0.02 and 0.1 empty the projectability pool below num_wann = 9 at some k-point, while 0.01 ran. 0.005 restores and slightly enlarges the pool without repeating attempt 1's deck; it is the frontier ladder's next point (0.005/0.99)."
+    }
+  ],
+  "diagnosis": "The deck was refused before it ran because the projectability pool at one or more k-points was too small, so subspace selection never started. Wannier90's dis_windows_proj check found fewer states with projectability \u2265 dis_proj_min than the 9 functions requested (W 6s + 6p + 5d). The history shows it is that threshold: with dis_proj_min = 0.01 (attempts 0 and 1) the construction ran, and with 0.1 and 0.02 (attempts 2 and 3) it was refused. So at some k-point only about 9 of the 32 bands project above 0.02 onto the kept orbitals. Going back to 0.01 would just repeat attempt 1, which failed truncated_hopping_eta2 at 22.8 meV against a 20 meV limit. I am taking the next untried point that will run on the frontier's PDWF retry ladder, 0.005 with 0.99. It loosens the drop criterion further than either deck that ran. Projector shells, semicore cut (honoured, 28 eV gap), frozen window and dis_proj_max stay as they are.",
+  "provenance": {
+    "material": "W",
+    "attempt": 4,
+    "recorded_at": "2026-10-12T11:47:57+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/W/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 16.248652383359644,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 16.25 meV with hoppings longer than r_c = L_BvK/4 = 10.28 Ang (|R + tau_j - tau_i|) removed (283 of 3447 lattice vectors keep a hopping; untruncated 1.77 meV)",
+      "l_bvk_ang": 41.11123453153574,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 10.277808632883936,
+      "n_vectors_kept": 283,
+      "n_vectors_total": 3447,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 22923,
+      "n_elements_total": 279207,
+      "eta2_untruncated_mev": 1.7739466065302005,
+      "fermi_energy_scf_ev": 22.6357,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/W/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.703744843845246,
+      "eta_trunc_L3_mev": 4.1714241030126775,
+      "n_vectors_kept_L3": 701,
+      "r_L2_ang": 20.55561726576787,
+      "eta_trunc_L2_mev": 2.1005293812605146,
+      "n_vectors_kept_L2": 2277,
+      "tau_ang": 1.900289950922221,
+      "tau_free_intercept_ang": 3.870800727720378,
+      "n_vectors_fitted": 3446
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

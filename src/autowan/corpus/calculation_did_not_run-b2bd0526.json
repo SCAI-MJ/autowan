@@ -1,0 +1,63 @@
+{
+  "recipe_id": "calculation_did_not_run-b2bd0526",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.016,
+    "occupied_bandwidth_ev": 63.7365,
+    "bands_available": 36,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "V": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "truncated_hopping_eta2"
+  ],
+  "changes": [
+    {
+      "parameter": "pao_subset",
+      "old": null,
+      "new": [
+        {
+          "species": "V",
+          "orbitals": [
+            "s2",
+            "d1"
+          ]
+        }
+      ],
+      "reason": "The 4p PAO (p2) has 0.5% weight in the kept states and cannot fill its three functions. Keeping 4s + 3d gives num_wann = 6, matching the manifold's s and d character."
+    },
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.00125,
+      "reason": "Removing p2 lowers each state's projectability. Going back to run 0's floor, which is known to run, makes sure enough states pass the floor at every k-point."
+    }
+  ],
+  "diagnosis": "Every ladder point with dis_proj_min \u2265 0.005 was refused by Wannier90 (dis_windows_proj): at some k-point, fewer than 9 states reached the projectability floor. The cause is the projector set, not the thresholds. The 9 pseudo-atomic orbitals (PAOs) are V 4s (s2), 3d (d1) and 4p (p2). On attempt 0's projections, the kept states are 86% V d, 14% V s and only 0.5% V p. So the 4p orbital (p2) from this pseudopotential represents almost nothing in the kept bands. Its three functions have no states to fill them, and the window falls short of the count of 9. Run 0 only ran because its dis_proj_min was 0.00125. Even then, its truncated eta_2 was 49 meV, which fits a construction carrying three nearly empty, diffuse p functions. My fix drops p2 from pao_subset and keeps 4s + 3d, which gives 6 functions on the one V atom. Removing p2 also lowers each state's projectability, so I also set dis_proj_min back to 0.00125, the floor run 0 ran with, so the 6-function window is sure to have enough states. The semicore cut (exclude_bands 1-4) stays as it is; the gate honours it, with a 30.5 eV gap above.",
+  "provenance": {
+    "material": "V",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:11:19+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/claude_cli_claude_opus_5_5/qe/V/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

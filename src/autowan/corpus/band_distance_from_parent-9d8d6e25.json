@@ -1,0 +1,117 @@
+{
+  "recipe_id": "band_distance_from_parent-9d8d6e25",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 3.3568,
+    "occupied_bandwidth_ev": 32.3518,
+    "bands_available": 52,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Sr": 1,
+      "O": 1
+    }
+  },
+  "resolved": [
+    "occupied_manifold_is_represented",
+    "calculation_did_not_run",
+    "band_interpolation_eta2",
+    "band_distance_from_parent"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "semicore_exclusion",
+      "old": null,
+      "new": [
+        {
+          "species": "Sr",
+          "shells": []
+        },
+        {
+          "species": "O",
+          "shells": []
+        }
+      ],
+      "reason": "Include Sr semicore (s1, p1) because they overlap valence by 0.35 eV \u2014 no isolated gap exists for exclusion. Empty list for Sr brings all its semicore in; O already includes all semicore."
+    }
+  ],
+  "diagnosis": "The gate refuses the deck because exclude_bands 1-4 (Sr s1 and p1 semicore shells, 4 bands total) are not isolated from the valence manifold \u2014 they overlap by 0.35 eV, but the gate requires a clean gap >165 meV. Since no isolated gap exists below the valence, these semicore states cannot be excluded and must be included in the construction. The current semicore_exclusion excludes Sr s1,p1 but includes all O semicore; this cut is invalid. The fix is to include the Sr semicore by setting its exclusion list empty, which moves the exclude_bands cut to zero (no excluded bands) and adds 4 Wannier functions to represent those states.",
+  "provenance": {
+    "material": "SrO",
+    "attempt": 2,
+    "recorded_at": "2026-10-13T03:02:41+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C1",
+    "profile": "band_interpolation",
+    "channel": "nospin",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/nemotron_3_ultra_550b_a55b_free/qe/SrO/band_interpolation/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 10648 lie further than 165 meV from any band of the model"
+    },
+    "band_interpolation_eta2": {
+      "value": 0.8285833331799468,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 0.83 meV at mu = E_F(scf) + 2 = 10.997 eV over 212 path k-points and 17 bands",
+      "eta2_max_mev": 6.297727183786961,
+      "mu_ev": 10.9973,
+      "fermi_energy_scf_ev": 8.9973,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 10.745868437683166,
+      "eta2_mev_at_nscf_fermi": 5.892464477187904,
+      "n_kpoints": 212,
+      "n_bands_compared": 17,
+      "excluded_dft_bands": [],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/SrO/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": true,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 0,
+      "crossing_bands_path": 0,
+      "vbm_ev": 7.950669041822649,
+      "cbm_ev": 11.269334036760743,
+      "gap_ev": 3.3186649949380937,
+      "gap_mesh_ev": 3.356799854498406,
+      "gap_path_ev": 3.318665811699276,
+      "ef_minus_vbm_ev": 1.0466309581773503,
+      "cbm_minus_ef_ev": 2.2720340367607434,
+      "eta2_conduction_coverage_ev": -0.27203403676074345,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 8,
+      "filled_band_electrons": 16,
+      "parent_electrons": 16.0,
+      "occupation_consistent": true
+    },
+    "band_distance_from_parent": {
+      "value": 0.06812369997564498,
+      "units": "eV",
+      "threshold": 0.16520058558099088,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "11807 states compared over -24.40..13.98 eV"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

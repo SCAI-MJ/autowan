@@ -1,0 +1,120 @@
+{
+  "recipe_id": "band_distance_from_parent-bb299a88",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 3.3568,
+    "occupied_bandwidth_ev": 32.3518,
+    "bands_available": 52,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Sr": 1,
+      "O": 1
+    }
+  },
+  "resolved": [
+    "occupied_manifold_is_represented",
+    "band_interpolation_eta2",
+    "band_distance_from_parent"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "semicore_exclusion",
+      "old": null,
+      "new": [
+        {
+          "species": "Sr",
+          "shells": [
+            "s1"
+          ]
+        },
+        {
+          "species": "O",
+          "shells": []
+        }
+      ],
+      "reason": "Exclude only cleanly isolated Sr 4s (band 1, 15.66 eV gap); include Sr 4p (bands 2-4) in Wannier subspace so gate honours exclusion and construction has enough functions for valence manifold"
+    }
+  ],
+  "diagnosis": "The gate does not honour exclude_bands 1-4 because the Sr 4p semicore bands (bands 2-4) overlap the valence band 5 by 0.35 eV, exceeding the 165 meV isolation threshold. The construction has only 13 Wannier functions (O 2s2p + Sr 5s4d) but is scored against all occupied states including the 3 Sr 4p bands it cannot represent, causing occupied_manifold_is_represented (0.50), band_distance_from_parent (6.4 eV), and band_interpolation_eta2 (107 meV) to fail. The fix is to exclude only the cleanly isolated Sr 4s shell (band 1, 15.66 eV gap) and include Sr 4p in the Wannier subspace, raising num_wann to 16 and num_bands to 51. validate_deck confirms this exclusion will be honoured (gap_ev = 15.661 > 0.1652).",
+  "provenance": {
+    "material": "SrO",
+    "attempt": 1,
+    "recorded_at": "2026-10-12T11:55:03+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C1",
+    "profile": "band_interpolation",
+    "channel": "nospin",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/nemotron_3_ultra_550b_a55b_free/qe/SrO/band_interpolation/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 9317 lie further than 165 meV from any band of the model; bands 1 excluded by the deck and not counted (isolated 15.66 eV below the represented manifold)"
+    },
+    "band_interpolation_eta2": {
+      "value": 1.2767750659605872,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 1.28 meV at mu = E_F(scf) + 2 = 10.997 eV over 212 path k-points and 16 bands",
+      "eta2_max_mev": 14.415129394420134,
+      "mu_ev": 10.9973,
+      "fermi_energy_scf_ev": 8.9973,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 10.745868437683166,
+      "eta2_mev_at_nscf_fermi": 1.3146683310663796,
+      "n_kpoints": 212,
+      "n_bands_compared": 16,
+      "excluded_dft_bands": [
+        1
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/SrO/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": true,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 0,
+      "crossing_bands_path": 0,
+      "vbm_ev": 7.950669041822649,
+      "cbm_ev": 11.269334036760743,
+      "gap_ev": 3.3186649949380937,
+      "gap_mesh_ev": 3.356799854498406,
+      "gap_path_ev": 3.318665811699276,
+      "ef_minus_vbm_ev": 1.0466309581773503,
+      "cbm_minus_ef_ev": 2.2720340367607434,
+      "eta2_conduction_coverage_ev": -0.27203403676074345,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 8,
+      "filled_band_electrons": 16,
+      "parent_electrons": 16.0,
+      "occupation_consistent": true
+    },
+    "band_distance_from_parent": {
+      "value": 1.3445890676890188e-05,
+      "units": "eV",
+      "threshold": 0.16520058558099088,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "9506 states compared over -8.57..12.40 eV; bands 1 excluded by the deck and not counted (isolated 15.66 eV below the represented manifold)"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

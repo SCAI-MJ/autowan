@@ -1,0 +1,513 @@
+{
+ "_comment": "Derived from the fourteen campaign POTCARs (PAW_PBE library, $AUTOWAN_POTCAR_LIBRARY): per label, the non-local channels and, per channel, the occupied atomic shells its partial waves were built at (a Description reference energy equal to an occupied Atomic-configuration level of the same l). No POTCAR text. Per material, the all-channel count of the 2026-09-29 parents (report 07) and the semicore-aware count (one function per occupied radial channel, at least one per channel). Measured 2026-10-01 by an independent reader before the implementation.",
+ "potcars": {
+  "Na": {
+   "titel": "PAW_PBE Na 08Apr2002",
+   "occupied_radial_channels": {
+    "s": [
+     "3s"
+    ],
+    "p": []
+   },
+   "functions_per_atom_all_channel": 4,
+   "functions_per_atom_semicore_aware": 4
+  },
+  "Ba_sv": {
+   "titel": "PAW_PBE Ba_sv 06Sep2000",
+   "occupied_radial_channels": {
+    "s": [
+     "5s",
+     "6s"
+    ],
+    "p": [
+     "5p"
+    ],
+    "d": [
+     "5d"
+    ]
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 10
+  },
+  "Cu": {
+   "titel": "PAW_PBE Cu 22Jun2005",
+   "occupied_radial_channels": {
+    "s": [
+     "4s"
+    ],
+    "p": [],
+    "d": [
+     "3d"
+    ]
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 9
+  },
+  "V_sv": {
+   "titel": "PAW_PBE V_sv 02Aug2007",
+   "occupied_radial_channels": {
+    "s": [
+     "3s",
+     "4s"
+    ],
+    "p": [
+     "3p"
+    ],
+    "d": [
+     "3d"
+    ]
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 10
+  },
+  "W_sv_GW": {
+   "titel": "PAW_PBE W_sv_GW 23Mar2010",
+   "occupied_radial_channels": {
+    "s": [
+     "5s"
+    ],
+    "p": [
+     "5p"
+    ],
+    "d": [
+     "5d"
+    ],
+    "f": []
+   },
+   "functions_per_atom_all_channel": 16,
+   "functions_per_atom_semicore_aware": 16
+  },
+  "Ti_sv": {
+   "titel": "PAW_PBE Ti_sv 26Sep2005",
+   "occupied_radial_channels": {
+    "s": [
+     "3s",
+     "4s"
+    ],
+    "p": [
+     "3p"
+    ],
+    "d": [
+     "3d"
+    ]
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 10
+  },
+  "Si": {
+   "titel": "PAW_PBE Si 05Jan2001",
+   "occupied_radial_channels": {
+    "s": [
+     "3s"
+    ],
+    "p": [
+     "3p"
+    ]
+   },
+   "functions_per_atom_all_channel": 4,
+   "functions_per_atom_semicore_aware": 4
+  },
+  "C": {
+   "titel": "PAW_PBE C 08Apr2002",
+   "occupied_radial_channels": {
+    "s": [
+     "2s"
+    ],
+    "p": [
+     "2p"
+    ]
+   },
+   "functions_per_atom_all_channel": 4,
+   "functions_per_atom_semicore_aware": 4
+  },
+  "Ga_d": {
+   "titel": "PAW_PBE Ga_d 06Jul2010",
+   "occupied_radial_channels": {
+    "s": [
+     "4s"
+    ],
+    "p": [
+     "4p"
+    ],
+    "d": [
+     "3d"
+    ]
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 9
+  },
+  "As": {
+   "titel": "PAW_PBE As 22Sep2009",
+   "occupied_radial_channels": {
+    "s": [
+     "4s"
+    ],
+    "p": [
+     "4p"
+    ],
+    "d": []
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 9
+  },
+  "Sr_sv": {
+   "titel": "PAW_PBE Sr_sv 07Sep2000",
+   "occupied_radial_channels": {
+    "s": [
+     "4s",
+     "5s"
+    ],
+    "p": [
+     "4p"
+    ],
+    "d": [
+     "4d"
+    ]
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 10
+  },
+  "O": {
+   "titel": "PAW_PBE O 08Apr2002",
+   "occupied_radial_channels": {
+    "s": [
+     "2s"
+    ],
+    "p": [
+     "2p"
+    ]
+   },
+   "functions_per_atom_all_channel": 4,
+   "functions_per_atom_semicore_aware": 4
+  },
+  "La": {
+   "titel": "PAW_PBE La 06Sep2000",
+   "occupied_radial_channels": {
+    "s": [
+     "5s",
+     "6s"
+    ],
+    "p": [
+     "5p"
+    ],
+    "d": [
+     "5d"
+    ],
+    "f": [
+     "4f"
+    ]
+   },
+   "functions_per_atom_all_channel": 16,
+   "functions_per_atom_semicore_aware": 17
+  },
+  "Mn_sv": {
+   "titel": "PAW_PBE Mn_sv 23Jul2007",
+   "occupied_radial_channels": {
+    "s": [
+     "3s",
+     "4s"
+    ],
+    "p": [
+     "3p"
+    ],
+    "d": [
+     "3d"
+    ]
+   },
+   "functions_per_atom_all_channel": 9,
+   "functions_per_atom_semicore_aware": 10
+  }
+ },
+ "materials": {
+  "Na": {
+   "species": [
+    {
+     "symbol": "Na",
+     "potcar": "Na",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 4,
+   "num_wann_semicore_aware": 4,
+   "ispin": 1
+  },
+  "Ba": {
+   "species": [
+    {
+     "symbol": "Ba",
+     "potcar": "Ba_sv",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 9,
+   "num_wann_semicore_aware": 10,
+   "ispin": 1
+  },
+  "Cu": {
+   "species": [
+    {
+     "symbol": "Cu",
+     "potcar": "Cu",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 9,
+   "num_wann_semicore_aware": 9,
+   "ispin": 1
+  },
+  "V": {
+   "species": [
+    {
+     "symbol": "V",
+     "potcar": "V_sv",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 9,
+   "num_wann_semicore_aware": 10,
+   "ispin": 1
+  },
+  "W": {
+   "species": [
+    {
+     "symbol": "W",
+     "potcar": "W_sv_GW",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 16,
+   "num_wann_semicore_aware": 16,
+   "ispin": 1
+  },
+  "Ti": {
+   "species": [
+    {
+     "symbol": "Ti",
+     "potcar": "Ti_sv",
+     "atoms": 2
+    }
+   ],
+   "num_wann_all_channel": 18,
+   "num_wann_semicore_aware": 20,
+   "ispin": 1
+  },
+  "Si": {
+   "species": [
+    {
+     "symbol": "Si",
+     "potcar": "Si",
+     "atoms": 2
+    }
+   ],
+   "num_wann_all_channel": 8,
+   "num_wann_semicore_aware": 8,
+   "ispin": 1
+  },
+  "C": {
+   "species": [
+    {
+     "symbol": "C",
+     "potcar": "C",
+     "atoms": 2
+    }
+   ],
+   "num_wann_all_channel": 8,
+   "num_wann_semicore_aware": 8,
+   "ispin": 1
+  },
+  "GaAs": {
+   "species": [
+    {
+     "symbol": "Ga",
+     "potcar": "Ga_d",
+     "atoms": 1
+    },
+    {
+     "symbol": "As",
+     "potcar": "As",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 18,
+   "num_wann_semicore_aware": 18,
+   "ispin": 1
+  },
+  "SrTiO3": {
+   "species": [
+    {
+     "symbol": "Sr",
+     "potcar": "Sr_sv",
+     "atoms": 1
+    },
+    {
+     "symbol": "Ti",
+     "potcar": "Ti_sv",
+     "atoms": 1
+    },
+    {
+     "symbol": "O",
+     "potcar": "O",
+     "atoms": 3
+    }
+   ],
+   "num_wann_all_channel": 30,
+   "num_wann_semicore_aware": 32,
+   "ispin": 1
+  },
+  "Sr": {
+   "species": [
+    {
+     "symbol": "Sr",
+     "potcar": "Sr_sv",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 9,
+   "num_wann_semicore_aware": 10,
+   "ispin": 1
+  },
+  "La": {
+   "species": [
+    {
+     "symbol": "La",
+     "potcar": "La",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 16,
+   "num_wann_semicore_aware": 17,
+   "ispin": 1
+  },
+  "TiC": {
+   "species": [
+    {
+     "symbol": "Ti",
+     "potcar": "Ti_sv",
+     "atoms": 1
+    },
+    {
+     "symbol": "C",
+     "potcar": "C",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 13,
+   "num_wann_semicore_aware": 14,
+   "ispin": 1
+  },
+  "Mn": {
+   "species": [
+    {
+     "symbol": "Mn",
+     "potcar": "Mn_sv",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 9,
+   "num_wann_semicore_aware": 10,
+   "ispin": 1
+  },
+  "V3Si": {
+   "species": [
+    {
+     "symbol": "V",
+     "potcar": "V_sv",
+     "atoms": 6
+    },
+    {
+     "symbol": "Si",
+     "potcar": "Si",
+     "atoms": 2
+    }
+   ],
+   "num_wann_all_channel": 62,
+   "num_wann_semicore_aware": 68,
+   "ispin": 1
+  },
+  "TiO2": {
+   "species": [
+    {
+     "symbol": "Ti",
+     "potcar": "Ti_sv",
+     "atoms": 2
+    },
+    {
+     "symbol": "O",
+     "potcar": "O",
+     "atoms": 4
+    }
+   ],
+   "num_wann_all_channel": 34,
+   "num_wann_semicore_aware": 36,
+   "ispin": 1
+  },
+  "Cu2O": {
+   "species": [
+    {
+     "symbol": "Cu",
+     "potcar": "Cu",
+     "atoms": 4
+    },
+    {
+     "symbol": "O",
+     "potcar": "O",
+     "atoms": 2
+    }
+   ],
+   "num_wann_all_channel": 44,
+   "num_wann_semicore_aware": 44,
+   "ispin": 1
+  },
+  "MnO": {
+   "species": [
+    {
+     "symbol": "Mn",
+     "potcar": "Mn_sv",
+     "atoms": 1
+    },
+    {
+     "symbol": "O",
+     "potcar": "O",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 13,
+   "num_wann_semicore_aware": 14,
+   "ispin": 2
+  },
+  "SrO": {
+   "species": [
+    {
+     "symbol": "Sr",
+     "potcar": "Sr_sv",
+     "atoms": 1
+    },
+    {
+     "symbol": "O",
+     "potcar": "O",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 13,
+   "num_wann_semicore_aware": 14,
+   "ispin": 1
+  },
+  "SiC": {
+   "species": [
+    {
+     "symbol": "Si",
+     "potcar": "Si",
+     "atoms": 1
+    },
+    {
+     "symbol": "C",
+     "potcar": "C",
+     "atoms": 1
+    }
+   ],
+   "num_wann_all_channel": 8,
+   "num_wann_semicore_aware": 8,
+   "ispin": 1
+  }
+ }
+}

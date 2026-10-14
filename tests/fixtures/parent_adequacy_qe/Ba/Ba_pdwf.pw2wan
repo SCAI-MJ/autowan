@@ -1,0 +1,9 @@
+&inputpp
+  outdir = './'
+  prefix = 'Ba'
+  seedname = 'Ba_pdwf'
+  write_amn = .true.
+  write_mmn = .true.
+  write_eig = .true.
+  atom_proj = .true.
+/

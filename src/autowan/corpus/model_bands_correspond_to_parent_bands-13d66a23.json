@@ -1,0 +1,69 @@
+{
+  "recipe_id": "model_bands_correspond_to_parent_bands-13d66a23",
+  "signature": {
+    "bands_crossing_fermi_level": 6,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0129,
+    "occupied_bandwidth_ev": 88.0671,
+    "bands_available": 36,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Fe": 1
+    }
+  },
+  "resolved": [
+    "model_bands_correspond_to_parent_bands"
+  ],
+  "still_unresolved": [
+    "dmft_subspace_model_window"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 2.0,
+      "reason": "Freeze the complete required comparison range, ending at 19.54 eV on the parent energy scale."
+    }
+  ],
+  "diagnosis": "Both minimisations converged, but projectability-only selection leaves the required energy range insufficiently constrained. Lowering the freezing threshold improved earlier runs without reaching the DMFT tolerance. An explicit energy-frozen window directly enforces fidelity over the target range while retaining the required six Fe s-d functions.",
+  "provenance": {
+    "material": "Fe",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:26:56+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "down",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/Fe/dmft_subspace_window/rep1_down",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 19333 inside 9.39..19.54 eV sit further than 83 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 43.07 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+        9.391490641890758,
+        19.541432209857035
+      ],
+      "deck_frozen_window_ev": [
+        null,
+        19.541432209857035
+      ]
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

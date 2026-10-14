@@ -1,0 +1,86 @@
+{
+  "recipe_id": "truncated_hopping_eta2-2651481b",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 0.5368,
+    "occupied_bandwidth_ev": 14.8961,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ga": 1,
+      "As": 1
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 5.0,
+      "reason": "Unpin the entangled conduction states at 5-7 eV, which lie outside the range the criterion scores, so the subspace can be smoother and the hoppings shorter-ranged. The scored range up to E_F+2 eV stays frozen with a 3 eV margin."
+    }
+  ],
+  "diagnosis": "The SMV construction with analytic s,p,d projectors on both atoms is correct where it is constrained: the untruncated eta_2 is 0.97 meV, every band check passes, and the centres and spreads are balanced (ratio 1.53). It fails only the sparse criterion, and only just: 20.04 meV against a 20 meV limit. That error comes from the tail of the hoppings, not from fidelity. The fitted decay length is 2.04 \u00c5, and 7.6e-5 of |H|^2 lies beyond r_c = 9.99 \u00c5, spread evenly over the Ga- and As-centred functions. When those hoppings are cut, the largest errors are about 60 meV on valence bands 8 and 9 near (0,\u00bd,\u00bd) and on the lowest conduction band. The cure is a smoother, more localised subspace. num_bands is already at the maximum the parent allows (27 kept bands), so the remaining freedom is the frozen window. At 7 eV it pins all of bands 10-11, much of bands 12-13 (3.36-9.84 eV) and the bottom of band 14 (from 6.91 eV). These entangled states carry kinks that the gauge cannot smooth away, and they lie well above the E_F+2 eV range the criterion scores. Lowering dis_froz_max to 5 eV still pins every state below E_F+5 eV, so the scored range stays exact. It frees the entangled states at 5-7 eV, so disentanglement can pick a smoother subspace with shorter-ranged hoppings. The non-converged disentanglement (steps steady at about 2.4e-6) also points to a constrained subspace landscape, not a budget problem, so I am not raising the iteration count.",
+  "provenance": {
+    "material": "GaAs",
+    "attempt": 4,
+    "recorded_at": "2026-10-13T02:55:01+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/claude_cli_claude_opus_5_5/qe/GaAs/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 19.126585222522966,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 19.13 meV with hoppings longer than r_c = L_BvK/4 = 9.99 Ang (|R + tau_j - tau_i|) removed (213 of 1659 lattice vectors keep a hopping; untruncated 0.90 meV)",
+      "l_bvk_ang": 39.973787388333626,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 9.993446847083407,
+      "n_vectors_kept": 213,
+      "n_vectors_total": 1659,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 29912,
+      "n_elements_total": 537516,
+      "eta2_untruncated_mev": 0.8985240032626527,
+      "fermi_energy_scf_ev": 7.0876,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/GaAs/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.324595796111208,
+      "eta_trunc_L3_mev": 6.258460864621345,
+      "n_vectors_kept_L3": 423,
+      "r_L2_ang": 19.986893694166813,
+      "eta_trunc_L2_mev": 1.98102031865242,
+      "n_vectors_kept_L2": 1177,
+      "tau_ang": 2.0241620603691084,
+      "tau_free_intercept_ang": 2.7374474083866684,
+      "n_vectors_fitted": 1658
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

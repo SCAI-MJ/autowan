@@ -1,0 +1,76 @@
+{
+  "recipe_id": "model_bands_correspond_to_parent_bands-8f3cbb32",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0328,
+    "occupied_bandwidth_ev": 81.6717,
+    "bands_available": 52,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Mn": 1,
+      "O": 1
+    }
+  },
+  "resolved": [
+    "model_bands_correspond_to_parent_bands"
+  ],
+  "still_unresolved": [
+    "dmft_subspace_model_window"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_proj_max",
+      "old": null,
+      "new": 0.85,
+      "reason": "Reduce projectability freezing threshold to avoid over-constraining the subspace; frontier runs show 0.85 gives best results (~25 meV)"
+    },
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.005,
+      "reason": "Keep current exclusion threshold (different from frontier's 0.01-0.02) to maintain permissive state dropping while reducing freezing"
+    }
+  ],
+  "diagnosis": "The PDWF construction fails both dmft_subspace_model_window (918 meV vs 20 meV limit) and model_bands_correspond_to_parent_bands (0.274 vs 0.2 limit). The frontier's own runs show a clear pattern: dis_proj_max=0.99 (current) gives terrible results (208-918 meV), while dis_proj_max=0.85-0.9 gives the best results (~24-38 meV). The issue is that dis_proj_max=0.99 freezes too many states by projectability, over-constraining the subspace and preventing accurate representation of the entangled Mn 3d / O 2p target manifold. The model_bands_correspondence failure appeared only when dis_proj_max was raised to 0.99 (run 9), confirming this over-freezing. The best frontier runs (4 and 8) used dis_proj_max=0.85 with dis_proj_min=0.02 and 0.01 respectively. The current run uses dis_proj_min=0.005, so dis_proj_max=0.85 with dis_proj_min=0.005 is an untried combination that should reduce over-freezing while keeping the more permissive exclusion threshold.",
+  "provenance": {
+    "material": "MnO",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:07:28+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "down",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/nemotron_3_ultra_550b_a55b_free/qe/MnO/dmft_subspace_window/rep1_down",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 11302 inside -6.47..15.42 eV sit further than 505 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 25.71 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+        -6.469708713015888,
+        15.418656445297817
+      ],
+      "deck_frozen_window_ev": [
+        null,
+        null
+      ]
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

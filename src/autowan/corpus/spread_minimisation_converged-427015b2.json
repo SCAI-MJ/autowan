@@ -1,0 +1,50 @@
+{
+  "recipe_id": "spread_minimisation_converged-427015b2",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0427,
+    "occupied_bandwidth_ev": 56.8396,
+    "bands_available": 80,
+    "spin_channels": 1,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "spread_minimisation_converged"
+  ],
+  "still_unresolved": [
+    "centres_sit_on_atomic_sites"
+  ],
+  "changes": [
+    {
+      "parameter": "trial_step",
+      "old": null,
+      "new": 0.5,
+      "reason": "The default trial step is allowing oscillations with growing amplitude. A step of 0.5 will damp the oscillation while still allowing progress toward convergence."
+    }
+  ],
+  "diagnosis": "The spread minimisation is not converging despite running for 4000 iterations. The trajectory shows the delta is not shrinking but rather fluctuating with increasing magnitude (-2.62e-06 to -5.51e-06 and back to -3.02e-06), indicating the optimiser is oscillating rather than descending monotonically toward a minimum. The spread ratio of 20.68 between widest and narrowest functions indicates severely unbalanced projectors - some functions are 20 times more extended than others. This imbalance creates a competitive landscape where tightening one set of functions requires loosening others, causing the oscillation. The subspace selection converged cleanly in 1296 iterations, so the problem is purely in the localisation stage.",
+  "provenance": {
+    "material": "Ti_pdwf",
+    "attempt": 1,
+    "recorded_at": "2026-08-29T13:26:49+00:00",
+    "certified": false
+  },
+  "measurements": {
+    "spread_minimisation_converged": {
+      "value": 1328.0,
+      "units": "iterations",
+      "threshold": null,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": ""
+    }
+  },
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

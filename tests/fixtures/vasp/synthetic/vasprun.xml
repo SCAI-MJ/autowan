@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<modeling>
+ <generator>
+  <i name="program" type="string">vasp </i>
+  <i name="version" type="string">6.4.1 </i>
+ </generator>
+ <incar>
+  <i type="int" name="NBANDS">     4</i>
+  <i type="int" name="ISYM">    -1</i>
+  <i type="int" name="LORBIT">    11</i>
+ </incar>
+ <kpoints>
+  <generation param="Gamma">
+   <v type="int" name="divisions">       2        1        1</v>
+   <v name="usershift">      0.00000000       0.00000000       0.00000000 </v>
+  </generation>
+  <varray name="kpointlist" >
+   <v>       0.00000000       0.00000000       0.00000000 </v>
+   <v>       0.50000000       0.00000000       0.00000000 </v>
+  </varray>
+  <varray name="weights" >
+   <v>       0.50000000 </v>
+   <v>       0.50000000 </v>
+  </varray>
+ </kpoints>
+ <parameters>
+  <separator name="electronic" >
+   <i type="int" name="NBANDS">     4</i>
+   <i name="NELECT">      8.00000000</i>
+   <separator name="electronic convergence" >
+    <i type="int" name="NELM">   100</i>
+   </separator>
+   <separator name="electronic spin" >
+    <i type="int" name="ISPIN">     1</i>
+    <i type="logical" name="LNONCOLLINEAR"> F  </i>
+   </separator>
+  </separator>
+  <separator name="electronic startup" >
+   <i type="int" name="ISTART">     0</i>
+   <i type="int" name="ICHARG">     2</i>
+  </separator>
+ </parameters>
+ <atominfo>
+  <atoms>       2 </atoms>
+  <types>       1 </types>
+  <array name="atoms" >
+   <dimension dim="1">ion</dimension>
+   <field type="string">element</field>
+   <field type="int">atomtype</field>
+   <set>
+    <rc><c>Si</c><c>   1</c></rc>
+    <rc><c>Si</c><c>   1</c></rc>
+   </set>
+  </array>
+  <array name="atomtypes" >
+   <dimension dim="1">type</dimension>
+   <field type="int">atomspertype</field>
+   <field type="string">element</field>
+   <field>mass</field>
+   <field>valence</field>
+   <field type="string">pseudopotential</field>
+   <set>
+    <rc><c>   2</c><c>Si</c><c>     28.08500000</c><c>      4.00000000</c><c>  PAW_PBE Si 05Jan2001                   </c></rc>
+   </set>
+  </array>
+ </atominfo>
+ <structure name="initialpos" >
+  <crystal>
+   <varray name="basis" >
+    <v>      -2.71534056       0.00000000       2.71534056 </v>
+    <v>       0.00000000       2.71534056       2.71534056 </v>
+    <v>      -2.71534056       2.71534056       0.00000000 </v>
+   </varray>
+   <i name="volume">     40.04089914 </i>
+   <varray name="rec_basis" >
+    <v>      -0.18413145      -0.18413145       0.18413145 </v>
+    <v>       0.18413145       0.18413145       0.18413145 </v>
+    <v>      -0.18413145       0.18413145      -0.18413145 </v>
+   </varray>
+  </crystal>
+  <varray name="positions" >
+   <v>       0.00000000       0.00000000       0.00000000 </v>
+   <v>       0.25000000       0.25000000       0.25000000 </v>
+  </varray>
+ </structure>
+ <calculation>
+  <scstep>
+   <energy>
+    <i name="e_fr_energy">    -10.84  </i>
+   </energy>
+  </scstep>
+  <scstep>
+   <energy>
+    <i name="e_fr_energy">    -10.85  </i>
+   </energy>
+  </scstep>
+  <structure>
+   <crystal>
+    <varray name="basis" >
+     <v>      -2.71534056       0.00000000       2.71534056 </v>
+     <v>       0.00000000       2.71534056       2.71534056 </v>
+     <v>      -2.71534056       2.71534056       0.00000000 </v>
+    </varray>
+    <i name="volume">     40.04089914 </i>
+   </crystal>
+   <varray name="positions" >
+    <v>       0.00000000       0.00000000       0.00000000 </v>
+    <v>       0.25000000       0.25000000       0.25000000 </v>
+   </varray>
+  </structure>
+  <energy>
+   <i name="e_fr_energy">    -10.85 </i>
+  </energy>
+  <eigenvalues>
+   <array>
+    <dimension dim="1">band</dimension>
+    <dimension dim="2">kpoint</dimension>
+    <dimension dim="3">spin</dimension>
+    <field>eigene</field>
+    <field>occ</field>
+    <set>
+     <set comment="spin 1">
+      <set comment="kpoint 1">
+       <r>   -6.0000    1.0000 </r>
+       <r>    5.0000    1.0000 </r>
+       <r>    5.5000    0.0000 </r>
+       <r>    8.0000    0.0000 </r>
+      </set>
+      <set comment="kpoint 2">
+       <r>   -4.0000    1.0000 </r>
+       <r>    3.0000    1.0000 </r>
+       <r>    6.5000    0.0000 </r>
+       <r>    9.0000    0.0000 </r>
+      </set>
+     </set>
+    </set>
+   </array>
+  </eigenvalues>
+  <dos>
+   <i name="efermi">      5.20000000 </i>
+  </dos>
+  <projected>
+   <array>
+    <dimension dim="1">ion</dimension>
+    <dimension dim="2">band</dimension>
+    <dimension dim="3">kpoint</dimension>
+    <dimension dim="4">spin</dimension>
+    <field>s</field>
+    <field>py</field>
+    <field>pz</field>
+    <field>px</field>
+    <field>dxy</field>
+    <field>dyz</field>
+    <field>dz2</field>
+    <field>dxz</field>
+    <field>x2-y2</field>
+    <set>
+     <set comment="spin1">
+      <set comment="kpoint 1">
+       <set comment="band 1">
+        <r> 0.4000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 </r>
+        <r> 0.4000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 </r>
+       </set>
+      </set>
+     </set>
+    </set>
+   </array>
+  </projected>
+ </calculation>
+ <structure name="finalpos" >
+  <crystal>
+   <varray name="basis" >
+    <v>      -2.71534056       0.00000000       2.71534056 </v>
+    <v>       0.00000000       2.71534056       2.71534056 </v>
+    <v>      -2.71534056       2.71534056       0.00000000 </v>
+   </varray>
+   <i name="volume">     40.04089914 </i>
+  </crystal>
+  <varray name="positions" >
+   <v>       0.00000000       0.00000000       0.00000000 </v>
+   <v>       0.25000000       0.25000000       0.25000000 </v>
+  </varray>
+ </structure>
+</modeling>

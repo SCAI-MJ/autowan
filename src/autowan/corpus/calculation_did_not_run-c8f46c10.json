@@ -1,0 +1,55 @@
+{
+  "recipe_id": "calculation_did_not_run-c8f46c10",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.016,
+    "occupied_bandwidth_ev": 63.7365,
+    "bands_available": 36,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "V": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "truncated_hopping_eta2"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_proj_min",
+      "old": null,
+      "new": 0.00125,
+      "reason": "Put back the threshold attempts 0\u20133 ran with. At 0.01 the weakly projecting states are dropped and fewer than 9 remain at some k-point (dis_windows_proj error)."
+    },
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 4.0,
+      "reason": "Move the frozen edge from +2.01 eV (inside the d bands, where the truncated model's error peaks) to just above the d-band top (3.87 eV). frozen_capacity shows this fits easily: at most 6 frozen states against 9 functions, even up to 8.5 eV."
+    }
+  ],
+  "diagnosis": "Attempt 4 never ran. Raising dis_proj_min from 0.00125 to 0.01 dropped every state whose projectability on the kept orbitals (V 4s, 3d, 4p) was below 0.01. At some k-point that left fewer than 9 states for 9 Wannier functions, so Wannier90 stopped in dis_windows_proj. The 4p orbitals carry very little weight on the parent states (about 0.6 % of the window's composition), so a cut at 0.01 removes too many states. The fix is to put dis_proj_min back to 0.00125, the value attempts 0\u20133 ran with. Running attempt 3's deck again would only repeat its truncated_hopping_eta2 failure (49.3 meV truncated against 3.9 meV untruncated). In attempts 0, 2 and 3 the dis_proj_max steps (0.95, 0.9, 0.99) all failed that check, so that knob is used up. In attempt 3 the truncated model's error sits in the d manifold: band 7 at k = (0.5, 0, \u22120.5), about 1.5 eV, is off by up to 330 meV. The frozen edge at +2.01 eV cuts through the middle of the d bands (7\u20139 run up to 3.5\u20133.9 eV), and a frozen edge in the middle of a band is a typical source of kinks that need long-range hoppings. So I am also raising dis_froz_max to 4.0 eV, just above the top of the d bands. frozen_capacity shows that even 8.5 eV freezes at most 6 states against 9 functions, so 4.0 eV fits.",
+  "provenance": {
+    "material": "V",
+    "attempt": 5,
+    "recorded_at": "2026-10-12T12:36:04+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/V/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

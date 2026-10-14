@@ -1,0 +1,13 @@
+{
+  "run_dir": "run",
+  "parent_xml": "parent/data-file-schema.xml",
+  "reference_path": "reference/dft_bands_path.npz",
+  "gate_profile": "band_interpolation",
+  "backend": "qe",
+  "seeds": ["wan", "wan_r1", "wan_r2"],
+  "labels": {
+    "wan": "the frontier: PDWF",
+    "wan_r1": "repair 1: frozen window raised",
+    "wan_r2": "repair 2: switched to SMV, s+p+d projectors"
+  }
+}

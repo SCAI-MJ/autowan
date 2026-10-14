@@ -1,0 +1,94 @@
+{
+  "recipe_id": "truncated_hopping_eta2-047e5626",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0167,
+    "occupied_bandwidth_ev": 56.8692,
+    "bands_available": 72,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ti",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Same shells as the PDWF s2+p2+d1 set (1+3+5 = 9 per atom, x2 atoms = 18 = num_wann, which fits within num_bands = 64), but from analytic orbitals instead of the pseudopotential's diffuse 4s/4p PAOs, whose l=1 entry is flagged as inconsistent."
+    }
+  ],
+  "diagnosis": "The subspace is fine and the gauge is the problem, and the gauge problem comes from where the projectors' radial parts come from. Disentanglement converged (delta about 2e-7, steady). Every parent state on the construction mesh is reproduced to about 1e-5 eV below the frozen edge. The Ti 3d functions are tight (about 0.72 \u00c5\u00b2 each, centred on the atom). The eight functions from the pseudopotential's 4s and 4p atomic orbitals are diffuse (4.2 to 11 \u00c5\u00b2) and sit 0.36 to 0.61 \u00c5 off their atoms. These six diffuse functions carry all the hopping weight beyond r_c = 8.2 \u00c5. Even without truncation, interpolation on the path is off by 47 meV, with errors up to 0.5 eV in occupied bands near E_F at k about (1/3,1/3,1/2), where the frozen states should be reproduced exactly. That points to long-range hoppings rather than a missing subspace. The PDWF route has been tried: s2+d1 (12 functions) gave 235 meV or could not run, s2+p2+d1 gave 119 and then 111 meV, and changing dis_proj_max barely moved it. validate_deck also warns that the parent's projector list and its UPF file disagree about the l=1 orbitals, so the 4p PAO radial part is suspect. The published frontier runs for Ti compounds that used external or hydrogenic s,p,d projections on Ti with 18 functions (TiFe, TiOs) reached 1.3 to 8.6 meV. Keeping the same shells but taking them from analytic orbitals is a different move from changing which shells are named, and the PDWF family cannot make it.",
+  "provenance": {
+    "material": "Ti",
+    "attempt": 5,
+    "recorded_at": "2026-10-12T17:05:57+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/Ti/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 14.827372680458504,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 14.83 meV with hoppings longer than r_c = L_BvK/4 = 8.20 Ang (|R + tau_j - tau_i|) removed (147 of 1773 lattice vectors keep a hopping; untruncated 5.83 meV)",
+      "l_bvk_ang": 32.7883751741,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 8.197093793525,
+      "n_vectors_kept": 147,
+      "n_vectors_total": 1773,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 21614,
+      "n_elements_total": 574452,
+      "eta2_untruncated_mev": 5.827713640880244,
+      "fermi_energy_scf_ev": 13.155,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Ti/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 10.929458391366666,
+      "eta_trunc_L3_mev": 8.140626325525556,
+      "n_vectors_kept_L3": 275,
+      "r_L2_ang": 16.39418758705,
+      "eta_trunc_L2_mev": 5.9518761028198695,
+      "n_vectors_kept_L2": 783,
+      "tau_ang": 1.7795689780807533,
+      "tau_free_intercept_ang": 3.4643589076062997,
+      "n_vectors_fitted": 1772
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

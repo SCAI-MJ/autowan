@@ -1,0 +1,241 @@
+{
+  "material": "fe_up_scdm",
+  "config": {
+    "generic_repair_attempts": 2,
+    "reference_assisted_attempts": 0,
+    "total_attempts": 4,
+    "stop_on_repeated_parameters": true
+  },
+  "stage": "terminal",
+  "passed": true,
+  "terminal_reason": "both gates passed",
+  "attempts": [
+    {
+      "index": 0,
+      "stage": "automatic",
+      "parameters": {
+        "num_bands": "14",
+        "num_wann": "9",
+        "dis_win_max": "62.78",
+        "dis_num_iter": "1000",
+        "num_iter": "1000",
+        "mp_grid": "8 8 8"
+      },
+      "outcome": {
+        "passed": false,
+        "evaluated_check_ids": [
+          "subspace_selection_converged",
+          "wannier_count_matches_request",
+          "hopping_shells_inside_representable_supercell",
+          "frontier_manifold_straddles_fermi_level",
+          "centres_sit_on_atomic_sites",
+          "hopping_decays_with_distance"
+        ],
+        "failed_check_ids": [],
+        "measurements": {
+          "subspace_selection_converged": {
+            "value": 952.0,
+            "units": "iterations",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "spread_minimisation_converged": {
+            "value": null,
+            "units": "",
+            "threshold": null,
+            "passed": null,
+            "evaluable": false,
+            "applies": true,
+            "note": "fe_up_scdm: the run set no convergence window, so Wannier90 ran no convergence test on the spread functional"
+          },
+          "wannier_count_matches_request": {
+            "value": 9.0,
+            "units": "functions",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "hopping_shells_inside_representable_supercell": {
+            "value": 0.0,
+            "units": "shells",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "frontier_manifold_straddles_fermi_level": {
+            "value": 1.0,
+            "units": "fraction of k-points",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "centres_sit_on_atomic_sites": {
+            "value": 0.6553416607066074,
+            "units": "Ang",
+            "threshold": 1.242743251579656,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "band_distance_from_parent": {
+            "value": null,
+            "units": "",
+            "threshold": null,
+            "passed": null,
+            "evaluable": false,
+            "applies": false,
+            "note": "not meaningful for a metal manifold"
+          },
+          "hopping_decays_with_distance": {
+            "value": 0.00396610602480569,
+            "units": "eV",
+            "threshold": 0.21700873,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": "largest element among the outermost 60 shells"
+          }
+        },
+        "source": "physics_gate"
+      },
+      "action": null,
+      "calculation_error": null,
+      "model_error": null,
+      "started_at": "2026-08-28T07:08:50+00:00",
+      "finished_at": "2026-08-28T07:10:30+00:00"
+    },
+    {
+      "index": 1,
+      "stage": "generic_repair",
+      "parameters": {
+        "conv_window": "5",
+        "num_bands": "14",
+        "num_wann": "9",
+        "dis_win_max": "62.78",
+        "dis_num_iter": "1000",
+        "num_iter": "1000",
+        "mp_grid": "8 8 8"
+      },
+      "outcome": {
+        "passed": true,
+        "evaluated_check_ids": [
+          "subspace_selection_converged",
+          "spread_minimisation_converged",
+          "wannier_count_matches_request",
+          "hopping_shells_inside_representable_supercell",
+          "frontier_manifold_straddles_fermi_level",
+          "centres_sit_on_atomic_sites",
+          "hopping_decays_with_distance"
+        ],
+        "failed_check_ids": [],
+        "measurements": {
+          "subspace_selection_converged": {
+            "value": 952.0,
+            "units": "iterations",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "spread_minimisation_converged": {
+            "value": 892.0,
+            "units": "iterations",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "wannier_count_matches_request": {
+            "value": 9.0,
+            "units": "functions",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "hopping_shells_inside_representable_supercell": {
+            "value": 0.0,
+            "units": "shells",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "frontier_manifold_straddles_fermi_level": {
+            "value": 1.0,
+            "units": "fraction of k-points",
+            "threshold": null,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "centres_sit_on_atomic_sites": {
+            "value": 0.6553416717170396,
+            "units": "Ang",
+            "threshold": 1.242743251579656,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": ""
+          },
+          "band_distance_from_parent": {
+            "value": null,
+            "units": "",
+            "threshold": null,
+            "passed": null,
+            "evaluable": false,
+            "applies": false,
+            "note": "not meaningful for a metal manifold"
+          },
+          "hopping_decays_with_distance": {
+            "value": 0.00396610602480569,
+            "units": "eV",
+            "threshold": 0.21700873,
+            "passed": true,
+            "evaluable": true,
+            "applies": true,
+            "note": "largest element among the outermost 60 shells"
+          }
+        },
+        "source": "physics_gate"
+      },
+      "action": {
+        "action": "modify_parameters",
+        "diagnosis": "The spread minimisation did not converge because no convergence test was performed - the run set conv_window to None, so Wannier90 ran the full 1000 iterations without checking for convergence. The convergence trajectory shows the spread functional reached 6.28679 Ang^2 with a final delta of -1.19e-10, which is extremely small and indicates the minimisation has effectively converged. The spreads plot shows a clear separation into two groups: 3 tight functions (~0.39 Ang^2) and 6 more diffuse functions (~0.85 Ang^2), with a spread ratio of 2.18. This moderate separation is acceptable for a metallic system. The subspace selection converged successfully in 952 iterations.",
+        "evidence": [
+          "subspace_selection_converged"
+        ],
+        "expected_effect": "Setting conv_window to 5 will enable the convergence test. Given the extremely small final delta of -1.19e-10, the spread minimisation should be declared converged within a few iterations of testing, clearing the spread_minimisation_converged check.",
+        "confidence": 0.95,
+        "query": null,
+        "changes": [
+          {
+            "parameter": "conv_window",
+            "old": null,
+            "new": 5,
+            "reason": "Enable convergence testing with a standard window of 5 iterations. The final delta of -1.19e-10 shows the minimisation has effectively converged but needs the test enabled to be recognized."
+          }
+        ]
+      },
+      "calculation_error": null,
+      "model_error": null,
+      "started_at": "2026-08-28T07:11:05+00:00",
+      "finished_at": "2026-08-28T07:12:40+00:00"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "recipe_id": "band_distance_from_parent-5fa385fb",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 3.3568,
+    "occupied_bandwidth_ev": 32.3518,
+    "bands_available": 52,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Sr": 1,
+      "O": 1
+    }
+  },
+  "resolved": [
+    "occupied_manifold_is_represented",
+    "truncated_hopping_eta2",
+    "band_distance_from_parent"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "semicore_exclusion",
+      "old": null,
+      "new": [
+        {
+          "species": "Sr",
+          "shells": [
+            "s1"
+          ]
+        },
+        {
+          "species": "O",
+          "shells": []
+        }
+      ],
+      "reason": "Sr 4p overlaps the kept O 2s band, so the 4-band cut is not isolated and the gate ignores it. Excluding only Sr 4s gives an isolated cut (15.66 eV gap) and brings Sr 4p in as 3 more functions (num_wann 16, num_bands 51)."
+    }
+  ],
+  "diagnosis": "The deck cuts out the lowest 4 bands (Sr 4s + Sr 4p) as semicore, but the Sr 4p bands (bands 2-4, -19.3 to -16.8 eV) overlap the O 2s band that is kept (band 5, -17.1 to -15.65 eV). Their gap is -0.35 eV, so they are entangled. The gate does not honour that exclusion, so it scores every excluded occupied state as missing. That alone explains the ~50 % missing occupied states and the 6.4 eV RMS distance, and it explains why all ten frontier runs give the identical 0.4992 / 6.413 no matter what thresholds they used. Projectability thresholds cannot fix a band-index cut. The fix is to move the cut. Sr 4s (band 1, -35 eV) sits 15.66 eV below everything else and is a clean, honoured cut. So exclude only Sr 4s and bring Sr 4p into the construction as three more PAO functions (13 -> 16 functions, num_bands 48 -> 51; validate_deck accepts this). The truncated-eta2 failure probably shares the same cause: the single model band near -16 eV is trying to be O 2s while entangled with Sr 4p, and that band is visibly wiggly in the model band plot. With the 4p/2s block represented in full, the deep bands should be reproduced exactly and the model should become shorter-ranged.",
+  "provenance": {
+    "material": "SrO",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T01:55:02+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/claude_cli_claude_opus_5_5/qe/SrO/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "occupied_manifold_is_represented": {
+      "value": 0.0,
+      "units": "fraction of occupied states",
+      "threshold": 0.05,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 9317 lie further than 165 meV from any band of the model; bands 1 excluded by the deck and not counted (isolated 15.66 eV below the represented manifold)"
+    },
+    "truncated_hopping_eta2": {
+      "value": 3.0066507285973465,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 3.01 meV with hoppings longer than r_c = L_BvK/4 = 10.03 Ang (|R + tau_j - tau_i|) removed (201 of 1921 lattice vectors keep a hopping; untruncated 0.55 meV)",
+      "l_bvk_ang": 40.131319187156265,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 10.032829796789066,
+      "n_vectors_kept": 201,
+      "n_vectors_total": 1921,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 32736,
+      "n_elements_total": 491776,
+      "eta2_untruncated_mev": 0.5479007527493678,
+      "fermi_energy_scf_ev": 8.9973,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/SrO/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.377106395718755,
+      "eta_trunc_L3_mev": 2.2372664975670262,
+      "n_vectors_kept_L3": 417,
+      "r_L2_ang": 20.065659593578133,
+      "eta_trunc_L2_mev": 1.4743889757146265,
+      "n_vectors_kept_L2": 1289,
+      "tau_ang": 1.9655227005785907,
+      "tau_free_intercept_ang": 3.249169664019776,
+      "n_vectors_fitted": 1920
+    },
+    "band_distance_from_parent": {
+      "value": 1.4718702619460625e-05,
+      "units": "eV",
+      "threshold": 0.16520058558099088,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "9506 states compared over -8.57..12.40 eV; bands 1 excluded by the deck and not counted (isolated 15.66 eV below the represented manifold)"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

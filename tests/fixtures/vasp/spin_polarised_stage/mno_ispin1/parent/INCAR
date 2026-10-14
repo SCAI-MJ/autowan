@@ -1,0 +1,18 @@
+SYSTEM = MnO, autowan VASP parent (nscf, production)
+PREC = Accurate
+ENCUT = 520.00   ! 1.3 x the largest POTCAR ENMAX (x variant factor)
+EDIFF = 1E-8
+NELM = 40
+ALGO = Exact   ! exact diagonalisation: every retained empty band converged
+ISMEAR = 1   ! Methfessel-Paxton: QE smeared its metals (Marzari-Vanderbilt, 0.02 Ry)
+SIGMA = 0.2721
+LMAXMIX = 4   ! one-centre densities kept to the highest projector l for ICHARG = 11
+LASPH = .TRUE.
+NCORE = 1
+NBANDS = 32   ! a multiple of 8: any 1/2/4/8-rank run keeps it exactly
+ISYM = -1   ! the full uniform mesh for the Wannier overlap step
+ISTART = 0
+ICHARG = 11   ! eigenstates from the SCF density, held fixed
+LWAVE = .TRUE.
+LCHARG = .FALSE.
+LORBIT = 11

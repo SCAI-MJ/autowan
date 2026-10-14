@@ -1,0 +1,40 @@
+{
+  "recipe_id": "calculation_did_not_run-9f1d456d",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0427,
+    "occupied_bandwidth_ev": 56.8396,
+    "bands_available": 80,
+    "spin_channels": 1,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "centres_sit_on_atomic_sites"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": 2.0,
+      "new": 0.5,
+      "reason": "The frozen window at 2.0 eV contains more states than the 16 functions from s,p,sp3 projectors can represent. Reducing to 0.5 eV will include fewer states while still capturing the important physics near the Fermi level in this metal."
+    }
+  ],
+  "diagnosis": "The calculation cannot start because the frozen window contains more states than there are Wannier functions to represent them. The frozen window extends to 2.0 eV above the Fermi level, and with the current projector set (s, p, sp3 on Ti), there are only 8 functions per Ti atom, giving 16 total functions for 2 Ti atoms. The error persists even with num_bands raised to 60, indicating the frozen window is capturing too many states relative to the function count. Previous attempts show that the s,p,d projector set (18 functions per Ti, 36 total) worked without this error, while s,p,sp3 (8 functions per Ti, 16 total) triggers it. The frozen window needs to accommodate a metallic system where bands cross the Fermi level.",
+  "provenance": {
+    "material": "Ti_pdwf",
+    "attempt": 6,
+    "recorded_at": "2026-08-29T08:06:30+00:00",
+    "certified": false
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

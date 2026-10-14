@@ -1,0 +1,49 @@
+{
+  "recipe_id": "calculation_did_not_run-23a7cb1c",
+  "signature": {
+    "bands_crossing_fermi_level": 4,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0167,
+    "occupied_bandwidth_ev": 56.8692,
+    "bands_available": 72,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ti": 2
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "truncated_hopping_eta2"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_proj_max",
+      "old": null,
+      "new": 1.0,
+      "reason": "Turn off freezing by projectability, so that frozen states come only from the energy window (at most 10, under num_wann = 12). This keeps the frozen window at E_F + 2.02 eV, which contains the Fermi level, and keeps the s + d projector set that removed the diffuse p2 functions."
+    }
+  ],
+  "diagnosis": "Attempt 1 dropped the diffuse Ti p2 pseudo-atomic orbital, keeping s2 + d1. That cut the count from 18 to 12 functions (2 atoms \u00d7 (1+5)). Wannier90 then refused to start because, at some k-point, more than 12 states were frozen. The refusal is not caused by the energy window: below dis_froz_max = E_F + 2.02 eV there are at most 10 states (frozen_capacity), which fits, and the window could go as high as E_F + 6.6 eV. The extra frozen states come from the projectability criterion. With dis_proj_max = 0.95, Ti-d states above E_F + 2 eV that the s + d orbitals describe well (p \u2265 0.95) are also frozen, and these push the count past 12. Dropping p2 was itself a sound move: in attempt 0 the 18-function model failed even without truncation (\u03b72 = 56.7 meV untruncated, 114.6 meV truncated). Its functions were broad, 7\u201310 \u00c5\u00b2 each, centred 0.6\u20130.8 \u00c5 off the atoms. Six of them together carry about 0.77 of the hopping weight beyond r_c, and the error sits right at E_F (DFT bands 12 and 14, errors up to 0.8 eV). So I keep s + d and fix the side of the inequality that actually overflowed: I turn off freezing by projectability. That leaves the energy window, which contains E_F, as the only thing that freezes states.",
+  "provenance": {
+    "material": "Ti",
+    "attempt": 2,
+    "recorded_at": "2026-10-12T12:35:03+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v8",
+    "run_dir": "poster_campaign_v1/runs_v8/claude_cli_claude_opus_5_5/qe/Ti/sparse_tb/rep1",
+    "campaign_version": "5e33c8f3096dd764d582bb57420c29434f2077b0"
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

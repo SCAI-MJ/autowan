@@ -1,0 +1,49 @@
+{
+  "recipe_id": "calculation_did_not_run-618876bf",
+  "signature": {
+    "bands_crossing_fermi_level": 2,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1232,
+    "occupied_bandwidth_ev": 28.8201,
+    "bands_available": 20,
+    "spin_channels": 1,
+    "atoms_in_cell": 1,
+    "species": {
+      "Ba": 1
+    }
+  },
+  "resolved": [
+    "calculation_did_not_run"
+  ],
+  "still_unresolved": [
+    "spread_minimisation_converged"
+  ],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ba",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Ba typically uses s and p valence orbitals, but the frozen window extends 2.0 eV above Fermi in this metal and likely contains more states than s+p (4 functions) can represent. Adding d orbitals gives 9 total functions to match the state count in the frozen window."
+    }
+  ],
+  "diagnosis": "The calculation cannot start because the frozen window contains more states than there are Wannier functions to represent them. The frozen window extends up to 2.0 eV above the Fermi level in a metallic system where bands cross the Fermi level. The automatic protocol likely set up too few Wannier functions for the number of states that need exact reproduction in this energy range. Since this is a Ba atom and the calculation has not yet revealed what projectors are being used, the automatic scheme probably selected a minimal set. The previous attempt raised num_bands to 20 but this only increases the pool of states available for disentanglement - it does not increase the number of Wannier functions, which comes from the projector set.",
+  "provenance": {
+    "material": "Ba_pdwf",
+    "attempt": 2,
+    "recorded_at": "2026-08-29T10:24:44+00:00",
+    "certified": false
+  },
+  "measurements": {},
+  "engine": "qe",
+  "regime": "obsolete",
+  "regime_note": "distilled 2026-08-28/29 from the energy-window regime on tutorial pseudopotentials; excluded from the default corpus (autowan item 4 decision 14, 2026-10-07)"
+}

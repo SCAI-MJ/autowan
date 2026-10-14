@@ -1,0 +1,165 @@
+{
+  "recipe_id": "dmft_subspace_model_window-65bb02fc",
+  "signature": {
+    "bands_crossing_fermi_level": 6,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0129,
+    "occupied_bandwidth_ev": 88.0671,
+    "bands_available": 36,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Fe": 1
+    }
+  },
+  "resolved": [
+    "dmft_subspace_model_window"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 3.0,
+      "reason": "Widen modestly from E_F+2 to E_F+3 eV; the previous widening substantially improved fidelity without preventing convergence."
+    }
+  ],
+  "diagnosis": "The frozen-window change reduced target RMS from 1292.64 to 22.66 meV while both minimisations converged. Continue that successful constraint change before altering projectors or iteration budgets.",
+  "provenance": {
+    "material": "Fe",
+    "attempt": 2,
+    "recorded_at": "2026-10-13T02:53:14+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "down",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/Fe/dmft_subspace_window/rep1_down",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "dmft_subspace_model_window": {
+      "value": 1.4441440336265443,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "target Fe 4s; Fe 3d: num_wann 6 against 6; RMS 1.44 meV over 1727 target states (bands 5-10, 9.39 to 19.54 eV); entangled target manifold, compared at or below 19.54 eV (Fermi level + 2 eV), 658 target states above it not compared",
+      "target": "Fe",
+      "target_shells": [
+        "Fe 4s",
+        "Fe 3d"
+      ],
+      "num_wann_expected": 6,
+      "num_wann_actual": 6,
+      "num_wann_requested": 6,
+      "projector_route": "pao",
+      "count_ok": true,
+      "seeded": {
+        "Fe": [
+          "dx2-y2",
+          "dxy",
+          "dxz",
+          "dyz",
+          "dz2",
+          "s"
+        ]
+      },
+      "seed_problems": [],
+      "seeds_ok": true,
+      "correlated_sites": [
+        {
+          "site": "Fe#1",
+          "functions_on_site": 5,
+          "needed": 5
+        }
+      ],
+      "centre_site_limit_ang": 1.239730737007768,
+      "nearest_neighbour_ang": 2.479461474015536,
+      "centres_ok": true,
+      "target_rms_mev": 1.4441440336265443,
+      "target_max_mev": 9.3040153625914,
+      "n_target_states": 1727,
+      "n_target_states_unpaired": 0,
+      "n_target_states_beyond_function_count": 0,
+      "target_states_per_k": [
+        2,
+        6
+      ],
+      "target_bands": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "target_energy_range_ev": [
+        9.391490641890803,
+        19.54091189563879
+      ],
+      "target_weight_min": 0.5,
+      "weights_source": "dmft_subspace_weights/Fe_weights.npz",
+      "n_kpoints": 402,
+      "n_dft_bands": 36,
+      "n_wannier_bands": 6,
+      "reference": "QE pw.x bands test_set_extension_parents/qe/Fe_fm/work/c7/e5/Fe_fm_bands_path.npz",
+      "manifold_isolated": false,
+      "manifold_isolation": {
+        "isolated": false,
+        "channels": [
+          {
+            "spin": 0,
+            "target_bands_1based": [
+              5,
+              15
+            ],
+            "n_target_bands": 11,
+            "n_functions": 6,
+            "gap_below_ev": 45.56487082305202,
+            "gap_above_ev": -10.049792077197708,
+            "isolated": false,
+            "reasons": [
+              "bands 5-15 carry target states: 11 bands for 6 target functions",
+              "no gap to the band above (band 16 dips 10050 meV below the top of band 15)"
+            ]
+          },
+          {
+            "spin": 1,
+            "target_bands_1based": [
+              5,
+              15
+            ],
+            "n_target_bands": 11,
+            "n_functions": 6,
+            "gap_below_ev": 43.07349240914791,
+            "gap_above_ev": -9.430624061458161,
+            "isolated": false,
+            "reasons": [
+              "bands 5-15 carry target states: 11 bands for 6 target functions",
+              "no gap to the band above (band 16 dips 9431 meV below the top of band 15)"
+            ]
+          }
+        ],
+        "gap_min_ev": 0.001,
+        "target_weight_min": 0.5
+      },
+      "n_target_states_above_window": 658,
+      "comparison_window_top_ev": 19.5414,
+      "comparison_window_anchor": "Fermi level",
+      "comparison_window_anchor_ev": 17.5414,
+      "comparison_window_margin_ev": 2.0,
+      "comparison_window_fermi_ev": 17.5414,
+      "comparison_window_bands": "construction mesh",
+      "material_class": "metal",
+      "fermi_source": "given"
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

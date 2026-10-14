@@ -1,0 +1,736 @@
+{
+ "connected_valence_missing_band": {
+  "coverage": 1.0,
+  "failed": [
+   "occupied_manifold_is_represented"
+  ],
+  "inputs": {
+   "conv_window": "3",
+   "dis_froz_max": "2.0000000000d+00",
+   "dis_proj_max": "9.5000000000d-01",
+   "dis_proj_min": "1.0000000000d-02",
+   "mp_grid": [
+    8,
+    1,
+    1
+   ],
+   "num_bands": 2,
+   "num_wann": 2,
+   "spin_index": 0
+  },
+  "measurements": {
+   "band_distance_from_parent": {
+    "applies": false,
+    "evaluable": false,
+    "note": "not meaningful for a metal manifold",
+    "passed": null,
+    "threshold": null,
+    "units": "",
+    "value": null
+   },
+   "centres_sit_on_atomic_sites": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": 2.0,
+    "units": "Ang",
+    "value": 0.0
+   },
+   "frontier_manifold_straddles_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "fraction of the parent's frontier k-points",
+    "value": 1.0
+   },
+   "hopping_decays_with_distance": {
+    "applies": true,
+    "evaluable": true,
+    "note": "largest element among the outermost 2 shells",
+    "passed": true,
+    "threshold": 0.03,
+    "units": "eV",
+    "value": 0.0
+   },
+   "hopping_shells_inside_representable_supercell": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "shells",
+    "value": 0.0
+   },
+   "metal_frozen_window_contains_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "eV",
+    "value": 0.0
+   },
+   "model_bands_correspond_to_parent_bands": {
+    "applies": true,
+    "evaluable": true,
+    "note": "0 of 9 inside -6.00..2.00 eV sit further than 40 meV from any band the parent calculation has",
+    "passed": true,
+    "threshold": 0.2,
+    "units": "fraction of model bands",
+    "value": 0.0
+   },
+   "occupied_manifold_is_represented": {
+    "applies": true,
+    "evaluable": true,
+    "note": "7 of 16 lie further than 40 meV from any band of the model",
+    "passed": false,
+    "threshold": 0.05,
+    "units": "fraction of occupied states",
+    "value": 0.4375
+   },
+   "spread_minimisation_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 10.0
+   },
+   "subspace_selection_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "no disentanglement was required",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 0.0
+   },
+   "wannier_count_matches_request": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "functions",
+    "value": 2.0
+   }
+  },
+  "non_evaluable": [],
+  "passed": false
+ },
+ "no_semicore_metal": {
+  "coverage": 1.0,
+  "failed": [],
+  "inputs": {
+   "conv_window": "3",
+   "dis_froz_max": "2.0000000000d+00",
+   "dis_proj_max": "9.5000000000d-01",
+   "dis_proj_min": "1.0000000000d-02",
+   "mp_grid": [
+    8,
+    1,
+    1
+   ],
+   "num_bands": 3,
+   "num_wann": 3,
+   "spin_index": 0
+  },
+  "measurements": {
+   "band_distance_from_parent": {
+    "applies": false,
+    "evaluable": false,
+    "note": "not meaningful for a metal manifold",
+    "passed": null,
+    "threshold": null,
+    "units": "",
+    "value": null
+   },
+   "centres_sit_on_atomic_sites": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": 2.0,
+    "units": "Ang",
+    "value": 0.0
+   },
+   "frontier_manifold_straddles_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "fraction of the parent's frontier k-points",
+    "value": 1.0
+   },
+   "hopping_decays_with_distance": {
+    "applies": true,
+    "evaluable": true,
+    "note": "largest element among the outermost 2 shells",
+    "passed": true,
+    "threshold": 0.05,
+    "units": "eV",
+    "value": 0.0
+   },
+   "hopping_shells_inside_representable_supercell": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "shells",
+    "value": 0.0
+   },
+   "metal_frozen_window_contains_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "eV",
+    "value": 0.0
+   },
+   "model_bands_correspond_to_parent_bands": {
+    "applies": true,
+    "evaluable": true,
+    "note": "0 of 17 inside -6.00..2.00 eV sit further than 20 meV from any band the parent calculation has",
+    "passed": true,
+    "threshold": 0.2,
+    "units": "fraction of model bands",
+    "value": 0.0
+   },
+   "occupied_manifold_is_represented": {
+    "applies": true,
+    "evaluable": true,
+    "note": "0 of 16 lie further than 20 meV from any band of the model",
+    "passed": true,
+    "threshold": 0.05,
+    "units": "fraction of occupied states",
+    "value": 0.0
+   },
+   "spread_minimisation_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 10.0
+   },
+   "subspace_selection_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "no disentanglement was required",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 0.0
+   },
+   "wannier_count_matches_request": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "functions",
+    "value": 3.0
+   }
+  },
+  "non_evaluable": [],
+  "passed": true
+ },
+ "semicore_counted_gapped": {
+  "coverage": 1.0,
+  "failed": [
+   "occupied_manifold_is_represented",
+   "band_distance_from_parent"
+  ],
+  "inputs": {
+   "conv_window": "3",
+   "dis_froz_max": "2.0000000000d+00",
+   "dis_proj_max": "9.5000000000d-01",
+   "dis_proj_min": "1.0000000000d-02",
+   "mp_grid": [
+    8,
+    1,
+    1
+   ],
+   "num_bands": 3,
+   "num_wann": 3,
+   "spin_index": 0
+  },
+  "measurements": {
+   "band_distance_from_parent": {
+    "applies": true,
+    "evaluable": true,
+    "note": "27 states compared over -30.00..2.90 eV",
+    "passed": false,
+    "threshold": 0.05,
+    "units": "eV",
+    "value": 13.613718571108093
+   },
+   "centres_sit_on_atomic_sites": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": 2.0,
+    "units": "Ang",
+    "value": 0.0
+   },
+   "frontier_manifold_straddles_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "fraction of the parent's frontier k-points",
+    "value": 1.0
+   },
+   "hopping_decays_with_distance": {
+    "applies": true,
+    "evaluable": true,
+    "note": "largest element among the outermost 2 shells",
+    "passed": true,
+    "threshold": 0.05,
+    "units": "eV",
+    "value": 0.0
+   },
+   "hopping_shells_inside_representable_supercell": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "shells",
+    "value": 0.0
+   },
+   "metal_frozen_window_contains_fermi_level": {
+    "applies": false,
+    "evaluable": false,
+    "note": "not meaningful for a gapped manifold",
+    "passed": null,
+    "threshold": null,
+    "units": "",
+    "value": null
+   },
+   "model_bands_correspond_to_parent_bands": {
+    "applies": true,
+    "evaluable": true,
+    "note": "0 of 17 inside -30.00..2.00 eV sit further than 50 meV from any band the parent calculation has",
+    "passed": true,
+    "threshold": 0.2,
+    "units": "fraction of model bands",
+    "value": 0.0
+   },
+   "occupied_manifold_is_represented": {
+    "applies": true,
+    "evaluable": true,
+    "note": "8 of 24 lie further than 50 meV from any band of the model",
+    "passed": false,
+    "threshold": 0.05,
+    "units": "fraction of occupied states",
+    "value": 0.3333333333333333
+   },
+   "spread_minimisation_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 10.0
+   },
+   "subspace_selection_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "no disentanglement was required",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 0.0
+   },
+   "wannier_count_matches_request": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "functions",
+    "value": 3.0
+   }
+  },
+  "non_evaluable": [],
+  "passed": false
+ },
+ "semicore_counted_metal": {
+  "coverage": 1.0,
+  "failed": [
+   "occupied_manifold_is_represented"
+  ],
+  "inputs": {
+   "conv_window": "3",
+   "dis_froz_max": "2.0000000000d+00",
+   "dis_proj_max": "9.5000000000d-01",
+   "dis_proj_min": "1.0000000000d-02",
+   "mp_grid": [
+    8,
+    1,
+    1
+   ],
+   "num_bands": 3,
+   "num_wann": 3,
+   "spin_index": 0
+  },
+  "measurements": {
+   "band_distance_from_parent": {
+    "applies": false,
+    "evaluable": false,
+    "note": "not meaningful for a metal manifold",
+    "passed": null,
+    "threshold": null,
+    "units": "",
+    "value": null
+   },
+   "centres_sit_on_atomic_sites": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": 2.0,
+    "units": "Ang",
+    "value": 0.0
+   },
+   "frontier_manifold_straddles_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "fraction of the parent's frontier k-points",
+    "value": 1.0
+   },
+   "hopping_decays_with_distance": {
+    "applies": true,
+    "evaluable": true,
+    "note": "largest element among the outermost 2 shells",
+    "passed": true,
+    "threshold": 0.05,
+    "units": "eV",
+    "value": 0.0
+   },
+   "hopping_shells_inside_representable_supercell": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "shells",
+    "value": 0.0
+   },
+   "metal_frozen_window_contains_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "eV",
+    "value": 0.0
+   },
+   "model_bands_correspond_to_parent_bands": {
+    "applies": true,
+    "evaluable": true,
+    "note": "0 of 17 inside -30.00..2.00 eV sit further than 50 meV from any band the parent calculation has",
+    "passed": true,
+    "threshold": 0.2,
+    "units": "fraction of model bands",
+    "value": 0.0
+   },
+   "occupied_manifold_is_represented": {
+    "applies": true,
+    "evaluable": true,
+    "note": "8 of 24 lie further than 50 meV from any band of the model",
+    "passed": false,
+    "threshold": 0.05,
+    "units": "fraction of occupied states",
+    "value": 0.3333333333333333
+   },
+   "spread_minimisation_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 10.0
+   },
+   "subspace_selection_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "no disentanglement was required",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 0.0
+   },
+   "wannier_count_matches_request": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "functions",
+    "value": 3.0
+   }
+  },
+  "non_evaluable": [],
+  "passed": false
+ },
+ "unoccupied_band_excluded": {
+  "coverage": 1.0,
+  "failed": [],
+  "inputs": {
+   "conv_window": "3",
+   "dis_froz_max": "2.0000000000d+00",
+   "dis_proj_max": "9.5000000000d-01",
+   "dis_proj_min": "1.0000000000d-02",
+   "mp_grid": [
+    8,
+    1,
+    1
+   ],
+   "num_bands": 3,
+   "num_wann": 3,
+   "spin_index": 0
+  },
+  "measurements": {
+   "band_distance_from_parent": {
+    "applies": false,
+    "evaluable": false,
+    "note": "not meaningful for a metal manifold",
+    "passed": null,
+    "threshold": null,
+    "units": "",
+    "value": null
+   },
+   "centres_sit_on_atomic_sites": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": 2.0,
+    "units": "Ang",
+    "value": 0.0
+   },
+   "frontier_manifold_straddles_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "fraction of the parent's frontier k-points",
+    "value": 1.0
+   },
+   "hopping_decays_with_distance": {
+    "applies": true,
+    "evaluable": true,
+    "note": "largest element among the outermost 2 shells",
+    "passed": true,
+    "threshold": 0.05,
+    "units": "eV",
+    "value": 0.0
+   },
+   "hopping_shells_inside_representable_supercell": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "shells",
+    "value": 0.0
+   },
+   "metal_frozen_window_contains_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "eV",
+    "value": 0.0
+   },
+   "model_bands_correspond_to_parent_bands": {
+    "applies": true,
+    "evaluable": true,
+    "note": "0 of 17 inside -6.00..2.00 eV sit further than 20 meV from any band the parent calculation has",
+    "passed": true,
+    "threshold": 0.2,
+    "units": "fraction of model bands",
+    "value": 0.0
+   },
+   "occupied_manifold_is_represented": {
+    "applies": true,
+    "evaluable": true,
+    "note": "0 of 16 lie further than 20 meV from any band of the model",
+    "passed": true,
+    "threshold": 0.05,
+    "units": "fraction of occupied states",
+    "value": 0.0
+   },
+   "spread_minimisation_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 10.0
+   },
+   "subspace_selection_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "no disentanglement was required",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 0.0
+   },
+   "wannier_count_matches_request": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "functions",
+    "value": 3.0
+   }
+  },
+  "non_evaluable": [],
+  "passed": true
+ },
+ "vasp_synthetic_parent": {
+  "coverage": 1.0,
+  "failed": [
+   "frontier_manifold_straddles_fermi_level",
+   "occupied_manifold_is_represented",
+   "model_bands_correspond_to_parent_bands",
+   "band_distance_from_parent"
+  ],
+  "inputs": {
+   "conv_window": "3",
+   "mp_grid": [
+    2,
+    1,
+    1
+   ],
+   "num_wann": 2,
+   "spin_index": 0
+  },
+  "measurements": {
+   "band_distance_from_parent": {
+    "applies": true,
+    "evaluable": true,
+    "note": "5 states compared over -6.00..6.30 eV",
+    "passed": false,
+    "threshold": 0.02,
+    "units": "eV",
+    "value": 1.283121194587635
+   },
+   "centres_sit_on_atomic_sites": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": 1.1757769524431319,
+    "units": "Ang",
+    "value": 0.0
+   },
+   "frontier_manifold_straddles_fermi_level": {
+    "applies": true,
+    "evaluable": true,
+    "note": "the model does not bracket the Fermi level at 2 of the 2 k-points where the parent does",
+    "passed": false,
+    "threshold": null,
+    "units": "fraction of the parent's frontier k-points",
+    "value": 0.0
+   },
+   "hopping_decays_with_distance": {
+    "applies": true,
+    "evaluable": true,
+    "note": "largest element among the outermost 2 shells",
+    "passed": true,
+    "threshold": 0.06,
+    "units": "eV",
+    "value": 0.01
+   },
+   "hopping_shells_inside_representable_supercell": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "shells",
+    "value": 0.0
+   },
+   "metal_frozen_window_contains_fermi_level": {
+    "applies": false,
+    "evaluable": false,
+    "note": "not meaningful for a gapped manifold",
+    "passed": null,
+    "threshold": null,
+    "units": "",
+    "value": null
+   },
+   "model_bands_correspond_to_parent_bands": {
+    "applies": true,
+    "evaluable": true,
+    "note": "1 of 3 inside -6.00..7.20 eV sit further than 20 meV from any band the parent calculation has",
+    "passed": false,
+    "threshold": 0.2,
+    "units": "fraction of model bands",
+    "value": 0.3333333333333333
+   },
+   "occupied_manifold_is_represented": {
+    "applies": true,
+    "evaluable": true,
+    "note": "2 of 4 lie further than 20 meV from any band of the model",
+    "passed": false,
+    "threshold": 0.05,
+    "units": "fraction of occupied states",
+    "value": 0.5
+   },
+   "spread_minimisation_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 10.0
+   },
+   "subspace_selection_converged": {
+    "applies": true,
+    "evaluable": true,
+    "note": "no disentanglement was required",
+    "passed": true,
+    "threshold": null,
+    "units": "iterations",
+    "value": 0.0
+   },
+   "wannier_count_matches_request": {
+    "applies": true,
+    "evaluable": true,
+    "note": "",
+    "passed": true,
+    "threshold": null,
+    "units": "functions",
+    "value": 2.0
+   }
+  },
+  "non_evaluable": [],
+  "passed": false
+ }
+}

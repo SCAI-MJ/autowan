@@ -1,0 +1,69 @@
+{
+  "recipe_id": "model_bands_correspond_to_parent_bands-946b0151",
+  "signature": {
+    "bands_crossing_fermi_level": 6,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.0129,
+    "occupied_bandwidth_ev": 88.0671,
+    "bands_available": 36,
+    "spin_channels": 2,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Fe": 1
+    }
+  },
+  "resolved": [
+    "model_bands_correspond_to_parent_bands"
+  ],
+  "still_unresolved": [
+    "dmft_subspace_model_window"
+  ],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 2.5,
+      "reason": "Add an energy-frozen window covering every compared target state (\u2264 E_F+2 eV) plus a margin. frozen_capacity confirms at most 6 states at any k-point, within the 6.73 eV limit."
+    }
+  ],
+  "diagnosis": "The subspace selection is the problem, not the minimisation. Both stages converged cleanly. The deck sets no frozen energy window (dis_froz_max unset), so the only states it pins are those with projectability \u2265 0.99, which are very few. As a result nothing forces the model to reproduce the parent bands, even deep below E_F. band_error_by_energy shows errors of about 1.2\u20131.5 eV in band 5 (\u22128 to \u22123 eV) and band 7 (\u22123.3 to 0.1 eV). It also shows the sixth function (4s-like, spread 2.0 \u00c5\u00b2 against 0.5 \u00c5\u00b2 for the five d functions) mixing with high-lying states: the model band rises to about 20 eV and is wrong by up to 3.5 eV near E_F. The frontier's ladder only ever moved the projectability thresholds. Lowering dis_proj_max (more states frozen) improved the RMS from 455 to 80 meV, which is the same mechanism, but the ladder never added an energy-frozen window. frozen_capacity shows a window from the bottom of the kept bands up to E_F+2 eV holds at most 6 states at the worst k-point and spin, and up to E_F+6.73 eV still fits. So freezing everything up to E_F+2.5 eV is possible. It covers every compared target state (\u2264 E_F+2 eV) with some margin and contains E_F.",
+  "provenance": {
+    "material": "Fe",
+    "attempt": 1,
+    "recorded_at": "2026-10-13T02:49:55+00:00",
+    "certified": false,
+    "seed": "wan",
+    "criterion": "C3",
+    "profile": "dmft_subspace",
+    "channel": "up",
+    "model": "claude-cli:claude-opus-5-5",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/claude_cli_claude_opus_5_5/qe/Fe/dmft_subspace_window/rep1_up",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "model_bands_correspond_to_parent_bands": {
+      "value": 0.0,
+      "units": "fraction of model bands",
+      "threshold": 0.2,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "0 of 22956 inside 9.22..20.04 eV sit further than 83 meV from any band the parent calculation has; bands 1-4 excluded by the deck and not counted (isolated 45.56 eV below the represented manifold)",
+      "target_window_source": "deck",
+      "target_window_ev": null,
+      "reproduction_window_ev": [
+        9.217395668758845,
+        20.041432209857035
+      ],
+      "deck_frozen_window_ev": [
+        null,
+        20.041432209857035
+      ]
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "pdwf"
+}

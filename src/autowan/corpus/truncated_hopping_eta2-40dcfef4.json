@@ -1,0 +1,103 @@
+{
+  "recipe_id": "truncated_hopping_eta2-40dcfef4",
+  "signature": {
+    "bands_crossing_fermi_level": 0,
+    "manifold_is_isolated": true,
+    "band_gap_ev": 0.5368,
+    "occupied_bandwidth_ev": 14.8961,
+    "bands_available": 32,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 2,
+    "species": {
+      "Ga": 1,
+      "As": 1
+    }
+  },
+  "resolved": [
+    "truncated_hopping_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "projectors",
+      "old": null,
+      "new": [
+        {
+          "species": "Ga",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        },
+        {
+          "species": "As",
+          "orbitals": [
+            "s",
+            "p",
+            "d"
+          ]
+        }
+      ],
+      "reason": "Continue the projector-space enlargement that halved the truncation error, adding only the missing As d shell."
+    }
+  ],
+  "diagnosis": "The remaining failure is truncation sensitivity, not unconverged optimisation or occupied-band fidelity. Enlarging the analytic projector space substantially improved sparsity; extend that successful change by adding As d rather than revisiting exhausted thresholds or iteration budgets.",
+  "provenance": {
+    "material": "GaAs",
+    "attempt": 4,
+    "recorded_at": "2026-10-13T03:22:05+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C2",
+    "profile": "sparse_tb",
+    "channel": "nospin",
+    "model": "codex-cli:gpt-6.1-sol",
+    "tree": "runs_v11",
+    "run_dir": "poster_campaign_v1/runs_v11/codex_cli_gpt_6.1_sol/qe/GaAs/sparse_tb/rep1",
+    "campaign_version": "74b2c265df86d0e113c78d696e87f9eb658c72bb"
+  },
+  "measurements": {
+    "truncated_hopping_eta2": {
+      "value": 17.153536373701918,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 17.15 meV with hoppings longer than r_c = L_BvK/4 = 9.99 Ang (|R + tau_j - tau_i|) removed (211 of 1591 lattice vectors keep a hopping; untruncated 1.16 meV)",
+      "l_bvk_ang": 39.973787388333626,
+      "l_bvk_definition": "shortest non-zero vector of the mp_grid superlattice",
+      "periodic_dims": 3,
+      "periodic_axes": [
+        0,
+        1,
+        2
+      ],
+      "r_c_ang": 9.993446847083407,
+      "n_vectors_kept": 211,
+      "n_vectors_total": 1591,
+      "truncation_length": "hopping length |R + tau_j - tau_i|, tau = the Wannier centres",
+      "n_elements_kept": 29944,
+      "n_elements_total": 515484,
+      "eta2_untruncated_mev": 1.1561828531163179,
+      "fermi_energy_scf_ev": 7.0876,
+      "fermi_energy_source": "given",
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/GaAs/A_external_fixed/dft_bands_path.npz",
+      "r_L3_ang": 13.324595796111208,
+      "eta_trunc_L3_mev": 6.474959976160751,
+      "n_vectors_kept_L3": 421,
+      "r_L2_ang": 19.986893694166813,
+      "eta_trunc_L2_mev": 2.009977606280817,
+      "n_vectors_kept_L2": 1159,
+      "tau_ang": 2.021001076738747,
+      "tau_free_intercept_ang": 2.788009309122048,
+      "n_vectors_fitted": 1590
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}

@@ -1,0 +1,90 @@
+{
+  "recipe_id": "band_interpolation_eta2-bcfcde59",
+  "signature": {
+    "bands_crossing_fermi_level": 1,
+    "manifold_is_isolated": false,
+    "band_gap_ev": 0.1346,
+    "occupied_bandwidth_ev": 52.9842,
+    "bands_available": 16,
+    "spin_channels": 1,
+    "spinor_bands": false,
+    "atoms_in_cell": 1,
+    "species": {
+      "Na": 1
+    }
+  },
+  "resolved": [
+    "band_interpolation_eta2"
+  ],
+  "still_unresolved": [],
+  "changes": [
+    {
+      "parameter": "dis_froz_max",
+      "old": null,
+      "new": 3.5,
+      "reason": "Widen the frozen window to 3.5 eV relative to the Fermi level so that all states within the Fermi-Dirac window at mu = E_F + 2 eV (sigma = 0.1 eV) are reproduced faithfully."
+    }
+  ],
+  "diagnosis": "In SMV, the current frozen window upper bound dis_froz_max = 2.0 eV coincides with the Fermi-Dirac evaluation chemical potential mu = E_F + 2 eV. Because the gate's eta_2 metric uses a Fermi-Dirac smearing of sigma = 0.1 eV, states between 2.0 eV and ~2.5 eV carry non-zero weight but were left unfrozen, causing eta_2 to reach 51.17 meV. Widening dis_froz_max to 3.5 eV encapsulates all states up to 15 sigma above mu while frozen_capacity confirms that at 3.5 eV the worst k-point has at most 3 frozen states (fits num_wann = 4 with room for smooth disentanglement).",
+  "provenance": {
+    "material": "Na",
+    "attempt": 3,
+    "recorded_at": "2026-10-12T23:15:52+00:00",
+    "certified": true,
+    "seed": "wan",
+    "criterion": "C1",
+    "profile": "band_interpolation",
+    "channel": "nospin",
+    "model": "google/gemini-3.8-flash",
+    "tree": "runs_v9",
+    "run_dir": "poster_campaign_v1/runs_v9/gemini_3.8_flash/qe/Na/band_interpolation/rep1",
+    "campaign_version": "3b397adfdb97db2d6ac853a24e67e63f3c302b4a"
+  },
+  "measurements": {
+    "band_interpolation_eta2": {
+      "value": 16.4371719910826,
+      "units": "meV",
+      "threshold": 20.0,
+      "passed": true,
+      "evaluable": true,
+      "applies": true,
+      "note": "eta_2 = 16.44 meV at mu = E_F(scf) + 2 = 3.555 eV over 270 path k-points and 4 bands",
+      "eta2_max_mev": 59.540109034991694,
+      "mu_ev": 3.5545999999999998,
+      "fermi_energy_scf_ev": 1.5546,
+      "fermi_energy_source": "given",
+      "fermi_energy_nscf_ev": 1.554581271523683,
+      "eta2_mev_at_nscf_fermi": 16.437068561895018,
+      "n_kpoints": 270,
+      "n_bands_compared": 4,
+      "excluded_dft_bands": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "ws_distance_applied": true,
+      "reference": "QE pw.x bands qe_frontier_paper_settings_baseline/baseline/results/raw/Na/A_external_fixed/dft_bands_path.npz",
+      "is_insulator": false,
+      "insulator_rule": "no band crosses E_F on the mesh and gap >= sigma = 0.1 eV",
+      "crossing_bands_mesh": 1,
+      "crossing_bands_path": 1,
+      "vbm_ev": 1.5398250429541918,
+      "cbm_ev": 1.5655009111870757,
+      "gap_ev": 0.025675868232883925,
+      "gap_mesh_ev": 0.13458197394784577,
+      "gap_path_ev": 0.025675868232883925,
+      "ef_minus_vbm_ev": 0.014774957045808224,
+      "cbm_minus_ef_ev": 0.010900911187075701,
+      "spinor": false,
+      "electrons_per_band": 2,
+      "filled_bands_mesh": 4,
+      "filled_band_electrons": 8,
+      "parent_electrons": 9.0,
+      "occupation_consistent": null
+    }
+  },
+  "engine": "qe",
+  "regime": "current",
+  "method": "smv"
+}
