@@ -356,14 +356,14 @@ changes an acceptance threshold, touches the parent calculation, or runs a comma
 
 ## Extending it
 
-**Checks.** `--add-check` / `--drop-check` adjust a profile, and `--check` adds a
-contributed check (see `gates/README.md`). Acceptance is the conjunction over the
-profile's checks. Dropping a default check prints a warning.
+**Your own checks.** `--add-check` / `--drop-check` adjust a profile, and `--check` adds
+a check you wrote yourself (see `gates/README.md`). Acceptance is the conjunction over
+the profile's checks. Dropping a default check prints a warning.
 
-**Recipes.** `--contribute-recipes <dir>` distils a finished run's log into the steps
-where a check stopped failing. The model's `search_references` tool searches
-`--recipes <dir>`, by default the corpus shipped in the package. Retrieval matches on
-the electronic-structure signature, never on the material's name.
+**Your own recipe directory.** The model's `search_references` tool searches
+`--recipes <dir>`, by default the corpus shipped in the package. `--contribute-recipes
+<dir>` distils a finished run's log into the steps where a check stopped failing, so you
+can build a corpus from your own runs.
 
 The shipped corpus has **60 entries** distilled from the certified repairs of the
 KPS 2026 poster campaign (QE, PDWF frontier, SSSP pseudopotentials). It also keeps
@@ -377,6 +377,26 @@ transfer rather than recall can set these in `WorkflowConfig`:
   frontier table.
 
 `src/autowan/corpus/README.md` has the full contract.
+
+## Contributing to a shared corpus or gate library: not open yet
+
+The aim is that every run anyone does makes the next run better, and that people can
+publish gates for their own use of the bands. How to do that is still being designed,
+so there is no submission route yet: please do not open pull requests with recipe
+entries or checks for now.
+
+What we know so far, measured on the poster campaign's 1,274 repair steps over 22
+materials:
+
+- Retrieving past repairs by the material's electronic-structure signature (the
+  current `search_references`) predicted whether a change would help no better than
+  the average for that kind of change. The format will change.
+- Earlier runs on the same material with the same DFT setup were strongly predictive.
+  Whether that survives a different setup (another code, pseudopotential or k-mesh) is
+  not yet measured.
+
+Ideas, and runs you would be willing to share, are welcome as
+[issues](https://github.com/SCAI-MJ/autowan/issues).
 
 ## Known limitations
 

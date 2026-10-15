@@ -48,3 +48,6 @@ tutorial pseudopotentials, before the frontier became PDWF on SSSP. They are mar
 
 `autowan --contribute-recipes <dir>` adds entries from your own runs; point
 `--recipes <dir>` at a directory to search it instead of the shipped corpus.
+
+A shared, community-contributed corpus is not open yet: its format and retrieval are
+being redesigned (see "Contributing to a shared corpus" in the top-level README).
