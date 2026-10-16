@@ -181,7 +181,7 @@ class VaspWannierRunner(ConstructionRunner):
         deck_text = win.read_text()
         deck_tags = overlap_step_incar_tags(deck_text)
         if is_frontier_overlap_step(deck_text):
-            # The SCDM frontier (reports/2026-10-07/04): read the parent's WAVECAR
+            # The SCDM frontier: read the parent's WAVECAR
             # with no diagonalisation, let VASP choose NUM_WANN, and hand the .win body
             # over as WANNIER90_WIN so VASP writes its own wannier90.win around it.
             # VASP's Wannier interface (the PEAD routines) refuses NCORE != 1, so

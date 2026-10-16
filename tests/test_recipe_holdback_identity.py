@@ -221,7 +221,7 @@ def test_the_tool_holds_back_this_materials_entries_whatever_the_seed_says(tmp_p
     ), "the run's own material reached the model under another seed"
     spec = next(s for s in tools.specs() if s.name == "search_references")
     assert "held back" in spec.description
-    # The package default (2026-10-13, round 2): no hold-back -- public use may draw on
+    # The package default (2026-10-13): no hold-back -- public use may draw on
     # an earlier repair of the same material, as frontier_dataset may.
     tools.recipe_same_material_holdback = False
     answer = tools("search_references", {"query": "spread converged"})

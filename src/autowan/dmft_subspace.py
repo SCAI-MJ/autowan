@@ -1,6 +1,6 @@
 """The DMFT-subspace criterion: the correlated-subspace Wannier model the literature builds.
 
-User decision 2026-10-12 (autowan item 4, replacing ``downfolded_d``): the third
+Since 2026-10-12 (replacing ``downfolded_d``), the third
 acceptance criterion is **the Wannier model a DMFT calculation of this material is built
 on, as the literature builds it**. ``downfolded_d`` asked every transition-metal compound
 for five d functions per metal site, judged over E_F +- 1 eV; neither matches practice.
@@ -64,8 +64,7 @@ The check ``dmft_subspace_model`` passes when all three hold:
     the target (MoS2-like Gamma points, SrTiO3's t2g top against e_g) leave the
     comparison by themselves.
 
-    **Isolated or entangled, and the comparison window** (user decision 2026-10-12,
-    second revision; check ``dmft_subspace_model_window``). The target manifold is
+    **Isolated or entangled, and the comparison window** (the second 2026-10-12 revision; check ``dmft_subspace_model_window``). The target manifold is
     *isolated* when, on the path and in every spin channel, the bands that carry its
     states (the lowest to the highest band index holding a state of target weight >=
     0.5) are exactly as many as the target has functions and an energy gap of more than

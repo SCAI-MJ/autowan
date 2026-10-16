@@ -1,7 +1,6 @@
 """Rebuild this fixture from the real VASP 6.4.1 overlap-step stages it records.
 
-Source (read-only scratch, 2026-09-29 parent-adequacy controls on VASP, report
-reports/2026-09-29/10-autowan-parent-adequacy-prescription-vasp.md):
+Source (read-only scratch, the 2026-09-29 parent-adequacy controls on VASP):
 
     <SCRATCH>/spin/clean/construction/mno.vasp2wannier90      ISPIN = 2 (MAGMOM 9 0)
     <SCRATCH>/spin/degraded/construction/mno.vasp2wannier90   ISPIN = 1

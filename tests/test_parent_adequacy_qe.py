@@ -1355,7 +1355,7 @@ FROZEN_CERTIFIED_WITH_XML = (
 
 
 @pytest.mark.skipif(
-    not FROZEN.is_dir(), reason="the frozen campaign tree lives on cluster2"
+    not FROZEN.is_dir(), reason="the frozen campaign tree is not shipped"
 )
 @pytest.mark.parametrize("material", FROZEN_CERTIFIED_WITH_XML)
 def test_campaign_parents_that_certified_raise_no_alarm(material, qe):
@@ -1371,7 +1371,7 @@ def test_campaign_parents_that_certified_raise_no_alarm(material, qe):
 
 
 @pytest.mark.skipif(
-    not FROZEN.is_dir(), reason="the frozen campaign tree lives on cluster2"
+    not FROZEN.is_dir(), reason="the frozen campaign tree is not shipped"
 )
 def test_the_ti_parent_raises_no_alarm(qe):
     d = FROZEN / "campaign" / "Ti"

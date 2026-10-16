@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=autowan_vasp_fixture_scf
-#SBATCH --partition=orte
+# Add an #SBATCH --partition line for your cluster.
 #SBATCH --nodes=1
 #SBATCH --ntasks=4
 #SBATCH --mem=8G

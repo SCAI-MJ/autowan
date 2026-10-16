@@ -61,7 +61,7 @@ VASP_KNOWLEDGE = EngineKnowledge(
     unsupported_parameters=("pao_subset",),
     # VASP 6.4.1 runs SCDM: vasp.6.4.1-w90-avx2 with LSCDM = .TRUE. printed "SCDM mode"
     # and an erfc cutoff (CUTOFF_MU / CUTOFF_SIGMA defaulted from NUM_WANN) and wrote an
-    # AMN that Wannier90 localised (SLURM 18683, amd1, 2026-09-29). The cutoff is an
+    # AMN that Wannier90 localised (2026-09-29). The cutoff is an
     # overlap-step INCAR tag, carried on the deck's ``! overlap-step INCAR:`` lines.
     unsupported_reasons={
         "pao_subset": (

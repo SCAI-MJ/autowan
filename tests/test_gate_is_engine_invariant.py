@@ -84,7 +84,7 @@ def test_neither_backend_adds_to_or_removes_from_the_core_set(gates):
     assert qe.checks == CORE_CHECKS
     assert vasp.checks == CORE_CHECKS
     # the ten original checks plus metal_frozen_window_contains_fermi_level, less the two
-    # convergence checks that left the default on 2026-10-09 (decision 22)
+    # convergence checks that left the default on 2026-10-09
     assert len(vasp.checks) == 9
     assert get_backend("qe").contributed_checks() == ()
     assert get_backend("vasp").contributed_checks() == ()

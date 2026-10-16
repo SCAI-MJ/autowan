@@ -1,6 +1,6 @@
 """One Wannier function per occupied radial channel: the VASP deck writer's function count.
 
-2026-09-30 autowan discussion, item 1, decision 4 (a standing convention since): the
+A standing convention since 2026-09-30: the
 automatic VASP deck holds one Wannier function per (species, l, occupied radial
 channel). A channel whose pseudopotential was built at two occupied atomic shells --
 Mn_sv's 3s semicore and 4s valence -- gets one function per shell. A channel with one

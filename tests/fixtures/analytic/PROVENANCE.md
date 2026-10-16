@@ -4,7 +4,7 @@
 (`test_magnetic_subspace_target.py`, `test_semicore_independent_scale.py`,
 `test_metal_frozen_window_contains_fermi_level.py`, `test_openmx_projectability_on_kept_states.py`).
 Nothing is fitted and nothing is read from a calculation: each band is a closed-form expression,
-so a test's expected value can be derived by hand. Written 2026-09-15 (cluster2) for the
+so a test's expected value can be derived by hand. Written 2026-09-15 for the
 magnetic-subspace certification target work.
 
 ## Mesh and cell

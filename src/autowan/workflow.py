@@ -153,7 +153,7 @@ HANDOFF_MODEL_FIELDS = (
 class FrontierHandoff:
     """The frontier ran first and did not certify; this run takes over from its last state.
 
-    User decision 2026-10-13 ("frontier handoff"): the frontier gets a budget of Wannier90
+    Frontier handoff (since 2026-10-13): the frontier gets a budget of Wannier90
     runs -- its default deck (run 0) and its own retry ladder up to ``point`` -- each
     judged under this run's criterion. When none certifies, autowan starts from the
     frontier's last ladder state: the deck in the run directory under ``seed`` *is* the

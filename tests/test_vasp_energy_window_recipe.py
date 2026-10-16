@@ -2,8 +2,8 @@
 
 The VASP default first deck is the hydrogenic all-channel deck disentangled by an
 energy window alone: Wannier90's projectability window cannot run on VASP's raw,
-non-orthonormal projections (p > 1 stops it before the gate; discussion 2026-09-30,
-autowan item 1, Decision 1). ``deck_from_parent`` offered no recipe that writes it, so
+non-orthonormal projections (p > 1 stops it before the gate;
+2026-09-30). ``deck_from_parent`` offered no recipe that writes it, so
 the 2026-09-29 baseline (13/20 on the fixed-mesh parents) removed the three window lines
 from the hydrogenic deck after writing it. The recipe ``hydrogenic_energy_window`` writes
 that same deck directly: the hydrogenic deck, line for line, without ``dis_proj_min``,

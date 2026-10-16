@@ -421,7 +421,7 @@ def test_overlap_step_tags_are_read_from_the_comment_the_deck_writes():
 
 
 # ---------------------------------------------------------------------------
-# the knowledge entry: what the LSCDM run showed (SLURM 18683, amd1, 2026-09-29)
+# the knowledge entry: what the LSCDM run showed (2026-09-29)
 # ---------------------------------------------------------------------------
 
 

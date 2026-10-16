@@ -1,6 +1,6 @@
 """The d-only downfolding criterion: a minimal correlated subspace for DMFT, cRPA, DFT+U.
 
-User decision 2026-10-09 (autowan item 4): the third acceptance criterion is no longer
+Since 2026-10-09, the third acceptance criterion is no longer
 "the conduction band to CBM + 2 eV" but **a d-only downfolded model** -- the minimal
 correlated subspace a DMFT, cRPA or DFT+U calculation is built on. The check
 ``d_only_downfolding`` applies only when the structure contains at least one
@@ -114,7 +114,7 @@ TRANSITION_METALS = frozenset(
 
 #: Transition metals counted with a caveat the record carries.
 FLAGGED_TRANSITION_METALS = {
-    "La": "lanthanum is counted as a 5d transition metal (5d1 6s2; user decision "
+    "La": "lanthanum is counted as a 5d transition metal (5d1 6s2; "
     "2026-10-09) and flagged: its 4f shell lies just above E_F and a d-only model of it "
     "leaves the 4f states out by construction",
 }
@@ -134,7 +134,7 @@ D_FUNCTIONS_PER_SITE = 5
 WINDOW_HALF_WIDTH_EV = 1.0
 WINDOW_CALIBRATION = (
     "E_F +- 1 eV: the energy range a d-only model for DMFT, cRPA or DFT+U is asked to "
-    "reproduce (user decision 2026-10-09), with the paper's sigma = 0.1 eV soft edges"
+    "reproduce, with the paper's sigma = 0.1 eV soft edges"
 )
 
 #: Criterion (iii): a centre within half the nearest-neighbour distance of a TM site.
@@ -144,7 +144,7 @@ CENTRES_ON_TM_SITES = ScaleAwareThreshold(
     calibration="half the nearest-neighbour distance: beyond it a centre is closer to a "
     "different site than to its own, so the function cannot be assigned to a "
     "transition-metal site. The pre-profile centres_sit_on_atomic_sites rule, restricted "
-    "to transition-metal sites (user decision 2026-10-09). Geometric, not fitted.",
+    "to transition-metal sites. Geometric, not fitted.",
 )
 
 _LABEL = re.compile(r"([A-Za-z])([a-z]?)")

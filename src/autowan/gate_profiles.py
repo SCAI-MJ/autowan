@@ -1,19 +1,19 @@
 """Gate profiles: named, hashed lists of checks that say what "passed" means.
 
-One profile drives everything a run decides (Item 4 decision 13, 2026-10-07): the loop's
+One profile drives everything a run decides: the loop's
 stop condition, the repair prompt's target text, and the frontier rescan-grid selection.
 The profile's name and :attr:`GateProfile.hash` are recorded with every verdict.
 
 * ``default`` -- :data:`~.core_checks.CORE_CHECKS`: counts, the representable supercell,
   the parent-band checks, hopping decay, a metal's frozen window, and the drift guard
   ``centres_stay_near_home_cell``. Atom-centring is not in it, and neither is convergence
-  (since 2026-10-09, decision 22): the gate judges the construction, not how the
+  (since 2026-10-09): the gate judges the construction, not how the
   optimiser stopped.
 * ``band_interpolation`` -- default + ``band_interpolation_eta2`` (eta_2 <= 20 meV at
   E_F + 2 eV on a separate path).
 * ``sparse_tb`` -- default + ``truncated_hopping_eta2`` (the same, hoppings beyond
   L_BvK/4 removed).
-* ``downfolded_d`` -- a **d-manifold target** (user decision 2026-10-09): the default
+* ``downfolded_d`` -- a **d-manifold target**: the default
   set without its whole-occupied-manifold checks (:data:`WHOLE_MANIFOLD_CHECKS`), plus
   ``d_only_downfolding`` (a d-only model on the transition-metal sites: 5 functions per
   TM atom and spin, TM d projectors only, centres on TM sites, eta <= 20 meV over
@@ -21,19 +21,19 @@ The profile's name and :attr:`GateProfile.hash` are recorded with every verdict.
   which also lifts the repair validator's occupied-band floor and the deck check's
   refusal of an unhonoured occupied exclusion (both exist only for the whole-manifold
   target). Which default checks it keeps, and why: :data:`DOWNFOLDED_D_RATIONALE`.
-  It replaced ``conduction_band`` as the third criterion profile on 2026-10-09 (user
-  decision); ``conduction_band_eta`` stays registered, and the retired profile is
+  It replaced ``conduction_band`` as the third criterion profile on 2026-10-09;
+  ``conduction_band_eta`` stays registered, and the retired profile is
   rebuilt by name (:data:`RETIRED_PROFILES`, with a warning) or as
   ``default --add-check conduction_band_eta`` -- the same check-list hash.
-* ``dmft_subspace`` -- the **literature's DMFT subspace** (user decision 2026-10-12,
-  the third criterion from then on): the same sub-manifold base as ``downfolded_d``
+* ``dmft_subspace`` -- the **literature's DMFT subspace** (since 2026-10-12,
+  the third criterion): the same sub-manifold base as ``downfolded_d``
   plus ``dmft_subspace_model`` (:mod:`.dmft_subspace`): for SrVO3 and SrTiO3 the
   t2g orbitals, for NiO and MnO the metal 3d with O 2p, for Fe its 4s and 3d; the
   model must seed exactly that set and reproduce the DFT states of the target manifold
   (projected weight >= 0.5) within 20 meV RMS. Withheld for every other material. Its
   target text names the structure's own target (:meth:`GateProfile.target_text` with
   ``species``). ``downfolded_d`` stays a named profile so its stored verdicts reproduce.
-  Since the second 2026-10-12 revision (user decision) the check is
+  Since the second 2026-10-12 revision the check is
   ``dmft_subspace_model_window``: an entangled target manifold is compared only up to
   the frontier protocol's frozen-window top (E_F + 2 eV, or the CBM + 2 eV when
   gapped), an isolated one over its whole width; the target text also says which case
@@ -232,7 +232,7 @@ RETIRED_PROFILES: dict[str, tuple[tuple[str, ...], str, str]] = {
     "conduction_band": (
         (*DEFAULT_CHECK_IDS, "conduction_band_eta"),
         "an insulator's conduction band up to 2 eV above its minimum",
-        "retired 2026-10-09 (user decision): the third criterion is the d-only "
+        "retired 2026-10-09: the third criterion is the d-only "
         "downfolded model (downfolded_d); conduction_band_eta stays registered",
     ),
 }

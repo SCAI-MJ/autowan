@@ -310,13 +310,13 @@ def test_the_subspace_check_does_not_depend_on_a_deck_window():
 
 
 # ---------------------------------------------------------------------------
-# the stored Si VASP SCDM frontier smoke (cluster2 only)
+# the stored Si VASP SCDM frontier smoke (not shipped; skipped when absent)
 # ---------------------------------------------------------------------------
 
 SMOKE = _stored("AUTOWAN_TEST_SMOKE")
 
 
-@pytest.mark.skipif(not (SMOKE / "Si.wout").is_file(), reason="cluster2 smoke output")
+@pytest.mark.skipif(not (SMOKE / "Si.wout").is_file(), reason="the stored smoke output is not shipped")
 def test_the_si_vasp_scdm_frontier_converges_by_its_trajectory():
     run = read_wout(SMOKE / "Si.wout")
     assert run.wannierise_settings["conv_window"] == -1
@@ -331,7 +331,7 @@ def test_the_si_vasp_scdm_frontier_converges_by_its_trajectory():
 
 
 @pytest.mark.skipif(
-    not (SMOKE / "Si_conv_window.wout").is_file(), reason="cluster2 smoke output"
+    not (SMOKE / "Si_conv_window.wout").is_file(), reason="the stored smoke output is not shipped"
 )
 def test_the_si_diagnostic_with_a_window_keeps_the_engine_verdict():
     out = _spread_minimisation_converged(

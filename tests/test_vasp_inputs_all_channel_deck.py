@@ -6,7 +6,7 @@ insulator -- that window closes below the empty Sr 4d/5s manifold, so the deck n
 eight valence functions for eight occupied bands and the model had nothing above the
 Fermi level: the gate refused it on the frontier and on band distance, correctly.
 
-Two changes, pinned here (2026-09-14 autowan discussion, decision 2):
+Two changes, pinned here (2026-09-14):
 
 1. **Channels.** The deck names every angular-momentum channel each species' POTCAR
    carries a projector for -- SrO: Sr s, p, d and O s, p, thirteen functions; silicon:
@@ -81,7 +81,7 @@ def _number(value) -> float:
     "material, lines, count",
     [
         # Sr_sv's s channel carries two occupied shells (4s semicore, 5s valence):
-        # one function each since the semicore-aware count (2026-09-30 decision 4).
+        # one function each since the semicore-aware count (2026-09-30).
         ("SrO", ["Sr:s;p;d", "Sr:s:r=2", "O:s;p"], 14),
         ("Si", ["Si:s;p"], 8),
     ],

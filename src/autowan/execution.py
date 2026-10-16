@@ -141,7 +141,7 @@ def stop_on_termination_signals(signals: Sequence[int] = (signal.SIGTERM,)):
 
     SLURM sends SIGTERM to every process of a job at its wall-time limit, on
     ``scancel`` and on preemption, and SIGKILL ``KillWait`` seconds later (30 s on
-    cluster2): time enough for the workflow to stop its engine step and record the run
+    our cluster): time enough for the workflow to stop its engine step and record the run
     as stopped rather than finished. The handler fires once; a repeated signal while
     the record is being written is ignored. Outside the main thread it does nothing.
     """

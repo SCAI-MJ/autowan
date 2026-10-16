@@ -96,7 +96,7 @@ SRO_PW2WAN = """\
 #: The same deck built by SMV: the energy window alone (placed just above the occupied
 #: manifold of the synthetic parent, so the frozen states fit the functions), PAO
 #: projections. Naming projectors is an SMV knob; on the PDWF deck above it is refused
-#: as a method change (autowan item 4 decision 1).
+#: as a method change.
 SRO_SMV_WIN = (
     "\n".join(
         line
@@ -566,7 +566,7 @@ def test_a_descendant_that_keeps_the_refused_band_count_is_refused_again(tmp_pat
 @pytest.mark.parametrize(
     "run_config, expected_attempts, reason",
     [
-        # the single repair stage: one cap of eight attempts in all (decision 14)
+        # the single repair stage: one cap of eight attempts in all
         (RunConfig(total_attempts=8), 8, "attempt budget of 8 spent"),
         (RunConfig(total_attempts=5), 5, "attempt budget of 5 spent"),
     ],

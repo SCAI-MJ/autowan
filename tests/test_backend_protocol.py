@@ -511,8 +511,8 @@ def test_a_backend_may_add_a_check_and_the_gate_is_the_core_gate_plus_it(
 
 
 def test_a_backend_may_replace_but_not_impersonate_a_core_check(clean_registry):
-    # A shadowing contribution replaces the core check with a warning (decision 13,
-    # 2026-10-07); claiming the core origin is still refused.
+    # A shadowing contribution replaces the core check with a warning;
+    # claiming the core origin is still refused.
     from autowan.gate import GateProfileWarning
 
     register_backend(

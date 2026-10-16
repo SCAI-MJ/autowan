@@ -39,7 +39,7 @@ def test_a_passing_baseline_never_consults_a_model():
 
 
 def test_one_repair_stage_with_every_action_and_one_cap_of_eight():
-    """AUTOMATIC -> REPAIR -> TERMINAL: no generic/reference split (decision 14)."""
+    """AUTOMATIC -> REPAIR -> TERMINAL: no generic/reference split."""
     run = Run("bcc_Fe")
     assert run.config.total_attempts == 8
     run.finish_attempt(run.start_attempt({"num_iter": 1000}), outcome=FAIL)

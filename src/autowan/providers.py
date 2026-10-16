@@ -10,7 +10,7 @@ what may be returned lives in :mod:`actions` and :mod:`tools`, not here.
 
 Per model it records what it sent: ``max_tokens``, the reasoning setting, the
 temperature (or that none was sent), and per request the tokens and cost. Claude runs
-with an explicit reasoning effort of ``high`` (autowan item 4 decision 6); every other
+with an explicit reasoning effort of ``high``; every other
 model at its provider's default, which is recorded as such.
 
 Failures are typed so the run can tell them apart. A provider that cannot be reached,
@@ -47,10 +47,10 @@ DEFAULT_MODEL = "anthropic/claude-opus-5.5"
 #: so the record names the exact weights.
 LOCAL_MODEL = "RedHatAI/Qwen3.5-9B-quantized.w8a8"
 
-#: Fig. 3 models (item 4 decisions 6, 20 and 21), verified on GET /api/v1/models and
+#: Fig. 3 models, verified on GET /api/v1/models and
 #: /endpoints on 2026-10-08/09: each lists tools, tool_choice and structured_outputs.
 #: Every one runs at its provider-default reasoning (nothing sent). GPT is GPT-6.1 Sol
-#: (decision 21, user 2026-10-08): GPT-6 Astra at USD 10/50 does not fit the cap.
+#: (chosen 2026-10-08): GPT-6 Astra at USD 10/50 does not fit the cap.
 GPT_MODEL = "openai/gpt-6.1-sol"
 GEMINI_FLASH_MODEL = "google/gemini-3.8-flash"
 OPEN_WEIGHT_MODEL = "z-ai/glm-5.3"
@@ -373,7 +373,7 @@ MODEL_SETTINGS: dict[str, ModelSettings] = {
         usd_per_mtok_out=20.0,
         note=(
             "OpenRouter lists reasoning as mandatory for this model (efforts max, xhigh, "
-            "high, medium, low); effort set explicitly to high (item 4 decision 6). No "
+            "high, medium, low); effort set explicitly to high. No "
             "temperature is sent: Anthropic's extended thinking takes only the default. "
             "max_tokens 32000 keeps the per-request reservation at USD 0.64."
         ),
@@ -387,7 +387,7 @@ MODEL_SETTINGS: dict[str, ModelSettings] = {
         usd_per_mtok_out=10.0,
         note=(
             "OpenAI's GPT-6.1 Sol (created 2026-09-29), below the GPT-6 Astra flagship; "
-            "chosen by decision 21 for cost (USD 2/10 against Astra's 10/50). Reasoning "
+            "chosen for cost (USD 2/10 against Astra's 10/50). Reasoning "
             "mandatory, efforts max..low; nothing sent, so OpenRouter's default_effort "
             "medium applies. max_tokens 32000 reserves up to USD 0.32 per request."
         ),
@@ -505,7 +505,7 @@ class ToolSpec:
     """A tool whose calls do not count against the per-attempt tool-call budget (they
     have their own bound, :data:`UNCAPPED_CALLS`): the frontier's next-proposal tool,
     which costs nothing and answers a question the model should never be priced out
-    of asking (user decision 2026-10-13, round 2)."""
+    of asking."""
 
     def as_function(self) -> dict:
         return {
@@ -604,8 +604,8 @@ class ChatCompletionsProvider:
     max_turns: int = 16
     """Requests one tool loop may make before it must have an answer."""
     enforce_schema: bool = True
-    """Enforce the action and tool schemas at decode time (Fig. 3 fairness, item 4
-    decision 20). On by default, so every campaign provider runs with it; ``False``
+    """Enforce the action and tool schemas at decode time (Fig. 3 fairness). On
+    by default, so every campaign provider runs with it; ``False``
     restores the unenforced ``auto`` loop. Recorded with every answer."""
     enforcement_mechanism: str = ENFORCEMENT_STRICT
 

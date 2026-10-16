@@ -379,12 +379,12 @@ def test_an_escalation_that_does_not_speak_of_bands_is_left_alone(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# replay: the stored Na sparse_tb v2 escalation (cluster2 only, read-only)
+# replay: the stored Na sparse_tb v2 escalation (not shipped; skipped when absent)
 # ---------------------------------------------------------------------------
 
 NA_V2 = _stored("AUTOWAN_TEST_NA_V2")
 stored = pytest.mark.skipif(
-    not (NA_V2 / "wan_r3.win").is_file(), reason="the v2 Na run tree lives on cluster2"
+    not (NA_V2 / "wan_r3.win").is_file(), reason="the v2 Na run tree is not shipped"
 )
 
 

@@ -1,6 +1,6 @@
 """Frontier handoff: autowan takes over from the frontier's last ladder state.
 
-User decision 2026-10-13 (autowan item 4, the KPS 2026 poster): the frontier gets a
+Since 2026-10-13 (the KPS 2026 poster campaign), the frontier gets a
 budget of ten Wannier90 runs -- its default deck (run 0) and its own retry ladder points
 1..9 -- each judged under the run's criterion. When none certifies, autowan starts from
 ladder point 9: the deck in the run directory is point 9's, with point 9's Wannier90

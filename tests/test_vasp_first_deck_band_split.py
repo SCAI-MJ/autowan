@@ -1,8 +1,8 @@
 """The VASP first deck on a parent with band headroom: same deck, surplus excluded.
 
 The campaign's VASP parents carry Quantum ESPRESSO-level empty-band headroom, so a
-repair that widens the disentanglement has bands to draw on (discussion 2026-10-02,
-autowan item 1, Decision 2). The first deck must not see that headroom, or the
+repair that widens the disentanglement has bands to draw on
+(2026-10-02). The first deck must not see that headroom, or the
 unrepaired measurement changes definition. So the deck stays at the QE ratio,
 
     num_bands = min(parent bands,

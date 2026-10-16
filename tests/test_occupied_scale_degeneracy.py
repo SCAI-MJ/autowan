@@ -5,8 +5,8 @@ only numerically (8.8e-6 eV on the QE 15x15x1 mesh). With the Fermi level a hair
 the Dirac point, the pi* band is "occupied" at K and K' alone, so before 2026-10-09 the
 block-above-the-largest-gap rule took that one degenerate level as the occupied block:
 a scale of 8.7e-15 eV, a 1 % tolerance of zero, and occupied_manifold_is_represented and
-model_bands_correspond_to_parent_bands failing on every state (report 2026-10-08/01,
-issue 1). The fixture is the real parent's lowest eight bands.
+model_bands_correspond_to_parent_bands failing on every state
+(2026-10-08). The fixture is the real parent's lowest eight bands.
 """
 
 from __future__ import annotations

@@ -218,7 +218,7 @@ def test_naming_projectors_on_a_pdwf_deck_is_refused_not_a_silent_method_change(
 ):
     """Explicit projectors used to drop the window and its flag together, turning a PDWF
     construction into an energy-window one without saying so. That edit is now refused
-    (item 4 decision 1): projectors are SMV's knob, and the deck stays PDWF."""
+   : projectors are SMV's knob, and the deck stays PDWF."""
     deck = campaign_deck / "Si_pdwf.win"
     deck.write_text("dis_froz_proj = .true.\n" + deck.read_text())
     source = read_construction(campaign_deck, "Si_pdwf")

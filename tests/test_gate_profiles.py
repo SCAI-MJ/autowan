@@ -1,4 +1,4 @@
-"""Gate profiles (Item 4 decision 13, 2026-10-07): named, hashed check lists.
+"""Gate profiles: named, hashed check lists.
 
 Every check is removable and there are no tiers; dropping a default check warns and does
 nothing else; a contributed check may replace a profile's check; every verdict records the

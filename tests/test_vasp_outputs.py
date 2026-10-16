@@ -295,8 +295,8 @@ def test_the_fixture_parent_reads_and_is_the_material_it_says(material):
 # POTCAR channels: which angular momenta each species carries a projector for
 # ---------------------------------------------------------------------------
 #
-# The automatic VASP deck names every channel the POTCARs carry (2026-09-14 autowan
-# discussion, decision 2). The source is the pseudopotential's own description table:
+# The automatic VASP deck names every channel the POTCARs carry (since
+# 2026-09-14). The source is the pseudopotential's own description table:
 # one row per partial wave, ``l  E  TYP  RCUT``. ``TYP 7`` marks the channel used as the
 # local potential; it has no non-local projector and is not a channel a Wannier
 # function can be projected on (O and Si list a d row of this kind). The same table is

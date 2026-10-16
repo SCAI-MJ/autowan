@@ -86,14 +86,13 @@ RECIPES = ("hydrogenic", "locproj_auto", "scdm")
 #: The hydrogenic deck disentangled by its energy window alone (no projectability
 #: window), the 2026-09-30 default.
 ENERGY_WINDOW_RECIPE = "hydrogenic_energy_window"
-#: The VASP frontier: SCDM as the Varrassi et al. (2025) GW workflow runs it
-#: (reports/2026-10-07/04). The package default since 2026-10-07.
+#: The VASP frontier: SCDM as the Varrassi et al. (2025) GW workflow runs it.
+#: The package default since 2026-10-07.
 SCDM_FRONTIER_RECIPE = "scdm_frontier"
 #: autowan's SMV starting deck on VASP: semicore bands excluded (counted from the
-#: POTCARs), one hydrogenic function per valence channel, energy window only
-#: (autowan item 1 decision 1, 2026-10-07).
+#: POTCARs), one hydrogenic function per valence channel, energy window only (2026-10-07).
 SEMICORE_EXCLUDED_RECIPE = "semicore_excluded"
-#: The VASP frontier since 2026-10-08 (autowan item 4 decision 19): JARVIS-tools'
+#: The VASP frontier since 2026-10-08: JARVIS-tools'
 #: Wannierisation automation (Garrity & Choudhary, Sci. Data 8, 106 (2021)), its deck
 #: written by JARVIS's own writer and wrapped by :func:`jarvis_frontier_deck`.
 JARVIS_FRONTIER_RECIPE = "jarvis_frontier"
@@ -792,7 +791,7 @@ def _potcar_path(path: Path, potcar: str | Path | None) -> Path:
 
 
 # ---------------------------------------------------------------------------
-# the SCDM frontier (Varrassi et al. 2025, as reports/2026-10-07/04 extracted it)
+# the SCDM frontier (Varrassi et al. 2025)
 # ---------------------------------------------------------------------------
 
 #: The Wannier step's .win as the GW workflow writes it (``WANNIER90_WIN``): no windows,
@@ -943,7 +942,7 @@ def scdm_frontier_deck(
     )
     lines = [
         "! VASP SCDM frontier: the Wannier step of the Varrassi et al. (2025) GW workflow",
-        "! (npj Comput. Mater.; arXiv:2410.15948), as reports/2026-10-07/04 extracted it",
+        "! (npj Comput. Mater.; arXiv:2410.15948)",
         nbands_note,
         f"{_PSEUDO_COUNT_NOTE} {n_pseudo} (read from {potcar_path.name}); "
         f"num_wann = min(NBANDS, n_pseudo) = {num_wann}; NUM_WANN is not set",
@@ -981,7 +980,7 @@ def recorded_pseudo_count(text: str) -> int | None:
 
 
 # ---------------------------------------------------------------------------
-# the JARVIS frontier (JARVIS-tools' Wannierisation, autowan item 4 decision 19)
+# the JARVIS frontier (JARVIS-tools' Wannierisation; an SCDM deck)
 # ---------------------------------------------------------------------------
 
 #: The marker line that routes a deck's overlap step through the JARVIS mode.
@@ -1147,7 +1146,7 @@ def _with_poscar_cell(parent, vasprun: Path):
 
 
 # ---------------------------------------------------------------------------
-# the semicore-excluded SMV deck (autowan item 1, decision 1)
+# the semicore-excluded SMV deck
 # ---------------------------------------------------------------------------
 
 #: Valence electrons and the valence channels kept, per element: the JARVIS-WTB table
@@ -1155,27 +1154,26 @@ def _with_poscar_cell(parent, vasprun: Path):
 #: at usnistgov/jarvis 3b0c9d0). Only the valence column is taken from it: the semicore
 #: count is our POTCAR's ZVAL minus this, never the table's excluded-electron column,
 #: which assumes other POTCARs (JARVIS: Fe_pv, Ni_pv, Mo_pv, Cu_pv, Mn_pv, Na_pv, Ti_pv,
-#: V_pv, W_pv, Bi, ...). The rows cover every element of the 24-material test set (autowan
-#: item 4 decision 11). Our POTCAR, ZVAL and the semicore it leaves, per element:
+#: V_pv, W_pv, Bi, ...). The rows cover every element of the 24-material test set. Our POTCAR, ZVAL and the semicore it leaves, per element:
 #:
 #: ===  ==============  ====  =======================  ========================================
 #: El   our POTCAR      ZVAL  semicore (ZVAL - val)    checked
 #: ===  ==============  ====  =======================  ========================================
-#: As   As              5     0                        reports/2026-10-07/03 (PROCAR, GaAs)
-#: Ba   Ba_sv           10    8: 5s 5p                 reports/2026-10-07/03
-#: C    C               4     0                        reports/2026-10-07/03
-#: Cu   Cu              11    0                        reports/2026-10-07/03
-#: Ga   Ga_d            13    10: 3d                   reports/2026-10-07/03
-#: La   La              11    8: 5s 5p                 reports/2026-10-07/03
-#: Mn   Mn_sv           15    8: 3s 3p                 reports/2026-10-07/03
-#: Na   Na              1     0                        reports/2026-10-07/03
-#: O    O               6     2: 2s                    reports/2026-10-07/03
-#: Si   Si              4     0                        reports/2026-10-07/03
-#: Sr   Sr_sv           10    8: 4s 4p                 reports/2026-10-07/03
-#: Ti   Ti_sv           12    8: 3s 3p                 reports/2026-10-07/03
-#: V    V_sv            13    8: 3s 3p                 reports/2026-10-07/03
-#: W    W_sv_GW         14    8: 5s 5p                 reports/2026-10-07/03
-#: Bi   Bi_d            15    10: 5d                   extension parents (reports/2026-10-07/NN)
+#: As   As              5     0                        PROCAR band character (GaAs)
+#: Ba   Ba_sv           10    8: 5s 5p                 PROCAR band character
+#: C    C               4     0                        PROCAR band character
+#: Cu   Cu              11    0                        PROCAR band character
+#: Ga   Ga_d            13    10: 3d                   PROCAR band character
+#: La   La              11    8: 5s 5p                 PROCAR band character
+#: Mn   Mn_sv           15    8: 3s 3p                 PROCAR band character
+#: Na   Na              1     0                        PROCAR band character
+#: O    O               6     2: 2s                    PROCAR band character
+#: Si   Si              4     0                        PROCAR band character
+#: Sr   Sr_sv           10    8: 4s 4p                 PROCAR band character
+#: Ti   Ti_sv           12    8: 3s 3p                 PROCAR band character
+#: V    V_sv            13    8: 3s 3p                 PROCAR band character
+#: W    W_sv_GW         14    8: 5s 5p                 PROCAR band character
+#: Bi   Bi_d            15    10: 5d                   extension parents
 #: Co   Co_sv           17    8: 3s 3p                 extension parents
 #: Fe   Fe_sv           16    8: 3s 3p                 extension parents
 #: Mo   Mo_sv           14    8: 4s 4p                 extension parents
@@ -1438,7 +1436,7 @@ def semicore_excluded_deck(
     from ...inputs import _format_ranges
 
     lines = [
-        "! VASP SMV starting deck: semicore excluded (autowan item 1 decision 1, 2026-10-07)",
+        "! VASP SMV starting deck: semicore excluded",
         f"! semicore bands excluded: {n_ex} ({assignment.verified_by})",
         *[
             f"!   {s}: {e} semicore electrons per atom in {', '.join(sh) or 'none'}; "

@@ -1,4 +1,4 @@
-"""The DMFT-subspace criterion (user decision 2026-10-12) and the dmft_subspace profile.
+"""The DMFT-subspace criterion and the dmft_subspace profile.
 
 Synthetic SrVO3-like constructions: a cubic cell (a = 3.9 Angstrom) with Sr, V and three
 O. The model is three decoupled t2g chains along x, so its bands are known in closed

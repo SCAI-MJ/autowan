@@ -19,9 +19,9 @@ QE SMV   the frontier's pseudo-atomic projections with an energy window: the
          projectability window removed, ``dis_froz_max`` by the paper's rule
          capped at the frozen capacity
 VASP     SCDM: the frontier, as the Varrassi et al. (2025) GW workflow's Wannier
-         step runs it (reports/2026-10-07/04)
+         step runs it
 VASP     SMV: semicore excluded by our POTCAR count, one hydrogenic function per
-         valence channel, energy window only (autowan item 1 decision 1)
+         valence channel, energy window only
 =======  ======================================================================
 """
 
@@ -443,7 +443,7 @@ def vasp_scdm(ctx: DeckContext) -> StartingDeck:
         "the VASP frontier: SCDM as the Varrassi et al. (2025, arXiv:2410.15948) GW "
         "workflow's Wannier step runs it -- ALGO = None, NELM = 1, ISTART = 1, "
         "LWANNIER90_RUN, LSCDM with VASP's default cutoff, ISMEAR = 0, SIGMA = 0.02, "
-        "LORBIT = 11, NUM_WANN unset, no windows (reports/2026-10-07/04)",
+        "LORBIT = 11, NUM_WANN unset, no windows",
         text,
         None,
         {
@@ -477,7 +477,7 @@ def vasp_smv(ctx: DeckContext) -> StartingDeck:
         "autowan's SMV deck on VASP: semicore bands excluded (counted from our "
         "POTCARs, checked against band character), one hydrogenic function per valence "
         "channel, frozen window 2 eV above the highest occupied state, capped "
-        "(autowan item 1 decision 1)",
+        "",
         text,
         None,
         _relative(

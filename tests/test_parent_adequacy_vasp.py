@@ -960,7 +960,7 @@ def test_the_ferromagnetic_mno_parent_keeps_its_declared_moment(vasp):
 # the overlap step on a spin-polarised parent: VASP 6 numbers its products
 # ---------------------------------------------------------------------------
 #
-# Measured on the real vasp.6.4.1 LWANNIER90 build (2026-09-29, SLURM 18707): an ISPIN = 2
+# Measured on the real vasp.6.4.1 LWANNIER90 build (2026-09-29): an ISPIN = 2
 # run writes wannier90.1.{amn,mmn,eig} and wannier90.2.{...} (mlwf.F: SEED_NAME//'.'//
 # str(ISP)), not wannier90.up.* / .dn.*. A runner that looks only for the latter stops
 # every spin-polarised construction with "missing VASP overlap products", whatever the

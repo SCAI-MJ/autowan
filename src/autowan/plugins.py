@@ -9,7 +9,7 @@ Loading is explicit. Nothing is imported because it happens to sit in a director
 a path or a module has to be named, so a check cannot arrive by being dropped
 somewhere. A loaded check is added to the run's gate profile, or, when it shares an
 identifier with one of the profile's checks, replaces it with a
-:class:`~.gate.GateProfileWarning` (decision 13, 2026-10-07: every check is removable).
+:class:`~.gate.GateProfileWarning` (every check is removable).
 Either way the verdicts record the profile and the hash of the effective check list,
 so a contribution can change what "passed" means but never silently.
 

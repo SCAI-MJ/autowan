@@ -7,7 +7,7 @@ chemical species and no worked recipe, and it is the same text for every run.
 Everything material-specific reaches the model as *evidence*: the gate's measurements,
 the parameters in force, the plots, and what its read-only tools return.
 
-Every tool is available from the first repair (autowan item 4 decision 14). The policy
+Every tool is available from the first repair. The policy
 recommends reasoning from general principles first and consulting references only when
 that is not enough; the tools each attempt called are logged, so "solved without
 references" stays separable after the fact.

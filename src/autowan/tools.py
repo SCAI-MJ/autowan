@@ -6,7 +6,7 @@ up to a per-attempt cap, and every call is logged with the attempt it served, so
 a repair was found from general principles, from a deck check, or from a reference page
 stays separable after the fact.
 
-First wave (autowan item 4 decisions 12 and 14):
+First wave:
 
 ``validate_deck``        would this proposal run? (method/knob consistency, Wannier
                          count, band arithmetic, the gate's honour rule for the
@@ -175,7 +175,7 @@ class RepairTools:
     """Hold back ``search_references`` entries distilled from this run's own material
     (its composition, or its seed for entries without species). Off by default: public
     use may draw on an earlier repair of the same material, as ``frontier_dataset``
-    already may (decision 14); the poster drivers turn it on (2026-10-13, round 2)."""
+    already may; the poster drivers turn it on."""
     frontier_handoff: Any = None
     """A :class:`~.workflow.FrontierHandoff`. The menu then carries
     ``frontier_next_proposal`` (the frontier's retry rule applied to this run's latest
@@ -983,7 +983,7 @@ class RepairTools:
 
         Only the thresholds and their order are read from the stored ladder; whatever
         else the file holds (statuses, scores, per-criterion verdicts) is never read
-        into the answer (user decision 2026-10-12: the frontier may tell autowan only
+        into the answer (by design: the frontier may tell autowan only
         what its deck would propose next from the current state).
         """
         none = "not available: the frontier proposes no further candidates for this construction"
@@ -1025,7 +1025,7 @@ class RepairTools:
     def tool_frontier_next_proposal(self):
         """Handoff mode: the frontier's retry rule applied to the latest run deck.
 
-        User decision 2026-10-13 (second revision): one step at a time. The input is the
+        One step at a time. The input is the
         most recent deck that actually ran in this run (attempt 0 of a handoff is the
         frontier's last ladder point); the output is that deck with only dis_proj_min
         and dis_proj_max replaced by the ladder's next pair. The next pair follows the

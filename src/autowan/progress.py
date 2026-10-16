@@ -1,6 +1,6 @@
 """Watching an engine step for progress, and stopping it only once progress has stopped.
 
-User decision (2026-10-08): the package carries no fixed wall-time limit. Some
+Since 2026-10-08, the package carries no fixed wall-time limit. Some
 materials take a long time, and a limit fixed in seconds cannot tell a slow material
 from a stuck calculation. A Wannier90 step is already bounded by the deck's own
 iteration counts (``dis_num_iter``, ``num_iter``, capped by the action vocabulary), so
@@ -28,7 +28,7 @@ per-iteration clock; everything else just resets the idle time.
 The interval is measured between successive *observations* of new iteration lines, not
 from the per-line timestamps Wannier90 prints. An engine that buffers its output makes
 iterations visible in blocks, and the idle time a buffered run legitimately shows is a
-block, not an iteration. On cluster2, Wannier90 3.1 flushes every line (V3Si
+block, not an iteration. On our cluster, Wannier90 3.1 flushes every line (V3Si
 disentanglement: one 80-byte line every 36 s; SrVO3 wannierisation: one 2.8 kB cycle
 block every 5 s), so there the interval is the iteration.
 """
@@ -77,7 +77,7 @@ STALL_FLOOR_S = 300.0
 #: iterations to measure (reading a 3.8 GB .mmn, writing the Hamiltonian), and it
 #: compares a *phase* of this step with the *whole* of attempt 0's step, so a
 #: legitimate phase stays below one reference step even before the factor. The factor
-#: absorbs node load: cluster2 pw2wannier90 logs show wall/CPU of 1.2-1.3 over a step
+#: absorbs node load: pw2wannier90 logs on our cluster show wall/CPU of 1.2-1.3 over a step
 #: and up to 14 in its I/O-bound start-up (V3Si: init_pw2wan 7 s CPU, 95 s wall).
 REFERENCE_FACTOR = 10.0
 

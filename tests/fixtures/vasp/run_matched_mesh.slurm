@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=autowan_vasp_matched_mesh
-#SBATCH --partition=intel3
+# Add an #SBATCH --partition line for your cluster.
 #SBATCH --nodes=1
 #SBATCH --ntasks=4
 #SBATCH --mem=8G
@@ -39,10 +39,9 @@
 #   sbatch run_matched_mesh.slurm <worktree> <scratch_root> [material ...]
 #   SMOKE=1 sbatch run_matched_mesh.slurm <worktree> <scratch_root>   # launch-context preflight only
 #
-# The -w90 vasp_std is built -xHOST on intel3's Xeon Gold 5220R (AVX-512); on orte's
-# Broadwell nodes it dies at start with "illegal instruction" (SLURM 14706) -- intel3 only.
-# When intel3 cannot take a job, a portable build of the same source (-march=core-avx2, no
-# Intel-vendor check) runs elsewhere: sbatch -p amd1 --export=ALL,VASP_W90=<that vasp_std>,
+# A -xHOST (AVX-512) vasp_std dies at start with "illegal instruction" on older CPUs.
+# A portable build of the same source (-march=core-avx2, no Intel-vendor check) runs
+# elsewhere: sbatch -p <partition> --export=ALL,VASP_W90=<that vasp_std>,
 # REQUIRE_AVX512=0,VASP_BUILD=<note> ... The binary, node and CPU land in provenance.json.
 # CHGCAR, WAVECAR and POTCAR stay in <scratch_root>; only small text products are copied.
 set -uo pipefail
@@ -179,8 +178,8 @@ if [ "${SMOKE:-0}" = "1" ]; then
   fi
   ( cd "$(mktemp -d)" && timeout 60 "$VASP" < /dev/null > vasp.probe 2>&1; grep -q -i "illegal instruction\|not built to run" vasp.probe && { echo "[smoke] $VASP does not start on $(hostname)"; exit 1; }; echo "[smoke] $VASP starts on $(hostname): $(head -2 vasp.probe | tr '\n' ' ')" ) || rc=1
   command -v mpirun > /dev/null || { echo "[smoke] no mpirun on PATH"; rc=1; }
-  # A real MPI launch, not a singleton start: on amd1 the hydra proxy segfaulted at launch
-  # (SLURM 15552) while a singleton VASP start passed the preflight (SLURM 15551).
+  # A real MPI launch, not a singleton start: on one partition the hydra proxy segfaulted
+  # at launch while a singleton VASP start passed the preflight.
   n_up="$(timeout 60 mpirun -np 2 /bin/hostname 2>/dev/null | grep -c "$(hostname)")"
   [ "$n_up" = "2" ] && echo "[smoke] mpirun -np 2 launches on $(hostname)" \
     || { echo "[smoke] mpirun -np 2 did not launch on $(hostname) (got $n_up of 2)"; rc=1; }
@@ -291,7 +290,7 @@ prov.update({
     "dis_froz_max": frozen_window_top(parent, nw),
     "parent_scf_seconds": int((run / "scf_seconds").read_text()),
     "vasp_binary": "$VASP",
-    "vasp_build": "${VASP_BUILD:--xHOST build on intel3 (Xeon Gold 5220R, AVX-512), SLURM 14687}",
+    "vasp_build": "${VASP_BUILD:--xHOST build (AVX-512)}",
     "compute_node": "$(hostname)",
     "mpi_launch": "I_MPI_HYDRA_BOOTSTRAP=${I_MPI_HYDRA_BOOTSTRAP:-default} I_MPI_HYDRA_TOPOLIB=${I_MPI_HYDRA_TOPOLIB:-default}",
     "cpu_model": "$(lscpu | sed -n 's/^Model name: *//p')",

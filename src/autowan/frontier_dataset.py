@@ -8,9 +8,9 @@ exclude_bands, the projectability thresholds after any rescan, dis_froz_max, k-m
 eta2 and exit status.
 
 Rows are ranked by element overlap with the query, an exact composition match first,
-then by how alike the cells are. A same-material record is allowed by default (autowan
-item 4 decision 14); ``exclude_composition`` holds back every record of one
-composition -- the run's own -- whatever the query asks for (user rule 2026-10-13: the
+then by how alike the cells are. A same-material record is allowed by default;
+``exclude_composition`` holds back every record of one
+composition -- the run's own -- whatever the query asks for (rule since 2026-10-13: the
 only frontier information an agent may receive is what its deck proposes next). Rows
 are grouped by pseudopotential family -- SSSP 1.1 PBE, SSSP PBEsol, PseudoDojo FR,
 pslibrary -- and every row names its family, so families are never mixed without

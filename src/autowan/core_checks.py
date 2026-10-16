@@ -123,7 +123,7 @@ def _spread_minimisation_converged(c: Construction) -> CheckOutcome:
     failure would condemn every run that did not opt in -- the canonical iron example in
     the Wannier90 manual and the published VASP SCDM frontier deck among them.
 
-    Such a run is judged from its trajectory instead (user decision 2026-10-07): the
+    Such a run is judged from its trajectory instead: the
     question is unchanged, only the evidence is read differently. Wannier90's own
     criterion -- |ΔΩ| <= ``conv_tol`` on each of ``conv_window`` consecutive iterations
     -- is applied to the per-iteration total-spread changes printed in the ``.wout``,
@@ -884,7 +884,7 @@ def _hopping_decays_with_distance(c: Construction) -> CheckOutcome:
 # ---------------------------------------------------------------------------
 
 #: The two convergence checks: whether each minimisation met its own stopping criterion.
-#: They left the ``default`` profile on 2026-10-09 (autowan Item 4 decision 22) and are
+#: They left the ``default`` profile on 2026-10-09 and are
 #: the optional ``convergence`` group (``--add-check convergence``). The gate judges the
 #: construction it is handed -- its bands, its hoppings, its centres -- not how the
 #: optimiser stopped: a protocol that stops at a fixed iteration count by design (the
@@ -911,7 +911,7 @@ CONVERGENCE_CHECKS: tuple[Check, ...] = (
 
 
 #: The ``default`` gate profile, in report order. ``centres_sit_on_atomic_sites`` left it
-#: on 2026-10-07 (Item 4 decision 13) for the drift guard ``centres_stay_near_home_cell``;
+#: on 2026-10-07 for the drift guard ``centres_stay_near_home_cell``;
 #: it stays registered as an optional check (:data:`CENTRES_SIT_ON_ATOMIC_SITES`). The
 #: two convergence checks left it on 2026-10-09 (:data:`CONVERGENCE_CHECKS`).
 CORE_CHECKS: tuple[Check, ...] = (

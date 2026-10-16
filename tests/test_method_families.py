@@ -1,4 +1,4 @@
-"""The construction method is a first-class, logged choice (autowan item 4 decision 1).
+"""The construction method is a first-class, logged choice.
 
 Three families -- SMV, PDWF, SCDM -- each with only its own knobs; QE offers all three,
 VASP SMV and SCDM. A knob from another family is refused with the reason, no writer

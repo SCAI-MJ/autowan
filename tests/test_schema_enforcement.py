@@ -1,6 +1,6 @@
-"""Schema enforcement on every provider (Fig. 3 fairness; item 4 decision 20).
+"""Schema enforcement on every provider (Fig. 3 fairness).
 
-Report 2026-10-07/12: in ``auto`` tool choice, vLLM grammar-constrains nothing, and a 9B
+Measured 2026-10-07: in ``auto`` tool choice, vLLM grammar-constrains nothing, and a 9B
 model broke the ``evidence`` enum on 4 answers of 4. So that every model in the model
 comparison answers under the same constraint, the provider enforces the action and tool
 schemas at decode time, by default:

@@ -21,7 +21,7 @@ The seams, and what a third engine hangs off each of them:
 * :meth:`Backend.contributed_checks` adds checks to the gate profile's set. A
   contributed check that shares a profile check's identifier replaces it, with a
   :class:`~.gate.GateProfileWarning`, and every verdict records the changed check-list
-  hash (autowan item 4 decision 13); acceptance stays the conjunction of them all.
+  hash; acceptance stays the conjunction of them all.
 * :meth:`Backend.route` names the construction route (``mlwf`` for both shipped
   engines); it reaches the checks as ``inputs["route"]`` and is where route-scoped
   withholding attaches when an engine offers a second route. The gate stays

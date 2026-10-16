@@ -1,6 +1,6 @@
 """The ``jarvis_frontier`` recipe: JARVIS-tools' Wannierisation as the VASP frontier.
 
-autowan item 4 decision 19 (user, 2026-10-08). The deck is the text JARVIS's own writer
+The VASP frontier since 2026-10-08 (an SCDM deck). The deck is the text JARVIS's own writer
 produced (``Wannier90win.write_win`` + ``write_hr_win``, usnistgov/jarvis 3b0c9d0),
 kept line for line; the recipe adds what VASP's interface would append (cell, atoms,
 k-points, ``mp_grid``, ``spinors``) and, where the parent WAVECAR holds more bands than

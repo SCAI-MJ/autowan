@@ -1,7 +1,6 @@
 """Acceptance criteria scored against DFT bands on a separate high-symmetry path.
 
-Three optional gate checks, one per research use of a Wannier model (Item 4 decisions 2
-and 10, 2026-10-06/07). Each compares the construction's own model with DFT bands on a
+Three optional gate checks, one per research use of a Wannier model (2026-10-06/07). Each compares the construction's own model with DFT bands on a
 band path that is *not* the construction mesh, using the paper's band distance
 
     eta = sqrt( sum_nk w_nk (e_DFT - e_Wan)^2 / sum_nk w_nk ),
@@ -38,7 +37,7 @@ inscribed radius of its Wigner--Seitz cell. For a cubic N x N x N supercell it i
 N a. The ladder then reads naturally: L/2 is the largest sphere wholly inside the
 Wigner--Seitz supercell (every hopping the mesh can represent in every direction), and
 L/4 keeps half that range. At the campaign density (0.2 A^-1, including 2 pi) L is about
-2 pi / 0.2 = 31 A, so r_c is about 8 A, the figure the discussion quoted. Taking L as the
+2 pi / 0.2 = 31 A, so r_c is about 8 A, the figure quoted in the design notes. Taking L as the
 inscribed radius instead would put r_c near 4 A, inside the second-neighbour shell of
 most of the twenty materials, which no use of a sparse model intends.
 
@@ -77,7 +76,7 @@ from .gate import (
     ScaleAwareThreshold,
 )
 
-#: The verdict's truncation radius, as a fraction of L_BvK (decision 2, form iii).
+#: The verdict's truncation radius, as a fraction of L_BvK.
 TRUNCATION_FRACTION = 0.25
 #: Diagnostic truncation radii, reported and never judged.
 DIAGNOSTIC_TRUNCATION_FRACTIONS = (1.0 / 3.0, 0.5)
@@ -182,7 +181,7 @@ def read_qe_reference_band_path(
     scf_output: str | Path | None = None,
     nscf_output: str | Path | None = None,
 ) -> ReferenceBandPath:
-    """The QE paper-settings baseline's ``dft_bands_path.npz`` (reports/2026-10-07/01).
+    """The QE paper-settings baseline's ``dft_bands_path.npz``.
 
     The archive holds ``bands`` -- ``(n_k, n_bands)``, or ``(2, n_k, n_bands)`` for a
     collinear magnet -- from the pw.x ``bands`` run on Wannier90's own path, and
@@ -483,7 +482,7 @@ def periodic_axes(c: Construction) -> tuple[tuple[int, ...], dict[str, Any]]:
 def decay_lengths_ang(model: RealSpaceModel, fermi_energy_ev: float) -> dict:
     """Fitted decay length tau of ||H(R)||_F with |R|.
 
-    ``tau_ang`` is the one-parameter fit the discussion specified,
+    ``tau_ang`` is the one-parameter fit specified in the design notes,
     ||H(R)||_F = ||H(0)||_F exp(-|R|/tau), least squares in the logarithm over every
     non-zero lattice vector with a non-zero block. H(0) is taken with E_F subtracted from
     its diagonal: the on-site energies otherwise carry the code's arbitrary energy zero
@@ -575,7 +574,7 @@ def _finite(value: float) -> float | None:
 def insulator_classification(
     c: Construction, ref: ReferenceBandPath, fermi_energy_ev: float
 ) -> dict[str, Any]:
-    """Decision 10's insulator rule, with the band edges and where E_F sits.
+    """The insulator rule, with the band edges and where E_F sits.
 
     An insulator has no band (of either spin) crossing E_F on the construction mesh
     **and** a gap of at least sigma = 0.1 eV. The edges are taken over the mesh and the
@@ -669,7 +668,7 @@ PASS_AT_20_MEV = ScaleAwareThreshold(
     "(arXiv:2303.07877) and Jiang et al. 2025 (arXiv:2507.06840), with sigma = 0.1 eV. A "
     "published absolute criterion, adopted with its source so that a pass here is a pass "
     "in the paper's sense; applied unchanged to all three acceptance criteria "
-    "(decision 2, 2026-10-06).",
+    ".",
 )
 
 

@@ -580,7 +580,7 @@ def test_the_atom_centred_check_is_judged_at_a_tenth_of_an_angstrom(offset, pass
 
 
 # ---------------------------------------------------------------------------
-# the stored campaign trees (cluster2 only)
+# the stored campaign trees (not shipped; skipped when absent)
 # ---------------------------------------------------------------------------
 
 VASP_BAND_PATHS = _stored("AUTOWAN_TEST_VASP_BAND_PATHS")
@@ -590,7 +590,7 @@ QE_BASELINE_RAW = _stored("AUTOWAN_TEST_QE_BASELINE_RAW")
 @pytest.mark.skipif(
     not (VASP_BAND_PATHS / "Si" / "EIGENVAL").is_file()
     or not (QE_BASELINE_RAW / "Si").is_dir(),
-    reason="the VASP band-path run tree and the QE baseline are on cluster2",
+    reason="the VASP band-path run tree and the QE baseline are not shipped",
 )
 def test_the_vasp_band_path_sits_on_the_qe_reference_k_points():
     vasp = read_vasp_reference_band_path(VASP_BAND_PATHS / "Si")

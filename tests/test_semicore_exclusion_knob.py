@@ -4,7 +4,7 @@ On the v1 campaign code the QE SrO runs ended after one or two attempts: the fro
 deck's ``exclude_bands 1-4`` removes Sr 4s and Sr 4p, Sr 4p overlaps O 2s by 0.35 eV, so
 the cut runs through a connected manifold and the gate does not honour it -- and no knob
 reached the bottom exclusion (``num_bands`` edits move only the top one). The model said
-so and escalated (``poster_campaign_v1/runs/qe/SrO/*/rep1/record.json``).
+so and escalated (the v1 campaign's stored SrO records).
 
 What these tests hold:
 
@@ -751,14 +751,14 @@ def test_the_loop_writes_and_runs_a_semicore_edit_and_refuses_a_doomed_one(tmp_p
 
 
 # ---------------------------------------------------------------------------
-# replay: the stored SrO construction of the v1 campaign (cluster2 only)
+# replay: the stored SrO construction of the v1 campaign (not shipped; skipped when absent)
 # ---------------------------------------------------------------------------
 
 
 STORED = _stored("AUTOWAN_TEST_STORED")
 W90DEV = _stored("AUTOWAN_TEST_W90DEV")
 stored = pytest.mark.skipif(
-    not (STORED / "wan.win").is_file(), reason="the v1 SrO run tree lives on cluster2"
+    not (STORED / "wan.win").is_file(), reason="the v1 SrO run tree is not shipped"
 )
 
 
@@ -863,7 +863,7 @@ def test_replay_one_inclusive_deck_builds_offline_without_a_wannier90_run(stored
 
 
 @stored
-@pytest.mark.skipif(not W90DEV.is_file(), reason="w90dev is installed on cluster2")
+@pytest.mark.skipif(not W90DEV.is_file(), reason="the Wannier90 development build is not installed")
 def test_replay_wannier90_preprocessing_accepts_the_inclusive_deck(stored_sro):
     """``wannier90.x -pp`` only parses the deck and writes the .nnkp: no overlaps, no
     disentanglement, no minimisation."""

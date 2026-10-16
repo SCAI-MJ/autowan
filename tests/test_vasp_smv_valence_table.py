@@ -3,7 +3,7 @@
 Semicore = our POTCAR's ZVAL minus a checked valence count, held by the deepest shells
 of that POTCAR. An element with no row is refused (the generic shell rule that used to
 stand in is gone). The rows for the extension set are checked against the POTCARs the
-extension parents actually use (reports/2026-10-07/05), when they are on disk.
+extension parents actually use, when they are on disk.
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ def _stored(env: str) -> Path:
 SRO = Path(__file__).parent / "fixtures" / "vasp" / "SrO"
 EXTENSION = _stored("AUTOWAN_TEST_EXTENSION")
 
-#: The 24 materials of autowan item 4 decision 11, by element.
+#: The 24 materials of the poster campaign, by element.
 TEST_SET_ELEMENTS = {
     "Ba", "C", "Cu", "O", "Ga", "As", "La", "Mn", "Na", "Sr", "Ti", "V", "Si", "W",
     "Fe", "Ni", "Mo", "S", "Bi", "Se", "Pt", "Co", "Sn",
@@ -111,7 +111,7 @@ def test_semicore_is_the_deepest_shells_even_without_an_outer_s_shell():
 def test_the_extension_rows_against_the_extension_parents_potcars(parent, element):
     potcar = EXTENSION / parent / "scf" / "POTCAR"
     if not potcar.is_file():
-        pytest.skip("extension parents live on cluster2 only")
+        pytest.skip("the extension parents are not shipped")
     zval_expected, shells_expected = EXTENSION_ROWS[(parent, element)]
     zval = potcar_valences(potcar)[element]
     assert zval == zval_expected

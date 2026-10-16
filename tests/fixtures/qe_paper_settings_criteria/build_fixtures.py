@@ -1,6 +1,6 @@
 """Write the compact regression fixtures from the stored QE paper-settings baseline.
 
-Run once on cluster2 (where the run tree lives); the fixtures are committed so the
+Run once where the stored run tree lives; the fixtures are committed so the
 regression test runs anywhere::
 
     autowan/.venv/bin/python autowan/tests/fixtures/qe_paper_settings_criteria/build_fixtures.py

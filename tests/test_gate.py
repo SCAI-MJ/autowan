@@ -80,7 +80,7 @@ def test_an_unknown_scale_is_refused():
 
 
 def test_a_contributed_check_replaces_a_core_one_with_a_warning_and_a_new_hash():
-    # Decision 13 (2026-10-07) lifts the "may add, never replace" refusal: a contributed
+    # Since 2026-10-07, there is no "may add, never replace" refusal: a contributed
     # check with a profile check's identifier replaces it, loudly, and the recorded hash
     # of the check list changes so the replacement is never invisible in a verdict.
     from autowan.gate import GateProfileWarning

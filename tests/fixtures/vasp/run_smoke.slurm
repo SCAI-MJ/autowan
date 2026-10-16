@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=autowan_vasp_backend_smoke
-#SBATCH --partition=intel3
+# Add an #SBATCH --partition line for your cluster.
 #SBATCH --nodes=1
 #SBATCH --ntasks=4
 #SBATCH --mem=8G
@@ -20,10 +20,8 @@ WORKTREE="${1:?usage: sbatch run_smoke.slurm <worktree> <scratch_root>}"
 SCRATCH="${2:?usage: sbatch run_smoke.slurm <worktree> <scratch_root>}"
 PKG="$WORKTREE/autowan"
 PY="$PKG/.venv/bin/python"
-# The only VASP2WANNIER90-enabled vasp_std on cluster2: the user's sibling rebuild (built
-# 2026-09-12, SLURM 14687, recipe in the vault note vasp-lwannier90-cluster2-w90-rebuild).
-# Built -xHOST on intel3 (Xeon Gold 5220R, AVX-512): on orte's Broadwell nodes it dies at
-# start with "forrtl: severe (168): illegal instruction" (job 14706) -- hence intel3 here.
+# A vasp_std built with LWANNIER90. A -xHOST build (e.g. AVX-512) dies at start on older
+# CPUs with "forrtl: severe (168): illegal instruction": run it on the nodes it was built for.
 VASP="${VASP_W90:?set VASP_W90 to a vasp_std built with LWANNIER90}"
 # Wannier90 develop: the only build that knows the projectability keywords (dis_proj_min/max).
 W90="${WANNIER90:?set WANNIER90 to wannier90.x}"

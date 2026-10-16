@@ -1,6 +1,6 @@
 """No fixed wall-time limit; a step is stopped only when it stops making progress.
 
-User decision 2026-10-08: some materials genuinely take long, so the package carries no
+Since 2026-10-08: some materials genuinely take long, so the package carries no
 fixed step limit, and a limit is acceptable only with a dynamic, physically scaled
 criterion. The V3Si sparse_tb v1 run is the case that drove it: its attempt-2
 localisation (SMV, 62 functions, 224 bands, 7x7x7) was in its 2012th disentanglement

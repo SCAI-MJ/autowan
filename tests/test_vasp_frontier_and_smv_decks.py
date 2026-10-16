@@ -1,6 +1,6 @@
 """The two VASP starting decks of 2026-10-07, and the package default that changed.
 
-* SCDM frontier, exactly as reports/2026-10-07/04 extracted the Varrassi et al. (2025)
+* SCDM frontier, exactly the Varrassi et al. (2025)
   Wannier step: ALGO = None, NELM = 1, ISTART = 1, LWANNIER90_RUN, LSCDM, ISMEAR = 0,
   SIGMA = 0.02, LORBIT = 11, NUM_WANN and CUTOFF_* unset, a .win of four keys and no
   windows; NBANDS explicit at VASP's default formula with the rounding recorded.

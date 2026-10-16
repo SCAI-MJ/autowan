@@ -4,12 +4,13 @@
 
 You give autowan a DFT calculation and the Wannier90 input that the standard automatic
 method writes for it (PDWF for Quantum ESPRESSO, SCDM for VASP). We call that automatic
-method **the frontier**. autowan runs the frontier's input and scores the result with a
-**gate**: a fixed set of physical checks against your own DFT bands. If the gate
-passes, you are done, and no AI was involved. If it fails, a language model diagnoses
-why and proposes one change. The change is checked, run, and scored by the same gate.
-After the frontier's attempt, the model gets up to seven repairs
-(`--total-attempts 8`). The run ends in one of two ways:
+method **the frontier**. On VASP the SCDM deck is the one JARVIS-tools writes: the
+poster's "JARVIS deck" and "SCDM" are the same thing. autowan runs the frontier's input
+and scores the result with a **gate**: a fixed set of physical checks against your own
+DFT bands. If the gate passes, you are done, and no AI was involved. If it fails, a
+language model diagnoses why and proposes one change. The change is checked, run, and
+scored by the same gate. After the frontier's attempt, the model gets up to seven
+repairs (`--total-attempts 8`). The run ends in one of two ways:
 - **certified**: a construction that passed every check. You get the seedname and the
   numbers.
 - **stop & report**: the model's evidence that nothing on the Wannier side can fix this
@@ -41,7 +42,7 @@ cannot change the gate.
 
 | word | meaning |
 |---|---|
-| frontier | the published automatic Wannierisation method, run with no AI: PDWF on QE ([Qiao, Pizzi & Marzari 2023](https://doi.org/10.1038/s41524-023-01146-w)), SCDM on VASP |
+| frontier | the published automatic Wannierisation method, run with no AI: PDWF on QE ([Qiao, Pizzi & Marzari 2023](https://doi.org/10.1038/s41524-023-01146-w)), SCDM on VASP (the deck JARVIS-tools writes: Garrity & Choudhary, Sci. Data **8**, 106 (2021); the poster calls it the "JARVIS deck") |
 | deck | the Wannier90 input files of one construction: `<seed>.win` (and, for QE, `<seed>.pw2wan`) |
 | parent | the DFT calculation the Wannier functions are built from (your `pw.x` nscf run) |
 | gate | the checks that decide acceptance; a *gate profile* chooses which checks, for which use |
@@ -50,7 +51,19 @@ cannot change the gate.
 | L_BvK | the size of the supercell the k-mesh represents (`mp_grid × lattice`); a model's hoppings cannot be trusted much beyond it |
 
 > Came from the KPS 2026 poster? Start with the two-minute demo below. It needs no DFT
-> code and no API key.
+> code and no API key. The poster's words, as they appear here:
+>
+> - **C1 / C2 / C3** are the gate profiles `band_interpolation`, `sparse_tb` and
+>   `dmft_subspace` ([table](#choosing-what-certified-means-gate-profiles)).
+> - **frontier, n retries** (blue cell): before autowan takes over, the QE frontier gets a
+>   budget of ten Wannier90 runs: its default deck, then its own retry ladder, which steps
+>   the projectability thresholds `dis_proj_min`/`dis_proj_max`. *n* is the run that
+>   passed. A red *n* passed only beyond that budget and is counted as a failure.
+> - **autowan, k tries** (yellow cell): *k* model repairs, saved as `<seed>_r1` ... `<seed>_rk`.
+> - **done by the frontier** (light-blue cell): the frontier passed on a retry, so autowan
+>   was not needed.
+> - **asks for new DFT** (flag): the run ended with a [stop & report](#when-it-stops-with-a-report).
+> - **JARVIS deck**: the VASP frontier, an SCDM deck written by JARVIS-tools.
 
 ---
 

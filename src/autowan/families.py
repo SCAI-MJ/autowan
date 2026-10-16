@@ -23,7 +23,7 @@ family's knobs, and the deck writer refuses one that would.
 
 PDWF is not offered on VASP: VASP's hydrogenic and LOCPROJ projections are not
 orthonormal, their projectability reaches values far above one, and a projectability
-threshold on them selects nothing meaningful (2026-09-30; autowan item 4 decision 1).
+threshold on them selects nothing meaningful (2026-09-30).
 """
 
 from __future__ import annotations

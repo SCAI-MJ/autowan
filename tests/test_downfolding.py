@@ -1,4 +1,4 @@
-"""The d-only downfolding criterion (user decision 2026-10-09) and the downfolded_d profile.
+"""The d-only downfolding criterion and the downfolded_d profile.
 
 Synthetic constructions: a cubic cell (a = 3 Angstrom) with a transition-metal atom at the
 origin and a ligand at (1/2, 1/2, 1/2). The model is five decoupled d chains along x, so
@@ -744,7 +744,7 @@ def test_the_deck_check_states_rather_than_refuses_an_exclusion_under_a_sub_mani
 
 
 # ---------------------------------------------------------------------------
-# stored constructions (cluster2 only)
+# stored constructions (not shipped; skipped when absent)
 # ---------------------------------------------------------------------------
 
 V6_RUNS = _stored("AUTOWAN_TEST_V6_RUNS")
@@ -781,7 +781,7 @@ def _score_stored(run_dir: Path, profile: str):
 @pytest.mark.skipif(
     not (V6_RUNS / "demo/SrVO3_Vd_smv/aiida_hr.dat").is_file()
     or not SRVO3_NPZ.is_file(),
-    reason="the stored SrVO3 V:d construction (job 21097) is on cluster2",
+    reason="the stored SrVO3 V:d construction is not shipped",
 )
 def test_the_stored_srvo3_v_d_model_certifies_under_downfolded_d():
     report = _score_stored(V6_RUNS / "demo/SrVO3_Vd_smv", "downfolded_d")
@@ -795,7 +795,7 @@ def test_the_stored_srvo3_v_d_model_certifies_under_downfolded_d():
 
 @pytest.mark.skipif(
     not (SRVO3_FRONTIER / "aiida_hr.dat").is_file() or not SRVO3_NPZ.is_file(),
-    reason="the stored SrVO3 frontier construction is on cluster2",
+    reason="the stored SrVO3 frontier construction is not shipped",
 )
 def test_the_stored_full_valence_srvo3_frontier_fails_downfolded_d_on_count():
     report = _score_stored(SRVO3_FRONTIER, "downfolded_d")
