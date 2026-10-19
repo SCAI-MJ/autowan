@@ -64,6 +64,8 @@ cannot change the gate.
 >   was not needed.
 > - **asks for new DFT** (flag): the run ended with a [stop & report](#when-it-stops-with-a-report).
 > - **JARVIS deck**: the VASP frontier, an SCDM deck written by JARVIS-tools.
+> - **C3 frontier**: an adaptation of the QE frontier deck to each material's fixed
+>   target, not a published method ([C3 in detail](#c3-in-detail)).
 
 ---
 
@@ -296,6 +298,54 @@ certificate to a soundness check alone, with its C1, C2 or C3 value inside the l
 None did. In one case the soundness checks changed the count: for MoS₂ C2, ladder point 3
 had η = 19.4 meV after truncation but failed `hopping_decays_with_distance`, so the
 frontier was certified at point 9 instead.
+
+#### C3 in detail
+
+C3 does not choose the correlated subspace. For each of its five materials the target
+(which orbitals, hence `num_wann`) is fixed from the DMFT literature, and the question is
+whether a model of that subspace can be built automatically:
+
+| material | target, per spin | literature |
+|---|---|---|
+| SrVO3 | V t2g | Pavarini et al. 2004; Lechermann et al. 2006; Amadon et al. 2008 |
+| SrTiO3 | Ti t2g (the empty conduction band) | Zhong, Toth & Held 2013; Souto-Casares, Spaldin & Ederer 2021 |
+| NiO | Ni 3d + O 2p | Kuneš et al. 2007 |
+| MnO | Mn 3d + O 2p | Kuneš et al. 2008 |
+| Fe | Fe 4s + 3d | Şaşıoğlu et al. 2011; Leonov et al. 2011 |
+
+Every other material is withheld. A construction passes when all three hold:
+
+1. **Count and seeds.** `num_wann` equals the target's count, and the projectors name
+   exactly the target orbitals (`V:dxy;dyz;dxz`, `Ni:d`, `O:p`, or the kept PAOs under
+   PDWF). SCDM names no orbitals and is refused.
+2. **Correlated functions on their sites.** Each centre is assigned to its nearest
+   correlated atom (the transition metal). Each such atom must hold at least its
+   correlated count (3 for t2g, 5 for d) within half a nearest-neighbour distance. The
+   check counts centres; it does not test their orbital character. Ligand and s functions
+   are held only by the drift guard.
+3. **The target manifold, reproduced.** The target states are the DFT states on the band
+   path whose Löwdin weight on the target orbitals is at least 0.5. The weight is the sum
+   of |⟨φ|ψ_nk⟩|² over the target (atom, l, m) components, from `projwfc.x` run on the
+   path's `pw.x` bands calculation. The basis φ is the pseudopotential's atomic
+   wavefunctions (`PP_CHI`), Löwdin-orthogonalised. Each target state is paired with a model
+   band, and the RMS of the differences must be ≤ 20 meV. An isolated manifold is compared
+   over its whole width. An entangled one is compared up to the frontier's frozen-window
+   top (E_F + 2 eV for a metal, CBM + 2 eV for a gapped parent). Whether the manifold is
+   isolated is decided from the same bands and weights. The literature judges this
+   agreement by eye; 20 meV is our choice, the same as C1 and C2.
+
+**The C3 frontier is our adaptation, not a published method.** PDWF keeps a pseudo-atomic
+orbital whole, so it cannot express a t2g-only target. Both variants start from the same
+QE frontier deck as C1 (aiida-wannier90-workflows protocol, PDWF, semicore excluded):
+
+| variant | materials | changes to the frontier deck |
+|---|---|---|
+| textbook SMV | SrVO3, SrTiO3 | PDWF keys and `dis_froz_max` removed; projections on the t2g orbitals; outer window on the target manifold; one run |
+| PDWF-subspace | NiO, MnO, Fe | every non-target PAO excluded (NiO: `num_wann` 26 → 16); the energy frozen window removed, so states are frozen by projectability only; then the `dis_proj_min`/`dis_proj_max` retry ladder |
+
+On the poster, SrVO3 and SrTiO3 pass on the first run, NiO passes at ladder point 3, MnO
+passes in the up channel only, and Fe fails in both channels. A variant of PDWF-subspace
+that keeps the energy frozen window has not been tried.
 
 ### When it stops with a report
 
