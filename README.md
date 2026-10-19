@@ -378,13 +378,18 @@ the report was wrong.
 ### Models and cost
 
 - **OpenRouter** (the default): any model with tool calling, by its OpenRouter ID.
-  `--model anthropic/claude-opus-5.5` is the default. Repairs in the poster campaign ran
-  with Anthropic, OpenAI, Google, NVIDIA and Z.ai models.
+  `--model anthropic/claude-opus-5.5` is the default.
 - **Your own server** (`--provider local`, or `--base-url http://host:8000/v1`): any
   OpenAI-compatible endpoint with tool calling, e.g. vLLM. Set
   `AUTOWAN_LOCAL_BASE_URL` (and `AUTOWAN_LOCAL_API_KEY` if it needs one). The local
   preset's model is `RedHatAI/Qwen3.5-9B-quantized.w8a8`; `--model` picks another. Tokens are
   recorded and no cost is charged.
+- **Subscription command-line tools: not released yet.** In the poster campaign, Claude
+  (Claude Code, `claude -p`), GPT and Astra (`codex`) and Gemini (`agy -p`) ran through
+  their command-line tools on a subscription. The adapters serve the same tools and the same
+  action schema through an MCP bridge, with every built-in tool of the CLI switched off.
+  They approximate the API path, and their costs are recorded at API list prices. They
+  will be released later. Nemotron and Gemma ran through OpenRouter.
 
 Every request records its tokens and cost. Costs are at **API list prices**, so they are
 what a pay-per-token user would pay. In the sodium demo, each repair attempt with
