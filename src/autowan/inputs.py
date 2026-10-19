@@ -331,11 +331,13 @@ def _format(value: Any) -> str:
     if isinstance(value, bool):
         return ".true." if value else ".false."
     if isinstance(value, (list, tuple)):
-        # projectors: [{"species": "Fe", "orbitals": ("s", "d")}, ...]
+        # projectors: [{"species": "Fe", "orbitals": ("s", "d")}, ...]; a positioned
+        # entry {"site": "f=0.5,0.5,0", "orbitals": ("s",)} is written as its site
         parts = []
         for entry in value:
             orbitals = ";".join(entry["orbitals"])
-            parts.append(f"{entry['species']}:{orbitals}")
+            where = entry["site"] if "site" in entry else entry["species"]
+            parts.append(f"{where}:{orbitals}")
         return "\n".join(parts)
     return str(value)
 

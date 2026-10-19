@@ -30,6 +30,8 @@ minimisation that will not converge must be stabilised rather than forgiven.
 
 from __future__ import annotations
 
+import math
+import re
 from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Literal, Mapping, Sequence
@@ -250,9 +252,10 @@ EDITABLE_PARAMETERS: tuple[Parameter, ...] = (
         "pw2wan",
         "projectors",
         "orbital labels",
-        "SMV: which analytic orbitals seed the Wannier functions, per species; naming "
-        "them replaces the deck's projection source and forces the overlaps to be "
-        "recomputed",
+        "SMV: which analytic orbitals seed the Wannier functions, per species or at a "
+        "given position (a bond centre, an interstice: {site: 'f=x,y,z' fractional or "
+        "'c=x,y,z' Cartesian in Angstrom, orbitals}); naming them replaces the deck's "
+        "projection source and forces the overlaps to be recomputed",
     ),
     # PDWF selects among the pseudo-atomic orbitals the external projector list
     # supplies (atom_proj_exclude in the overlap input). Projectability is measured
@@ -288,9 +291,32 @@ EDITABLE_PARAMETERS: tuple[Parameter, ...] = (
 
 BY_NAME: dict[str, Parameter] = {p.name: p for p in EDITABLE_PARAMETERS}
 
-#: Orbital labels a projector entry may name. Anything outside this set is either a
-#: typo or a shell no pseudopotential in this workflow carries.
-ORBITAL_LABELS = ("s", "p", "d", "f", "sp", "sp2", "sp3")
+#: Orbital labels a projector entry may name: whole shells, hybrids, and the single
+#: real components of a p or d shell in Wannier90's own spelling (one function each).
+#: Anything outside this set is either a typo or a shell no pseudopotential in this
+#: workflow carries.
+ORBITAL_LABELS = (
+    "s",
+    "p",
+    "d",
+    "f",
+    "sp",
+    "sp2",
+    "sp3",
+    "px",
+    "py",
+    "pz",
+    "dz2",
+    "dxz",
+    "dyz",
+    "dx2-y2",
+    "dxy",
+)
+
+#: A positioned projector's site: Wannier90's ``f=x,y,z`` (fractional) or ``c=x,y,z``
+#: (Cartesian, Angstrom), three numbers.
+_NUM = r"[-+]?(?:[0-9]+\.?[0-9]*|\.[0-9]+)(?:[eE][-+]?[0-9]+)?"
+SITE_PATTERN = rf"^[cCfF]={_NUM},{_NUM},{_NUM}$"
 
 #: What a stop & report names as the limit no knob of the construction can move
 #: (escalate's ``report.binding_limit``). A well-founded report is a result: it is
@@ -465,21 +491,40 @@ def _parameter_value_schema(
         else {"type": "string"}
     )
     if p.kind == "projectors":
+        orbitals = {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "enum": list(ORBITAL_LABELS)},
+        }
         return {
             "type": "array",
             "minItems": 1,
             "items": {
-                "type": "object",
-                "additionalProperties": False,
-                "required": ["species", "orbitals"],
-                "properties": {
-                    "species": species,
-                    "orbitals": {
-                        "type": "array",
-                        "minItems": 1,
-                        "items": {"type": "string", "enum": list(ORBITAL_LABELS)},
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": ["species", "orbitals"],
+                        "properties": {"species": species, "orbitals": orbitals},
                     },
-                },
+                    {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": ["site", "orbitals"],
+                        "properties": {
+                            "site": {
+                                "type": "string",
+                                "pattern": SITE_PATTERN,
+                                "description": (
+                                    "one position, not an atom: 'f=x,y,z' in "
+                                    "fractional coordinates of the cell or 'c=x,y,z' "
+                                    "Cartesian in Angstrom, e.g. a bond midpoint"
+                                ),
+                            },
+                            "orbitals": orbitals,
+                        },
+                    },
+                ]
             },
         }
     if p.kind == "pao_subset":
@@ -644,7 +689,23 @@ def action_schema(
 # ---------------------------------------------------------------------------
 
 
-SHELL_SIZE = {"s": 1, "p": 3, "d": 5, "f": 7, "sp": 2, "sp2": 3, "sp3": 4}
+SHELL_SIZE = {
+    "s": 1,
+    "p": 3,
+    "d": 5,
+    "f": 7,
+    "sp": 2,
+    "sp2": 3,
+    "sp3": 4,
+    "px": 1,
+    "py": 1,
+    "pz": 1,
+    "dz2": 1,
+    "dxz": 1,
+    "dyz": 1,
+    "dx2-y2": 1,
+    "dxy": 1,
+}
 """What each shell contributes per atom.
 
 Lives beside the vocabulary rather than beside the deck writer because the count a
@@ -656,14 +717,19 @@ a set implying more functions than the calculation has bands is refused, not wri
 def implied_wannier_count(projectors, species_counts, spinors: bool = False) -> int:
     """How many Wannier functions a projector set implies for this cell.
 
+    A species entry seeds every atom of that species; a positioned entry (``site``)
+    seeds exactly one point of the cell.
+
     With ``spinors`` (a noncollinear or spin-orbit parent, ``spinors = .true.``) every
     orbital Wannier90 is given becomes two spinor functions, one per spin component,
     exactly as Wannier90 expands a projections line with no ``(u)``/``(d)`` qualifier.
     """
     total = 0
     for entry in projectors:
-        per_atom = sum(SHELL_SIZE.get(o, 1) for o in entry["orbitals"])
-        total += per_atom * species_counts.get(entry["species"], 1)
+        per_site = sum(SHELL_SIZE.get(o, 1) for o in entry["orbitals"])
+        # A positioned entry is one site; a species entry is every atom of it.
+        sites = 1 if "site" in entry else species_counts.get(entry["species"], 1)
+        total += per_site * sites
     return 2 * total if spinors else total
 
 
@@ -699,21 +765,85 @@ def _validate_species_entries(
     return out
 
 
+def _site_position(site: Any) -> str:
+    """A positioned projector's site, normalised to Wannier90's ``f=``/``c=`` spelling."""
+    if not isinstance(site, str):
+        raise ActionRejected(f"projectors: site {site!r} must be a string")
+    compact = site.replace(" ", "")
+    match = re.fullmatch(SITE_PATTERN, compact, re.I)
+    if match is None:
+        raise ActionRejected(
+            f"projectors: site {site!r} must read 'f=x,y,z' (fractional) or "
+            "'c=x,y,z' (Cartesian, Angstrom)"
+        )
+    frame = compact[0].lower()
+    try:
+        coords = [float(x) for x in compact[2:].split(",")]
+    except ValueError:
+        raise ActionRejected(f"projectors: site {site!r} has a non-numeric coordinate")
+    if not all(math.isfinite(x) for x in (c + 0.0 for c in coords)):
+        raise ActionRejected(f"projectors: site {site!r} has a non-finite coordinate")
+    return f"{frame}=" + ",".join(
+        f"{x:.6f}".rstrip("0").rstrip(".") or "0" for x in (c + 0.0 for c in coords)
+    )
+
+
 def _validate_projectors(
     value: Any, allowed_species: Sequence[str]
 ) -> tuple[dict, ...]:
+    """Species entries and positioned entries, each naming known orbital labels.
+
+    A species entry ``{species, orbitals}`` seeds every atom of that species; a
+    positioned entry ``{site, orbitals}`` seeds one point of the cell (a bond centre,
+    an interstice), written as Wannier90 takes it: ``f=x,y,z`` or ``c=x,y,z``.
+    """
+    if not isinstance(value, list) or not value:
+        raise ActionRejected("projectors must be a non-empty list")
+    species_entries, site_entries = [], []
+    for entry in value:
+        if isinstance(entry, dict) and entry.keys() == {"site", "orbitals"}:
+            site_entries.append(entry)
+        elif isinstance(entry, dict) and entry.keys() == {"species", "orbitals"}:
+            species_entries.append(entry)
+        else:
+            raise ActionRejected(
+                "each projectors entry needs exactly 'species' and 'orbitals', or "
+                "exactly 'site' and 'orbitals'"
+            )
     out = []
-    for species, orbitals in _validate_species_entries(
-        value, allowed_species, "projectors"
-    ):
-        for o in orbitals:
-            if o not in ORBITAL_LABELS:
-                raise ActionRejected(
-                    f"{species}: {o!r} is not an orbital label "
-                    f"({', '.join(ORBITAL_LABELS)})"
-                )
-        out.append({"species": species, "orbitals": tuple(orbitals)})
+    if species_entries:
+        for species, orbitals in _validate_species_entries(
+            species_entries, allowed_species, "projectors"
+        ):
+            out.append(
+                {"species": species, "orbitals": _orbital_labels(species, orbitals)}
+            )
+    seen_sites = set()
+    for entry in site_entries:
+        site = _site_position(entry["site"])
+        if site in seen_sites:
+            raise ActionRejected(
+                f"projectors names site {site} twice; give it one entry"
+            )
+        seen_sites.add(site)
+        orbitals = entry["orbitals"]
+        if not isinstance(orbitals, list) or not orbitals:
+            raise ActionRejected(f"{site}: orbitals must be a non-empty list")
+        if len(set(map(str, orbitals))) != len(orbitals):
+            raise ActionRejected(
+                f"{site}: {sorted(map(str, orbitals))} names an orbital twice"
+            )
+        out.append({"site": site, "orbitals": _orbital_labels(site, orbitals)})
     return tuple(out)
+
+
+def _orbital_labels(where: str, orbitals: Sequence[Any]) -> tuple[str, ...]:
+    for o in orbitals:
+        if o not in ORBITAL_LABELS:
+            raise ActionRejected(
+                f"{where}: {o!r} is not an orbital label ({', '.join(ORBITAL_LABELS)})"
+            )
+    return tuple(orbitals)
 
 
 def _validate_pao_subset(

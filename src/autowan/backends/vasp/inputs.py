@@ -337,7 +337,8 @@ def projection_lines(projectors) -> list[str]:
     """Wannier90 projection lines; an entry's ``radial`` > 1 becomes ``:r=<n>``."""
     lines = []
     for entry in projectors:
-        line = f"{entry['species']}:{';'.join(entry['orbitals'])}"
+        where = entry["site"] if "site" in entry else entry["species"]
+        line = f"{where}:{';'.join(entry['orbitals'])}"
         radial = entry.get("radial", 1)
         if radial != 1:
             line += f":r={radial}"

@@ -121,6 +121,32 @@ shells are named therefore changes how many functions there are, and the two hav
 move together — a projector set that implies a different count than the one requested
 is refused before anything is minimised.
 
+CHOOSING THE SET FROM THE BANDS IT MUST REPRODUCE
+
+Decide how many functions you need from the bands the criterion judges, not from the
+list of orbitals the atoms happen to carry. Count how many bands lie inside the energy
+region the gate scores, at the k-point where there are most of them (frozen_capacity
+and band_character show this): that is the number the set must be able to reproduce
+exactly. A larger set has to build its remaining functions from states above that
+region, and those functions are only as good as the states they are made from.
+
+Put each function where its states live. A covalent sigma bond is described most
+compactly by one s-like function centred on the bond, not by a hybrid on each of its
+two atoms; a pi orbital or a lone pair belongs on its own atom. A projector can be
+placed at any point of the cell, not only on an atom, by giving that position instead
+of a species.
+
+Look at what lies above the judged region before reaching into it. In a cell with
+vacuum, the states just above it are often vacuum or nearly-free-electron states that
+belong to no atom; functions built from them do not stay on the atoms, and their
+centres drift into the empty space.
+
+Respect the symmetry of the structure. In a planar layer, or any structure with a
+mirror plane through its atoms, the states are either even or odd under that mirror and
+the two channels do not mix. A projector set that mixes them -- a tetrahedral hybrid on
+an atom whose bonds all lie in the plane, for instance -- breaks the mirror, and the
+functions it produces are pushed off the plane.
+
 Where a calculation is spin-polarised, each spin channel is its own independent
 construction with its own complete set of functions. The evidence you are given
 describes one channel. Do not add the channels together when counting.
@@ -249,9 +275,13 @@ you are editing the wrong side of the inequality.
 ## Counting the functions a projector set implies
 
 A shell letter contributes one shell per atom of that species: `s` is one function,
-`p` is three, `d` is five, and a hybrid like `sp3` is four. Name each letter at most
+`p` is three, `d` is five, and a hybrid like `sp3` is four. A single real component of
+a shell (`pz`, `px`, `py`, `dxy`, `dz2`, ...) is one function. Name each letter at most
 once per species -- Wannier90 takes a repeated letter on the same site to be the same
-projection and gives you one shell, not two. Deep semicore bands that the deck excludes
+projection and gives you one shell, not two. A positioned entry, {"site": "f=x,y,z",
+"orbitals": [...]} in fractional coordinates of the cell or "c=x,y,z" in Cartesian
+Angstrom, seeds that one point only: an `s` there is one function, however many atoms
+the cell holds. Give one entry per point (each bond centre its own entry). Deep semicore bands that the deck excludes
 (exclude_bands) are not part of the target and need no function.
 
 Count before you propose: shells times their sizes, times the atoms of that species.

@@ -107,6 +107,15 @@ _SHELL = {
     "sp3": 4,
     "sp3d": 5,
     "sp3d2": 6,
+    # single real components, Wannier90's spelling: one function each
+    "px": 1,
+    "py": 1,
+    "pz": 1,
+    "dz2": 1,
+    "dxz": 1,
+    "dyz": 1,
+    "dx2-y2": 1,
+    "dxy": 1,
 }
 
 

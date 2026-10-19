@@ -66,6 +66,10 @@ cannot change the gate.
 > - **JARVIS deck**: the VASP frontier, an SCDM deck written by JARVIS-tools.
 > - **C3 frontier**: an adaptation of the QE frontier deck to each material's fixed
 >   target, not a published method ([C3 in detail](#c3-in-detail)).
+> - **graphene cells**: run with this version's repair projectors, which may sit at any
+>   point of the cell (a bond centre, say) and name single components such as `pz`. They
+>   were added after the first graphene runs failed, and every model reran graphene with
+>   them, so these cells are not a blind test.
 
 ---
 
