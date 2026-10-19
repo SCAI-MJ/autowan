@@ -243,10 +243,59 @@ Pick the profile for what you will use the Wannier functions for:
 | C2 | `sparse_tb` | a short-range tight-binding model | η₂ ≤ 20 meV still holds after every hopping longer than L_BvK/4 is cut |
 | C3 | `dmft_subspace` | the correlated subspace for DMFT (SrVO3, SrTiO3, NiO, MnO, Fe) | the literature's target orbitals, with their states reproduced to ≤ 20 meV RMS |
 
-Every profile also runs the soundness checks (function count, centres near atoms,
-hoppings that decay, bands that correspond to the parent, ...). `default`, which is
-what you get without `--gate-profile`, runs only those, with no η₂ criterion. `downfolded_d` and `atom_centred_basis` are also available. Each verdict records
+Every profile also runs the soundness checks ([below](#the-soundness-checks)). `default`,
+which is what you get without `--gate-profile`, runs only those, with no η₂ criterion.
+`downfolded_d` and `atom_centred_basis` are also available. Each verdict records
 the profile's hash, so two results are comparable exactly when the hashes match.
+
+#### The soundness checks
+
+The criterion (C1, C2 or C3) is what a certificate is about. The soundness checks run
+under every profile and only screen out constructions that are broken in a way the
+criterion might not see. They fall into three groups:
+
+**Run and input integrity.** Facts about the run, not about the choice of Wannier
+functions. A standard Wannier90 run passes the first two by construction.
+
+| check | passes when |
+|---|---|
+| `wannier_count_matches_request` | Wannier90 built as many functions as the deck's `num_wann` (it does not judge whether that number is physically right) |
+| `hopping_shells_inside_representable_supercell` | every lattice vector R in `_hr.dat` lies inside the Wigner–Seitz supercell of `mp_grid` (a count of vectors, not a bound on the size of H(R)) |
+| `metal_frozen_window_contains_fermi_level` | for a metal, a declared frozen window contains E_F (a property of the deck, checked after the run because the gate also scores decks autowan did not write) |
+
+**Locality of the model.** Properties of the Wannier Hamiltonian itself.
+
+| check | passes when |
+|---|---|
+| `centres_stay_near_home_cell` | every centre is within one nearest-neighbour distance of some atom, lattice images included |
+| `hopping_decays_with_distance` | the largest hopping in the outermost 10 % of shells is ≤ 1 % of the largest on-site element |
+
+**Agreement with the parent bands on the construction mesh.** These compare the model
+with the DFT eigenvalues on the nscf mesh the construction used. C1 and C2 instead compare
+on a separate band path at 20 meV. The tolerances here are coarse (1 % of the occupied
+bandwidth, about 0.1 eV for most materials), so they catch a model that misses or invents
+whole states, not one that is slightly off.
+
+| check | passes when |
+|---|---|
+| `frontier_manifold_straddles_fermi_level` | at every mesh k-point where the parent has bands both below and above E_F, so does the model. For a gapped parent with E_F in the gap, the model must therefore contain some conduction states; a valence-only model fails it |
+| `occupied_manifold_is_represented` | ≤ 5 % of the occupied parent states (all states below E_F, minus an isolated semicore block the deck excludes) lack a model band within 1 % of the occupied bandwidth |
+| `model_bands_correspond_to_parent_bands` | ≤ 20 % of the model's bands inside the deck's frozen window (or up to E_F + 2 eV when the deck sets none) lie away from every parent band by more than the same tolerance. The bound is loose on purpose, because above the frozen window a disentangled model is free |
+| `band_distance_from_parent` | gapped parents only: RMS model–parent distance from the bottom of the occupied bands to E_F + 10 % of the occupied bandwidth is ≤ 1 % of the occupied bandwidth |
+
+A check that does not apply is *withheld*: it is recorded as not applicable and left out
+of the verdict, never counted as passed or failed. `band_distance_from_parent` is withheld
+for metals, because a metal has no isolated manifold to reproduce, and widening the
+tolerance until it passed would make the number meaningless. C3 (and `downfolded_d`) aim
+at a sub-manifold, so they drop the three checks that require the whole occupied manifold:
+`frontier_manifold_straddles_fermi_level`, `occupied_manifold_is_represented` and
+`band_distance_from_parent`.
+
+For the poster campaign we checked whether any frontier construction lost its
+certificate to a soundness check alone, with its C1, C2 or C3 value inside the limit.
+None did. In one case the soundness checks changed the count: for MoS₂ C2, ladder point 3
+had η = 19.4 meV after truncation but failed `hopping_decays_with_distance`, so the
+frontier was certified at point 9 instead.
 
 ### When it stops with a report
 
